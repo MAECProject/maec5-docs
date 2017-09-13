@@ -407,6 +407,10 @@ html, body {
       line-height: 1.6;
     }
 
+    td:last-child {
+      width: 50%;
+    }
+
     th {
       padding: 5px 10px;
       border-bottom: 1px solid #ccc;
