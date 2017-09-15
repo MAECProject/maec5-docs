@@ -35,6 +35,10 @@ html, body {
   -webkit-text-size-adjust: none; /* Never autoresize text */
 }
 
+strong {
+  font-family: Consolas, Menlo, Monaco, "Lucida Console", "Liberation Mono", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Courier New", monospace, serif;
+}
+
 ////////////////////////////////////////////////////////////////////////////////
 // TABLE OF CONTENTS
 ////////////////////////////////////////////////////////////////////////////////
@@ -457,11 +461,13 @@ html, body {
     border-radius: 3px;
     @extend %break-words;
     @extend %code-font;
+    white-space: nowrap;
   }
 
   pre>code {
     background-color: transparent;
     padding: 0;
+    white-space: inherit;
   }
 
   aside {
