@@ -55,9 +55,9 @@ search: true
 }
 ```
 
-Welcome to STIX 2, sharing threat intelligence just got easier!
+Welcome to STIX 2! Sharing threat intelligence just got easier.
 
-This documentation is just a basic outline of the STIX 2.0 data model. If you're looking for an introduction or conceptual overview of STIX, see the [full specification](http://docs.oasis-open.org/cti/stix/v2.0/stix-v2.0-part1-stix-core.html). There's also the [documentation website](https://oasis-open.github.io/cti-documentation/) if you're looking for more examples.
+This page is just a basic outline of the STIX 2.0 data model. If you're looking for an introduction or conceptual overview of STIX, see the [full specification](http://docs.oasis-open.org/cti/stix/v2.0/stix-v2.0-part1-stix-core.html). There's also the [documentation website](https://oasis-open.github.io/cti-documentation/) if you're looking for more examples and walkthroughs.
 
 This documentation is divided into three major sections&hellip;
 
@@ -137,12 +137,12 @@ These common types are used by the core objects (and sometimes by other common t
 
 Attack Patterns are a type of TTP that describe ways that adversaries attempt to compromise targets. Attack Patterns are used to help categorize attacks, generalize specific attacks to the patterns that they follow, and provide detailed information about how attacks are performed. An example of an attack pattern is "spear phishing": a common type of attack where an attacker sends a carefully crafted e-mail message to a party with the intent of getting them to click a link or open an attachment to deliver malware. Attack Patterns can also be more specific; spear phishing as practiced by a particular threat actor (e.g., they might generally say that the target won a contest) can also be an Attack Pattern.
 
-The Attack Pattern SDO contains textual descriptions of the pattern along with references to externally-defined taxonomies of attacks such as CAPEC [CAPEC]. Relationships from Attack Pattern can be used to relate it to what it targets (Vulnerabilities and Identities) and which tools and malware use it (Tool and Malware).
+The Attack Pattern SDO contains textual descriptions of the pattern along with references to externally-defined taxonomies of attacks such as CAPEC. Relationships from Attack Pattern can be used to relate it to what it targets (Vulnerabilities and Identities) and which tools and malware use it (Tool and Malware).
 
 Name | Type | Description
 --------- | ------- | -----------
 | _See [common properties](#common-properties)_
-| **type** (required) | [string](#string) | The value of property field MUST be `attack-pattern`.
+| **type** (required) | [string](#string) | The value of property field **MUST** be `attack-pattern`.
 | **external_references** (optional) | [list](#list) of type [external-reference](#external-reference) | A list of external references which refer to non-STIX information. This property **MAY** be used to provide one or more Attack Pattern identifiers, such as a CAPEC ID. When specifying a CAPEC ID, the **source_name** property of the external reference **MUST** be set to `capec` and the **external_id** property **MUST** be formatted as CAPEC-[id]. |
 | **name** (required) | [string](#string) | A name used to identify the Attack Pattern. |
 | **description** (optional) | [string](#string) | A description that provides more details and context about the Attack Pattern, potentially including its purpose and its key characteristics. |
@@ -153,11 +153,11 @@ Name | Type | Description
 Source | Name | Target | Description
 ------ | ---- | ------ | -----------
 | _See [common relationships](#common-relationships)_
-| `attack-pattern` | `targets` | `identity`, `vulnerability` | This Relationship describes that this Attack Pattern typically targets the type of victims or vulnerability represented by the related Identity or Vulnerability object. For example, a targets Relationship linking an Attack Pattern for SQL injection to an Identity object representing domain administrators means that the form of SQL injection characterized by the Attack Pattern targets domain administrators in order to achieve its objectives. Another example is a Relationship linking an Attack Pattern for SQL injection to a Vulnerability in blogging software means that the particular SQL injection attack exploits that vulnerability.|
-| `attack-pattern` | `uses` | `malware`, `tool` | This Relationship describes that the related Malware or Tool is used to perform the behavior identified in the Attack Pattern. For example, a uses Relationship linking an Attack Pattern for a distributed denial of service (DDoS) to a Tool for Low Orbit Ion Cannon (LOIC) indicates that the tool can be used to perform those DDoS attacks. |
+| `attack-pattern` | `targets` | `identity`, `vulnerability` | This Relationship describes that this Attack Pattern typically targets the type of victims or vulnerability represented by the related Identity or Vulnerability object. For example, a `targets` Relationship linking an Attack Pattern for SQL injection to an Identity object representing domain administrators means that the form of SQL injection characterized by the Attack Pattern targets domain administrators in order to achieve its objectives. Another example is a Relationship linking an Attack Pattern for SQL injection to a Vulnerability in blogging software means that the particular SQL injection attack exploits that vulnerability.|
+| `attack-pattern` | `uses` | `malware`, `tool` | This Relationship describes that the related Malware or Tool is used to perform the behavior identified in the Attack Pattern. For example, a `uses` Relationship linking an Attack Pattern for a distributed denial of service (DDoS) to a Tool for Low Orbit Ion Cannon (LOIC) indicates that the tool can be used to perform those DDoS attacks. |
 | `indicator` | `indicates` | `attack-pattern` | This Relationship describes that the Indicator can detect evidence of the related Attack Pattern. This evidence may not be direct: for example, the Indicator may detect secondary evidence of the Attack Pattern, such as behavioral artifacts commonly associated with it.
 | `course-of-action` | `mitigates` | `attack-pattern` | This Relationship describes that the Course of Action can mitigate the related Attack Pattern.
-| `campaign`, `intrusion-set`, `threat-actor` | `uses` | `attack-pattern` | This Relationship describes that attacks carried out as part of the Campaign, Intrusion Set, or Threat Actor typically use the related Attack Pattern. For example, a uses Relationship from the Glass Gazelle Campaign to the Spear Phishing Attack Pattern indicates that Spear Phishing is often used during attacks attributed to that Campaign. |
+| `campaign`, `intrusion-set`, `threat-actor` | `uses` | `attack-pattern` | This Relationship describes that attacks carried out as part of the Campaign, Intrusion Set, or Threat Actor typically use the related Attack Pattern. For example, a `uses` Relationship from the Glass Gazelle Campaign to the Spear Phishing Attack Pattern indicates that Spear Phishing is often used during attacks attributed to that Campaign. |
 
 ## Campaign
 
@@ -188,7 +188,7 @@ For example, a Campaign could be used to describe a crime syndicate's attack usi
 Name | Type | Description
 --------- | ------- | -----------
 | _See [common properties](#common-properties)_
-| **type** (required) | [string](#string) | The value of property field MUST be `campaign`.
+| **type** (required) | [string](#string) | The value of property field **MUST** be `campaign`.
 | **name** (required) | [string](#string) | A name used to identify the Campaign. |
 | **description** (optional) | [string](#string) | A description that provides more details and context about the Campaign, potentially including its purpose and its key characteristics. |
 | **kill_chain_phases** (optional) | [list](#list) of type [kill-chain-phase](#kill-chain-phase) | The list of Kill Chain Phases for which this Attack Pattern is used. |
@@ -203,8 +203,8 @@ Source | Name | Target | Description
 ------ | ---- | ------ | -----------
 | _See [common relationships](#common-relationships)_
 | `campaign` | `attributed-to` | `intrusion-set`, `threat-actor` | This Relationship describes that the Intrusion Set or Threat Actor that is involved in carrying out the Campaign. For example, an `attributed-to` Relationship from the Glass Gazelle Campaign to the Urban Fowl Threat Actor means that the actor carried out or was involved in some of the activity described by the Campaign.
-| `campaign` | `targets` | `identity`, `vulnerability` | This Relationship describes that the Campaign uses exploits of the related Vulnerability or targets the type of victims described by the related Identity. For example, a targets Relationship from the Glass Gazelle Campaign to a Vulnerability in a blogging platform indicates that attacks performed as part of Glass Gazelle often exploit that Vulnerability. Similarly, a targets Relationship from the Glass Gazelle Campaign to a Identity describing the energy sector in the United States means that the Campaign typically carries out attacks against targets in that sector.
-| `campaign `| `uses` | `attack-pattern`, `malware`, `tool` | This Relationship describes that attacks carried out as part of the Campaign typically use the related Attack Pattern, Malware, or Tool. For example, a uses Relationship from the Glass Gazelle Campaign to the xInject Malware indicates that xInject is often used during attacks attributed to that Campaign.
+| `campaign` | `targets` | `identity`, `vulnerability` | This Relationship describes that the Campaign uses exploits of the related Vulnerability or targets the type of victims described by the related Identity. For example, a `targets` Relationship from the Glass Gazelle Campaign to a Vulnerability in a blogging platform indicates that attacks performed as part of Glass Gazelle often exploit that Vulnerability. Similarly, a targets Relationship from the Glass Gazelle Campaign to a Identity describing the energy sector in the United States means that the Campaign typically carries out attacks against targets in that sector.
+| `campaign `| `uses` | `attack-pattern`, `malware`, `tool` | This Relationship describes that attacks carried out as part of the Campaign typically use the related Attack Pattern, Malware, or Tool. For example, a `uses` Relationship from the Glass Gazelle Campaign to the xInject Malware indicates that xInject is often used during attacks attributed to that Campaign.
 | `indicator` | `indicates` | `campaign` | This Relationship describes that the Indicator can detect evidence of the related Campaign. This evidence may not be direct: for example, the Indicator may detect secondary evidence of the Campaign, such as behavioral artifacts commonly associated with that actor.
 
 ## Course of Action
@@ -254,7 +254,7 @@ The Course of Action SDO contains a textual description of the action; a reserve
 Name | Type | Description
 --------- | ------- | -----------
 | _See [common properties](#common-properties)_
-| **type** (required) | [string](#string) | The value of property field MUST be `course-of-action`.
+| **type** (required) | [string](#string) | The value of property field **MUST** be `course-of-action`.
 | **name** (required) | [string](#string) | A name used to identify the Course of Action. |
 | **description** (optional) | [string](#string) | A description that provides more details and context about the Course of Action, potentially including its purpose and its key characteristics. |
 
@@ -304,12 +304,12 @@ The Identity SDO can capture basic identifying information, contact information,
 Name | Type | Description
 --------- | ------- | -----------
 | _See [common properties](#common-properties)_
-| **type** (required) | [string](#string) | The value of property field MUST be `identity`.
+| **type** (required) | [string](#string) | The value of property field **MUST** be `identity`.
 | **labels** (required) | [list](#list) of type [string](#string) | The list of roles that this Identity performs (e.g., CEO, Domain Administrators, Doctors, Hospital, or Retailer). No open vocabulary is yet defined for this property.
 | **name** (required) | [string](#string) | The name of this Identity. When referring to a specific entity (e.g., an individual or organization), this property **SHOULD** contain the canonical name of the specific entity. |
 | **description** (optional) | [string](#string) | A description that provides more details and context about the Identity, potentially including its purpose and its key characteristics. |
-| **identity_class** (required) | [open-vocab](#open-vocab) | The type of entity that this Identity describes, e.g., an individual or organization. This is an open vocabulary and the values **SHOULD** come from the [identity-class-ov](#identity-class-ov) vocabulary.
-| **sectors** (optional) | [list](#list) of type [open-vocab](#open-vocab) | The list of industry sectors that this Identity belongs to. This is an open vocabulary and values **SHOULD** come from the [industry-sector-ov](#industry-sector-ov) vocabulary. |
+| **identity_class** (required) | [open-vocab](#open-vocab) | The type of entity that this Identity describes, e.g., an individual or organization. This is an open vocabulary and the values **SHOULD** come from the [identity-class-ov](#identity-class) vocabulary.
+| **sectors** (optional) | [list](#list) of type [open-vocab](#open-vocab) | The list of industry sectors that this Identity belongs to. This is an open vocabulary and values **SHOULD** come from the [industry-sector-ov](#industry-sector) vocabulary. |
 | **contact_information** (optional) | [string](#string) | The contact information (e-mail, phone number, etc.) for this Identity.  No format for this information is currently defined by this specification. |
 
 ### Relationships
@@ -364,7 +364,7 @@ Source | Name | Target | Description
 
 Indicators contain a pattern that can be used to detect suspicious or malicious cyber activity. For example, an Indicator may be used to represent a set of malicious domains and use the STIX Patterning Language (STIX™ Version 2.0. Part 5: STIX Patterning) to specify these domains.
 
-The Indicator SDO contains a simple textual description, the Kill Chain Phases that it detects behavior in, a time window for when the Indicator is valid or useful, and a required pattern property to capture a structured detection pattern. Conforming STIX implementations MUST support the STIX Patterning Language as defined in STIX™ Version 2.0. Part 5: STIX Patterning. While each structured pattern language has different syntax and potentially different  semantics, in general an Indicator is considered to have "matched" (or been "sighted") when the conditions specified in the structured pattern are satisfied in whatever context they are evaluated in.
+The Indicator SDO contains a simple textual description, the Kill Chain Phases that it detects behavior in, a time window for when the Indicator is valid or useful, and a required pattern property to capture a structured detection pattern. Conforming STIX implementations **MUST** support the STIX Patterning Language as defined in STIX™ Version 2.0. Part 5: STIX Patterning. While each structured pattern language has different syntax and potentially different  semantics, in general an Indicator is considered to have "matched" (or been "sighted") when the conditions specified in the structured pattern are satisfied in whatever context they are evaluated in.
 
 Relationships from the Indicator can describe the malicious or suspicious behavior that it directly detects (Malware, Tool, and Attack Pattern) as well as the Campaigns, Intrusion Sets, and Threat Actors that it might indicate the presence of.
 
@@ -372,7 +372,7 @@ Name | Type | Description
 --------- | ------- | -----------
 | _See [common properties](#common-properties)_
 | **type** (required) | [string](#string) | The value of this property **MUST** be `indicator`. |
-| **labels** (required) | [list](#list) of type [open-vocab](#open-vocab) | Specifies the type of indicator. This is an open vocabulary and values **SHOULD** come from the [indicator-label-ov](#indicator-label-ov) vocabulary.
+| **labels** (required) | [list](#list) of type [open-vocab](#open-vocab) | Specifies the type of indicator. This is an open vocabulary and values **SHOULD** come from the [indicator-label-ov](#indicator-label) vocabulary.
 | **name** (optional) | [string](#string) | A name used to identify the Indicator. |
 | **description** (optional) | [string](#string) | A description that provides more details and context about the Indicator, potentially including its purpose and its key characteristics. |
 | **pattern** (required) | [string](#string) | The detection pattern for this Indicator is a STIX Pattern as specified in STIX™ Version 2.0. Part 5: STIX Patterning. |
@@ -423,20 +423,20 @@ Name | Type | Description
 | **first_seen** (optional) | [timestamp](#timestamp) | The time that this Intrusion Set was first seen. This property is a summary property of data from sightings and other data that may or may not be available in STIX. If new sightings are received that are earlier than the first seen timestamp, the object may be updated to account for the new data.
 | **last_seen** (optional) | [timestamp](#timestamp) | The time that this Intrusion Set was last seen. This property is a summary property of data from sightings and other data that may or may not be available in STIX. If new sightings are received that are later than the last seen timestamp, the object may be updated to account for the new data.
 | **goals** (optional) | [list](#list) of type [string](#string) | The high level goals of this Intrusion Set, namely, what are they trying to do. For example, they may be motivated by personal gain, but their goal is to steal credit card numbers. To do this, they may execute specific Campaigns that have detailed objectives like compromising point of sale systems at a large retailer. Another example: to gain information about latest merger and IPO information from ACME Bank.
-| **resource_level** (optional) | [open-vocab](#open-vocab) | This defines the organizational level at which this Intrusion Set typically works, which in turn determines the resources available to this Intrusion Set for use in an attack. This is an open vocabulary and values **SHOULD** come from the [attack-resource-level-ov](#attack-resource-level-ov) vocabulary.
-| **primary_motivation** (optional) | [open-vocab](#open-vocab) | The primary reason, motivation, or purpose behind this Intrusion Set. The motivation is why the Intrusion Set wishes to achieve the goal (what they are trying to achieve). For example, an Intrusion Set with a goal to disrupt the finance sector in a country might be motivated by ideological hatred of capitalism. This is an open vocabulary and values SHOULD come from the [attack-motivation-ov](#attack-motivation-ov) vocabulary.
-| **secondary_motivations** (optional) | [list](#list) of type [open-vocab](#open-vocab) | The secondary reasons, motivations, or purposes behind this Intrusion Set. These motivations can exist as an equal or near-equal cause to the primary motivation. However, it does not replace or necessarily magnify the primary motivation, but it might indicate additional context. This is an open vocabulary and values **SHOULD** come from the [attack-motivation-ov](#attack-motivation-ov) vocabulary.
+| **resource_level** (optional) | [open-vocab](#open-vocab) | This defines the organizational level at which this Intrusion Set typically works, which in turn determines the resources available to this Intrusion Set for use in an attack. This is an open vocabulary and values **SHOULD** come from the [attack-resource-level-ov](#attack-resource-level) vocabulary.
+| **primary_motivation** (optional) | [open-vocab](#open-vocab) | The primary reason, motivation, or purpose behind this Intrusion Set. The motivation is why the Intrusion Set wishes to achieve the goal (what they are trying to achieve). For example, an Intrusion Set with a goal to disrupt the finance sector in a country might be motivated by ideological hatred of capitalism. This is an open vocabulary and values **SHOULD** come from the [attack-motivation-ov](#attack-motivation) vocabulary.
+| **secondary_motivations** (optional) | [list](#list) of type [open-vocab](#open-vocab) | The secondary reasons, motivations, or purposes behind this Intrusion Set. These motivations can exist as an equal or near-equal cause to the primary motivation. However, it does not replace or necessarily magnify the primary motivation, but it might indicate additional context. This is an open vocabulary and values **SHOULD** come from the [attack-motivation-ov](#attack-motivation) vocabulary.
 
 ### Relationships
 
 Source | Name | Target | Description
 ------ | ---- | ------ | -----------
 | _See [common relationships](#common-relationships)_
-| `campaign` | `attributed-to` | `intrusion-set` | This Relationship describes that the Intrusion Set is involved in carrying out the Campaign. For example, an attributed-to Relationship from the Glass Gazelle Campaign to the Urban Fowl Threat Actor means that the actor carried out or was involved in some of the activity described by the Campaign.
+| `campaign` | `attributed-to` | `intrusion-set` | This Relationship describes that the Intrusion Set is involved in carrying out the Campaign. For example, an `attributed-to` Relationship from the Glass Gazelle Campaign to the Urban Fowl Threat Actor means that the actor carried out or was involved in some of the activity described by the Campaign.
 | `indicator` | `indicates` | `intrusion-set` | This Relationship describes that the Indicator can detect evidence of the related Intrusion Set. This evidence may not be direct: for example, the Indicator may detect secondary evidence of the Intrusion Set, such as malware or behavior commonly used by that Intrusion Set. For example, an indicates Relationship from an Indicator to a Intrusion Set object representing Glass Gazelle means that the Indicator is capable of detecting evidence of Glass Gazelle, such as command and control IPs commonly used by that Intrusion Set. |
-| `intrusion-set` | `attributed-to` | `threat-actor` | This Relationship describes that the related Threat Actor is involved in carrying out the Intrusion Set. For example, an attributed-to Relationship from the Red Orca Intrusion Set to the Urban Fowl Threat Actor means that the actor carried out or was involved in some of the activity described by the Intrusion Set. |
-| `intrusion-set` | `targets` | `identity`, `vulnerability` | This Relationship describes that the Intrusion Set uses exploits of the related Vulnerability or targets the type of victims described by the related Identity. For example, a targets Relationship from the Red Orca Intrusion Set to a Vulnerability in a blogging platform indicates that attacks performed as part of Red Orca often exploit that Vulnerability. Similarly, a targets Relationship from the Red Orca Intrusion Set to an Identity describing the energy sector in the United States means that the Intrusion Set typically carries out attacks against targets in that sector. |
-| `intrusion-set` | `uses` | `attack-pattern`, `malware`, `tool` | This Relationship describes that attacks carried out as part of the Intrusion Set typically use the related Attack Pattern, Malware, or Tool. For example, a uses Relationship from the Red Orca Intrusion Set to the xInject Malware indicates that xInject is often used during attacks attributed to that Intrusion Set. |
+| `intrusion-set` | `attributed-to` | `threat-actor` | This Relationship describes that the related Threat Actor is involved in carrying out the Intrusion Set. For example, an `attributed-to` Relationship from the Red Orca Intrusion Set to the Urban Fowl Threat Actor means that the actor carried out or was involved in some of the activity described by the Intrusion Set. |
+| `intrusion-set` | `targets` | `identity`, `vulnerability` | This Relationship describes that the Intrusion Set uses exploits of the related Vulnerability or targets the type of victims described by the related Identity. For example, a `targets` Relationship from the Red Orca Intrusion Set to a Vulnerability in a blogging platform indicates that attacks performed as part of Red Orca often exploit that Vulnerability. Similarly, a targets Relationship from the Red Orca Intrusion Set to an Identity describing the energy sector in the United States means that the Intrusion Set typically carries out attacks against targets in that sector. |
+| `intrusion-set` | `uses` | `attack-pattern`, `malware`, `tool` | This Relationship describes that attacks carried out as part of the Intrusion Set typically use the related Attack Pattern, Malware, or Tool. For example, a `uses` Relationship from the Red Orca Intrusion Set to the xInject Malware indicates that xInject is often used during attacks attributed to that Intrusion Set. |
 
 ## Malware
 
@@ -464,7 +464,7 @@ Name | Type | Description
 --------- | ------- | -----------
 | _See [common properties](#common-properties)_
 | **type** (required) | [string](#string) | The value of this property **MUST** be `malware`. |
-| **labels** (required) | [list](#list) of type [open-vocab](#open-vocab) | The type of malware being described. This is an open vocabulary and values SHOULD come from the malware-label-ov vocabulary.
+| **labels** (required) | [list](#list) of type [open-vocab](#open-vocab) | The type of malware being described. This is an open vocabulary and values **SHOULD** come from the [malware-label-ov](#malware-label) vocabulary.
 | **name** (optional) | [string](#string) | A name used to identify the Malware sample.
 | **description** (optional) | [string](#string) | A description that provides more details and context about the Malware, potentially including its purpose and its key characteristics.
 | **kill_chain_phases** (optional) | [list](#list) of type [kill-chain-phase](#kill-chain-phase) | The list of Kill Chain Phases for which this Malware can be used. |
@@ -477,7 +477,7 @@ Source | Name | Target | Description
 | `attack-pattern`, `campaign`, `intrusion-set`, `threat-actor` | `uses` | `malware` | This Relationship describes that the related Malware is used to perform the behavior identified in the Attack Pattern. |
 | `course-of-action` | `mitigates` | `malware` | This Relationship describes that the Course of Action can mitigate the related Malware. |
 | `indicator` | `indicates` | `malware` | This Relationship describes that the Indicator can detect evidence of the related Malware. |
-| `malware` | `targets` | `identity`, `vulnerability` | This Relationship documents that this Malware is being used to target this Identity or exploit the Vulnerability. For example, a targets Relationship linking a Malware representing a downloader to a Vulnerability for CVE-2016-0001 means that the malware exploits that vulnerability. Similarly, a targets Relationship linking a Malware representing a downloader to an Identity representing the energy sector means that downloader is typically used against targets in the energy sector. |
+| `malware` | `targets` | `identity`, `vulnerability` | This Relationship documents that this Malware is being used to target this Identity or exploit the Vulnerability. For example, a `targets` Relationship linking a Malware representing a downloader to a Vulnerability for CVE-2016-0001 means that the malware exploits that vulnerability. Similarly, a targets Relationship linking a Malware representing a downloader to an Identity representing the energy sector means that downloader is typically used against targets in the energy sector. |
 | `malware` | `uses` | `tool` | This Relationship documents that this Malware uses the related tool to perform its functions. |
 | `malware` | `variant-of` | `malware` | This Relationship is used to document that one piece of Malware is a variant of another piece of Malware. For example, TorrentLocker is a variant of CryptoLocker. |
 
@@ -506,7 +506,7 @@ Source | Name | Target | Description
 
 Observed Data conveys information that was observed on systems and networks using the Cyber Observable specification defined in parts 3 and 4 of this specification. For example, Observed Data can capture the observation of an IP address, a network connection, a file, or a registry key. Observed Data is not an intelligence assertion, it is simply information: this file was seen, without any context for what it means.
 
-Observed Data captures both a single observation of a single entity (file, network connection) as well as the aggregation of multiple observations of an entity. When the` number_observed` property is 1 the Observed Data is of a single entity. When the `number_observed` property is greater than 1, the observed data consists of several instances of an entity collected over the time window specified by the `first_observed` and `last_observed` properties. When used to collect aggregate data, it is likely that some fields in the Cyber Observable Object (e.g., timestamp fields) will be omitted because they would differ for each of the individual observations.
+Observed Data captures both a single observation of a single entity (file, network connection) as well as the aggregation of multiple observations of an entity. When the **number_observed** property is 1 the Observed Data is of a single entity. When the **number_observed** property is greater than 1, the observed data consists of several instances of an entity collected over the time window specified by the **first_observed** and **last_observed** properties. When used to collect aggregate data, it is likely that some fields in the Cyber Observable Object (e.g., timestamp fields) will be omitted because they would differ for each of the individual observations.
 
 Observed Data may be used by itself (without relationships) to convey raw data collected from network and host-based detection tools. A firewall could emit a single Observed Data instance containing a single Network Traffic object for each connection it sees. The firewall could also aggregate data and instead send out an Observed Data instance every ten minutes with an IP address and an appropriate number_observed value to indicate the number of times that IP address was observed in that window.
 
@@ -518,8 +518,8 @@ Name | Type | Description
 | **type** (required) | [string](#string) | The value of this property **MUST** be `observed-data`. |
 | **first_observed** (required) | [](#timestamp) | The beginning of the time window during which the data was observed. |
 | **last_observed** (required) | [timestamp](#timestamp) | The end of the time window during which the data was observed. |
-| **number_observed** (required) | [integer](#integer) | The number of times the data represented in the objects property was observed. This MUST be an integer between 1 and 999,999,999 inclusive. If the number_observed property is greater than 1, the data contained in the objects property was observed multiple times. In these cases, object creators MAY omit properties of the Cyber Observable object (such as timestamps) that are specific to a single instance of that observed data. |
-| **objects** (required) | observable-objects | A dictionary of Cyber Observable Objects representing the observation. The dictionary MUST contain at least one object. The observable-objects type is defined in STIX™ Version 2.0. Part 3: Cyber Observable Core Concepts. The Cyber Observable content MAY include multiple objects if those objects are related as part of a single observation. Multiple objects not related to each other via Cyber Observable Relationships MUST NOT be contained within the same Observed Data instance. For example, a Network Traffic object and two IPv4 Address objects related via the src_ref and dst_ref properties can be contained in the same Observed Data because they are all related and used to characterize that single entity. Two unrelated IPv4 address objects that just happened to be observed at the same time, however, must be represented in separate Observed Data instances.
+| **number_observed** (required) | [integer](#integer) | The number of times the data represented in the objects property was observed. This **MUST** be an integer between 1 and 999,999,999 inclusive. If the **number_observed** property is greater than 1, the data contained in the objects property was observed multiple times. In these cases, object creators **MAY** omit properties of the Cyber Observable object (such as timestamps) that are specific to a single instance of that observed data. |
+| **objects** (required) | observable-objects | A dictionary of Cyber Observable Objects representing the observation. The dictionary **MUST** contain at least one object. The `observable-objects` type is defined in STIX™ Version 2.0. Part 3: Cyber Observable Core Concepts. The Cyber Observable content **MAY** include multiple objects if those objects are related as part of a single observation. Multiple objects not related to each other via Cyber Observable Relationships **MUST NOT** be contained within the same Observed Data instance. For example, a Network Traffic object and two IPv4 Address objects related via the src_ref and dst_ref properties can be contained in the same Observed Data because they are all related and used to characterize that single entity. Two unrelated IPv4 address objects that just happened to be observed at the same time, however, must be represented in separate Observed Data instances.
 
 ### Relationships
 
@@ -529,19 +529,19 @@ There are no relationships explicitly defined between the Observed Data object a
 
 The Relationship object is used to link together two SDOs (objects other than Sighting, Relationship, Bundle, and Data Marking) in order to describe how they are related to each other. If SDOs are considered "nodes" or "vertices" in the graph, the Relationship Objects (SROs) represent "edges".
 
-STIX defines many relationship types to link together SDOs. These relationships are contained in the "Relationships" table under each SDO definition. Relationship types defined in the specification SHOULD be used to ensure consistency. An example of a specification-defined relationship is that an indicator indicates a campaign. That relationship type is listed in the Relationships section of the Indicator SDO definition.
+STIX defines many relationship types to link together SDOs. These relationships are contained in the "Relationships" table under each SDO definition. Relationship types defined in the specification **SHOULD** be used to ensure consistency. An example of a specification-defined relationship is that an indicator indicates a campaign. That relationship type is listed in the Relationships section of the Indicator SDO definition.
 
-STIX also allows relationships from any SDO to any SDO that have not been defined in this specification. These relationships MAY use the related-to relationship type or MAY use a custom relationship type. As an example, a user might want to link malware directly to a tool. They can do so using related-to to say that the Malware is related to the Tool but not describe how, or they could use delivered-by (a custom name they determined) to indicate more detail.
+STIX also allows relationships from any SDO to any SDO that have not been defined in this specification. These relationships **MAY** use the `related-to` relationship type or **MAY** use a custom relationship type. As an example, a user might want to link malware directly to a tool. They can do so using `related-to` to say that the Malware is related to the Tool but not describe how, or they could use `delivered-by` (a custom name they determined) to indicate more detail.
 
 Note that some relationships in STIX may seem like "shortcuts". For example, an Indicator doesn't really detect a Campaign: it detects activity (Attack Patterns, Malware, etc.) that are often used by that campaign. While some analysts might want all of the source data and think that shortcuts are misleading, in many cases it's helpful to provide just the key points (shortcuts) and leave out the low-level details. In other cases, the low-level analysis may not be known or sharable, while the high-level analysis is. For these reasons, relationships that might appear to be "shortcuts" are not excluded from STIX.
 
 Name | Type | Description
 --------- | ------- | -----------
 | _See [common properties](#common-properties)_
-| **relationship_type** (required) | [string](#string) | The name used to identify the type of Relationship. This value SHOULD be an exact value listed in the relationships for the source and target SDO, but MAY be any string. The value of this property MUST be in ASCII and is limited to characters a–z (lowercase ASCII), 0–9, and hyphen (-). |
+| **relationship_type** (required) | [string](#string) | The name used to identify the type of Relationship. This value **SHOULD** be an exact value listed in the relationships for the source and target SDO, but **MAY** be any string. The value of this property **MUST** be in ASCII and is limited to characters a–z (lowercase ASCII), 0–9, and hyphen (-). |
 | **description** (optional) | [string](#string) | A description that provides more details and context about the Relationship, potentially including its purpose and its key characteristics. |
-| **source_ref** (required) | [identifier](#identifier) | The id of the source (from) object. The value MUST be an ID reference to an SDO (i.e., it cannot point to an SRO, Bundle, or Marking Definition). |
-| **target_ref** (required) | [identifier](#identifier) | The id of the target (to) object. The value MUST be an ID reference to an SDO (i.e., it cannot point to an SRO, Bundle, or Marking Definition). |
+| **source_ref** (required) | [identifier](#identifier) | The id of the source (from) object. The value **MUST** be an ID reference to an SDO (i.e., it cannot point to an SRO, Bundle, or Marking Definition). |
+| **target_ref** (required) | [identifier](#identifier) | The id of the target (to) object. The value **MUST** be an ID reference to an SDO (i.e., it cannot point to an SRO, Bundle, or Marking Definition). |
 
 ### Relationships
 
@@ -642,7 +642,7 @@ Name | Type | Description
 --------- | ------- | -----------
 | _See [common properties](#common-properties)_
 | **type** (required) | [string](#string) | The value of this property **MUST** be `report`. |
-| **labels** (required) | [list](#list) of type [open-vocab](#open-vocab) | This property is an Open Vocabulary that specifies the primary subject of this report. This is an open vocabulary and values SHOULD come from the report-label-ov vocabulary. |
+| **labels** (required) | [list](#list) of type [open-vocab](#open-vocab) | This property is an Open Vocabulary that specifies the primary subject of this report. This is an open vocabulary and values **SHOULD** come from the [report-label-ov](#report-label) vocabulary. |
 | **name** (required) | [string](#string) | A name used to identify the Report. |
 | **description** (optional) | [string](#string) | A description that provides more details and context about the Report, potentially including its purpose and its key characteristics. |
 | **published** (required) | [timestamp](#timestamp) | The date that this Report object was officially published by the creator of this report. The publication date (public release, legal release, etc.) may be different than the date the report was created or shared internally (the date in the created property). |
@@ -708,15 +708,15 @@ A Sighting denotes the belief that something in CTI (e.g., an indicator, malware
 The Sighting relationship object is a special type of SRO; it is a relationship that contains extra properties not present on the generic Relationship object. These extra properties are included to represent data specific to sighting relationships (e.g., count, representing how many times something was seen), but for other purposes a Sighting can be thought of as a Relationship with a name of "sighting-of". Sighting is captured as a relationship because you cannot have a sighting unless you have something that has been sighted. Sighting does not make sense without the relationship to what was sighted.
 
 Sighting relationships relate three aspects of the sighting:
-* What was sighted, such as the Indicator, Malware, Campaign, or other SDO (sighting_of_ref)
-* Who sighted it and/or where it was sighted, represented as an Identity (where_sighted_refs) and
-* What was actually seen on systems and networks, represented as Observed Data (observed_data_refs)
+* What was sighted, such as the Indicator, Malware, Campaign, or other SDO (**sighting_of_ref**)
+* Who sighted it and/or where it was sighted, represented as an Identity (**where_sighted_refs**) and
+* What was actually seen on systems and networks, represented as Observed Data (**observed_data_refs**)
 
 What was sighted is required; a sighting does not make sense unless you say what you saw. Who sighted it, where it was sighted, and what was actually seen are optional. In many cases it is not necessary to provide that level of detail in order to provide value.
 
 Sightings are used whenever any SDO has been "seen". In some cases, the object creator wishes to convey very little information about the sighting; the details might be sensitive, but the fact that they saw a malware instance or threat actor could still be very useful. In other cases, providing the details may be helpful or even necessary; saying exactly which of the 1000 IP addresses in an indicator were sighted is helpful when tracking which of those IPs is still malicious.
 
-Sighting is distinct from Observed Data in that Sighting is an intelligence assertion ("I saw this threat actor") while Observed Data is simply information ("I saw this file"). When you combine them by including the linked Observed Data (observed_data_refs) from a Sighting, you can say "I saw this file, and that makes me think I saw this threat actor". Although confidence is currently reserved, notionally confidence would be added to Sighting (the intelligence relationship) but not to Observed Data (the raw information).
+Sighting is distinct from Observed Data in that Sighting is an intelligence assertion ("I saw this threat actor") while Observed Data is simply information ("I saw this file"). When you combine them by including the linked Observed Data (**observed_data_refs**) from a Sighting, you can say "I saw this file, and that makes me think I saw this threat actor". Although confidence is currently reserved, notionally confidence would be added to Sighting (the intelligence relationship) but not to Observed Data (the raw information).
 
 Name | Type | Description
 --------- | ------- | -----------
@@ -724,11 +724,11 @@ Name | Type | Description
 | **type** (required) | [string](#string) | The value of this property **MUST** be `sighting`.
 | **first_seen** (optional) | [timestamp](#timestamp) | The beginning of the time window during which the SDO referenced by the sighting_of_ref property was sighted.
 | **last_seen** (optional) | [timestamp](#timestamp) | The end of the time window during which the SDO referenced by the sighting_of_ref property was sighted.
-| **count** (optional) | [integer](#integer) | This MUST be an integer between 0 and 999,999,999 inclusive and represents the number of times the SDO referenced by the `sighting_of_ref` property was sighted. Observed Data has a similar property called `number_observed`, which refers to the number of times the data was observed. These counts refer to different concepts and are distinct. For example, a single sighting of a DDoS bot might have many millions of observations of the network traffic that it generates. Thus, the Sighting count would be 1 (the bot was observed once) but the Observed Data `number_observed` would be much higher. As another example, a sighting with a count of 0 can be used to express that an indicator was not seen at all.
-| **sighting_of_ref** (required) | [identifier](#identifier) | An ID reference to the SDO that was sighted (e.g., Indicator or Malware). For example, if this is a Sighting of an Indicator, that Indicator’s ID would be the value of this property. This property MUST reference only an SDO or a Custom Object.
-| **observed_data_refs** (optional) | [list](#list) of type [identifier](#identifier) | A list of ID references to the Observed Data objects that contain the raw cyber data for this Sighting. For example, a Sighting of an Indicator with an IP address could include the Observed Data for the network connection that the Indicator was used to detect. This property MUST reference only Observed Data SDOs.
-| **where_sighted_refs** (optional) | [list](#list) of type [identifier](#identifier) | A list of ID references to the Identity (victim) objects of the entities that saw the sighting. Omitting the where_sighted_refs property does not imply that the sighting was seen by the object creator. To indicate that the sighting was seen by the object creator, an Identity representing the object creator should be listed in where_sighted_refs. This property MUST reference only Identity SDOs.
-| **summary** (optional) | [boolean](#boolean) | The summary property indicates whether the Sighting should be considered summary data. Summary data is an aggregation of previous Sightings reports and should not be considered primary source data. Default value is false.
+| **count** (optional) | [integer](#integer) | This **MUST** be an integer between 0 and 999,999,999 inclusive and represents the number of times the SDO referenced by the **sighting_of_ref** property was sighted. Observed Data has a similar property called **number_observed**, which refers to the number of times the data was observed. These counts refer to different concepts and are distinct. For example, a single sighting of a DDoS bot might have many millions of observations of the network traffic that it generates. Thus, the Sighting count would be `1` (the bot was observed once) but the Observed Data **number_observed** would be much higher. As another example, a sighting with a count of 0 can be used to express that an indicator was not seen at all.
+| **sighting_of_ref** (required) | [identifier](#identifier) | An ID reference to the SDO that was sighted (e.g., Indicator or Malware). For example, if this is a Sighting of an Indicator, that Indicator’s ID would be the value of this property. This property **MUST** reference only an SDO or a Custom Object.
+| **observed_data_refs** (optional) | [list](#list) of type [identifier](#identifier) | A list of ID references to the Observed Data objects that contain the raw cyber data for this Sighting. For example, a Sighting of an Indicator with an IP address could include the Observed Data for the network connection that the Indicator was used to detect. This property **MUST** reference only Observed Data SDOs.
+| **where_sighted_refs** (optional) | [list](#list) of type [identifier](#identifier) | A list of ID references to the Identity (victim) objects of the entities that saw the sighting. Omitting the **where_sighted_refs** property does not imply that the sighting was seen by the object creator. To indicate that the sighting was seen by the object creator, an Identity representing the object creator should be listed in **where_sighted_refs**. This property **MUST** reference only Identity SDOs.
+| **summary** (optional) | [boolean](#boolean) | The summary property indicates whether the Sighting should be considered summary data. Summary data is an aggregation of previous Sightings reports and should not be considered primary source data. Default value is `false`.
 
 ### Relationships
 
@@ -767,29 +767,29 @@ Name | Type | Description
 --------- | ------- | -----------
 | _See [common properties](#common-properties)_
 | **type** (required) | [string](#string) | 
-| **labels** (required) | [list](#list) of type [open-vocab](#open-vocab) | This property specifies the type of Threat Actor. This is an open vocabulary and values SHOULD come from the threat-actor-label-ov vocabulary.
+| **labels** (required) | [list](#list) of type [open-vocab](#open-vocab) | This property specifies the type of Threat Actor. This is an open vocabulary and values **SHOULD** come from the [threat-actor-label-ov](#threat-actor-label) vocabulary.
 | **name** (required) | [string](#string) | A name used to identify this Threat Actor or Threat Actor group.
 | **description** (optional) | [string](#string) | A description that provides more details and context about the Threat Actor, potentially including its purpose and its key characteristics.
 | **aliases** (optional) | [list](#list) of type [string](#string) | A list of other names that this Threat Actor is believed to use.
-| **roles** (optional) | [list](#list) of type [open-vocab](#open-vocab) | A list of roles the Threat Actor plays. This is an open vocabulary and the values SHOULD come from the threat-actor-role-ov vocabulary.
+| **roles** (optional) | [list](#list) of type [open-vocab](#open-vocab) | A list of roles the Threat Actor plays. This is an open vocabulary and the values **SHOULD** come from the [threat-actor-role-ov](#threat-actor-role) vocabulary.
 | **goals** (optional) | [list](#list) of type [string](#string) | The high level goals of this Threat Actor, namely, what are they trying to do. For example, they may be motivated by personal gain, but their goal is to steal credit card numbers. To do this, they may execute specific Campaigns that have detailed objectives like compromising point of sale systems at a large retailer.
-| **sophistication** (optional) | [open-vocab](#open-vocab) | The skill, specific knowledge, special training, or expertise a Threat Actor must have to perform the attack. This is an open vocabulary and values SHOULD come from the threat-actor-sophistication-ov vocabulary.
-| **resource_level** (optional) | [open-vocab](#open-vocab) | This defines the organizational level at which this Threat Actor typically works, which in turn determines the resources available to this Threat Actor for use in an attack. This attribute is linked to the sophistication property — a specific resource level implies that the Threat Actor has access to at least a specific sophistication level. This is an open vocabulary and values SHOULD come from the attack-resource-level-ov vocabulary.
-| **primary_motivation** (optional) | [open-vocab](#open-vocab) | The primary reason, motivation, or purpose behind this Threat Actor. The motivation is why the Threat Actor wishes to achieve the goal (what they are trying to achieve). For example, a Threat Actor with a goal to disrupt the finance sector in a country might be motivated by ideological hatred of capitalism. This is an open vocabulary and values SHOULD come from the attack-motivation-ov vocabulary.
-| **secondary_motivations** (optional) | [list](#list) of type [open-vocab](#open-vocab) | The secondary reasons, motivations, or purposes behind this Threat Actor. These motivations can exist as an equal or near-equal cause to the primary motivation. However, it does not replace or necessarily magnify the primary motivation, but it might indicate additional context. This is an open vocabulary and values SHOULD come from the attack-motivation-ov vocabulary.
-| **personal_motivations** (optional) | [list](#list) of type [open-vocab](#open-vocab) | The personal reasons, motivations, or purposes of the Threat Actor regardless of organizational goals. Personal motivation, which is independent of the organization’s goals, describes what impels an individual to carry out an attack. Personal motivation may align with the organization’s motivation—as is common with activists—but more often it supports personal goals. For example, an individual analyst may join a Data Miner corporation because his or her skills may align with the corporation’s objectives. But the analyst most likely performs his or her daily work toward those objectives for personal reward in the form of a paycheck. The motivation of personal reward may be even stronger for Threat Actors who commit illegal acts, as it is more difficult for someone to cross that line purely for altruistic reasons. This is an open vocabulary and values SHOULD come from the attack-motivation-ov vocabulary.
+| **sophistication** (optional) | [open-vocab](#open-vocab) | The skill, specific knowledge, special training, or expertise a Threat Actor must have to perform the attack. This is an open vocabulary and values **SHOULD** come from the [threat-actor-sophistication-ov](#threat-actor-sophistication]) vocabulary.
+| **resource_level** (optional) | [open-vocab](#open-vocab) | This defines the organizational level at which this Threat Actor typically works, which in turn determines the resources available to this Threat Actor for use in an attack. This attribute is linked to the sophistication property — a specific resource level implies that the Threat Actor has access to at least a specific sophistication level. This is an open vocabulary and values **SHOULD** come from the [attack-resource-level-ov](#attack-resource-level) vocabulary.
+| **primary_motivation** (optional) | [open-vocab](#open-vocab) | The primary reason, motivation, or purpose behind this Threat Actor. The motivation is why the Threat Actor wishes to achieve the goal (what they are trying to achieve). For example, a Threat Actor with a goal to disrupt the finance sector in a country might be motivated by ideological hatred of capitalism. This is an open vocabulary and values **SHOULD** come from the [attack-motivation-ov](#attack-motivation) vocabulary.
+| **secondary_motivations** (optional) | [list](#list) of type [open-vocab](#open-vocab) | The secondary reasons, motivations, or purposes behind this Threat Actor. These motivations can exist as an equal or near-equal cause to the primary motivation. However, it does not replace or necessarily magnify the primary motivation, but it might indicate additional context. This is an open vocabulary and values **SHOULD** come from the [attack-motivation-ov](#attack-motivation) vocabulary.
+| **personal_motivations** (optional) | [list](#list) of type [open-vocab](#open-vocab) | The personal reasons, motivations, or purposes of the Threat Actor regardless of organizational goals. Personal motivation, which is independent of the organization’s goals, describes what impels an individual to carry out an attack. Personal motivation may align with the organization’s motivation—as is common with activists—but more often it supports personal goals. For example, an individual analyst may join a Data Miner corporation because his or her skills may align with the corporation’s objectives. But the analyst most likely performs his or her daily work toward those objectives for personal reward in the form of a paycheck. The motivation of personal reward may be even stronger for Threat Actors who commit illegal acts, as it is more difficult for someone to cross that line purely for altruistic reasons. This is an open vocabulary and values **SHOULD** come from the [attack-motivation-ov](#attack-motivation) vocabulary.
 
 ### Relationships
 
 Source | Name | Target | Description
 ------ | ---- | ------ | -----------
 | _See [common relationships](#common-relationships)_
-| `campaign`, `intrusion-set` | `attributed-to` | `threat-actor` | This Relationship describes that the related Threat Actor is involved in carrying out the Intrusion Set. For example, an attributed-to Relationship from the Red Orca Intrusion Set to the Urban Fowl Threat Actor means that the actor carried out or was involved in some of the activity described by the Intrusion Set. |
-| `indicator` | `indicates` | `threat-actor` | This Relationship describes that the Indicator can detect evidence of the related Threat Actor. This evidence may not be direct: for example, the Indicator may detect secondary evidence of the Threat Actor, such as malware or behavior commonly used by that actor. For example, an indicates Relationship from an Indicator to a Threat Actor object representing Glass Gazelle means that the Indicator is capable of detecting evidence of Glass Gazelle, such as command and control IPs commonly used by that Threat Actor.
-| `threat-actor` | `attributed-to` | `identity` | This Relationship describes that the Threat Actor's real identity is the related Identity. For example, an attributed-to Relationship from the jay-sm17h Threat Actor to the John Smith Identity means that the actor known as jay-sm17h is John Smith. |
-| `threat-actor` | `impersonates` | `identity` | This Relationship describes that the Threat Actor impersonates the related Identity. For example, an  impersonates Relationship from the gh0st Threat Actor to the ACME Corp. Identity means that the actor known as gh0st impersonates ACME Corp. |
-| `threat-actor` | `targets` | `identity`, `vulnerability` | This Relationship describes that the Threat Actor uses exploits of the related Vulnerability or targets the type of victims described by the related Identity. For example, a targets Relationship from the jay-sm17h Threat Actor to a Vulnerability in a blogging platform indicates that attacks performed by John Smith often exploit that Vulnerability. Similarly, a targets Relationship from the jay-sm17h Threat Actor to an Identity describing the energy sector in the United States means that John Smith often carries out attacks against targets in that sector. |
-| `threat-actor` | `uses` | `attack-pattern`, `malware`, `tool` | This Relationship describes that attacks carried out as part of the Threat Actor typically use the related Attack Pattern, Malware, or Tool. For example, a uses Relationship from the jay-sm17h Threat Actor to the xInject Malware indicates that xInject is often used by John Smith. |
+| `campaign`, `intrusion-set` | `attributed-to` | `threat-actor` | This Relationship describes that the related Threat Actor is involved in carrying out the Intrusion Set. For example, an `attributed-to` Relationship from the Red Orca Intrusion Set to the Urban Fowl Threat Actor means that the actor carried out or was involved in some of the activity described by the Intrusion Set. |
+| `indicator` | `indicates` | `threat-actor` | This Relationship describes that the Indicator can detect evidence of the related Threat Actor. This evidence may not be direct: for example, the Indicator may detect secondary evidence of the Threat Actor, such as malware or behavior commonly used by that actor. For example, an `indicates` Relationship from an Indicator to a Threat Actor object representing Glass Gazelle means that the Indicator is capable of detecting evidence of Glass Gazelle, such as command and control IPs commonly used by that Threat Actor.
+| `threat-actor` | `attributed-to` | `identity` | This Relationship describes that the Threat Actor's real identity is the related Identity. For example, an `attributed-to` Relationship from the jay-sm17h Threat Actor to the John Smith Identity means that the actor known as jay-sm17h is John Smith. |
+| `threat-actor` | `impersonates` | `identity` | This Relationship describes that the Threat Actor impersonates the related Identity. For example, an  `impersonates` Relationship from the gh0st Threat Actor to the ACME Corp. Identity means that the actor known as gh0st impersonates ACME Corp. |
+| `threat-actor` | `targets` | `identity`, `vulnerability` | This Relationship describes that the Threat Actor uses exploits of the related Vulnerability or targets the type of victims described by the related Identity. For example, a `targets` Relationship from the jay-sm17h Threat Actor to a Vulnerability in a blogging platform indicates that attacks performed by John Smith often exploit that Vulnerability. Similarly, a targets Relationship from the jay-sm17h Threat Actor to an Identity describing the energy sector in the United States means that John Smith often carries out attacks against targets in that sector. |
+| `threat-actor` | `uses` | `attack-pattern`, `malware`, `tool` | This Relationship describes that attacks carried out as part of the Threat Actor typically use the related Attack Pattern, Malware, or Tool. For example, a `uses` Relationship from the jay-sm17h Threat Actor to the xInject Malware indicates that xInject is often used by John Smith. |
 
 ## Tool
 
@@ -811,13 +811,13 @@ Tools are legitimate software that can be used by threat actors to perform attac
 
 The Tool SDO characterizes the properties of these software tools and can be used as a basis for making an assertion about how a Threat Actor uses them during an attack. It contains properties to name and describe the tool, a list of Kill Chain Phases the tool can be used to carry out, and the version of the tool.
 
-This SDO MUST NOT be used to characterize malware. Further, Tool MUST NOT be used to characterise tools used as part of a course of action in response to an attack. Tools used during response activities can be included directly as part of a Course of Action SDO.
+This SDO **MUST NOT** be used to characterize malware. Further, Tool **MUST NOT** be used to characterise tools used as part of a course of action in response to an attack. Tools used during response activities can be included directly as part of a Course of Action SDO.
 
 Name | Type | Description
 --------- | ------- | -----------
 | _See [common properties](#common-properties)_
 | **type** (required) | [string](#string) | The value of this property **MUST** be `tool`. |
-| **labels** (required) | [list](#list) of type [open-vocab](#open-vocab) | The kind(s) of tool(s) being described. This is an open vocabulary and values SHOULD come from the tool-label-ov vocabulary. |
+| **labels** (required) | [list](#list) of type [open-vocab](#open-vocab) | The kind(s) of tool(s) being described. This is an open vocabulary and values **SHOULD** come from the [tool-label-ov](#tool-label) vocabulary. |
 | **name** (optional) | [string](#string) | A name used to identify the Tool.
 | **description** (optional) | [string](#string) | A description that provides more details and context about the Tool, potentially including its purpose and its key characteristics. |
 | **kill_chain_phases** (optional) | [list](#list) of type [kill-chain-phase](#kill-chain-phase) | The list of kill chain phases for which this Tool can be used. |
@@ -828,10 +828,10 @@ Name | Type | Description
 Source | Name | Target | Description
 ------ | ---- | ------ | -----------
 | _See [common relationships](#common-relationships)_
-| `attack-pattern`, `campaign`, `intrusion-set`, `malware` | `uses` | `tool` | This Relationship describes that the Attack Pattern, Campaign, Intrusion Set, or Malware uses the related Tool. For example, a uses Relationship linking an Attack Pattern for a distributed denial of service (DDoS) to a Tool for Low Orbit Ion Cannon (LOIC) indicates that the tool can be used to perform those DDoS attacks. |
+| `attack-pattern`, `campaign`, `intrusion-set`, `malware` | `uses` | `tool` | This Relationship describes that the Attack Pattern, Campaign, Intrusion Set, or Malware uses the related Tool. For example, a `uses` Relationship linking an Attack Pattern for a distributed denial of service (DDoS) to a Tool for Low Orbit Ion Cannon (LOIC) indicates that the tool can be used to perform those DDoS attacks. |
 | `course-of-action` | `mitigates` | `malware` | This Relationship describes that the Course of Action can mitigate the related Tool. |
 | `indicator` | `indicates` | `tool` | This Relationship describes that the Indicator can detect evidence of the related Tool. |
-| `tool` | `targets` | `identity`, `vulnerability` | This Relationship documents that this Tool is being used to target this Identity or exploit the Vulnerability. For example, a targets Relationship linking an exploit Tool to a Vulnerability for CVE-2016-0001 means that the tool exploits that vulnerability. Similarly, a targets Relationship linking a DDoS Tool to an Identity representing the energy sector means that Tool is typically used against targets in the energy sector. |
+| `tool` | `targets` | `identity`, `vulnerability` | This Relationship documents that this Tool is being used to target this Identity or exploit the Vulnerability. For example, a `targets` Relationship linking an exploit Tool to a Vulnerability for CVE-2016-0001 means that the tool exploits that vulnerability. Similarly, a `targets` Relationship linking a DDoS Tool to an Identity representing the energy sector means that Tool is typically used against targets in the energy sector. |
 
 ## Vulnerability
 
@@ -857,17 +857,11 @@ A Vulnerability is "a mistake in software that can be directly used by a hacker 
 
 The Vulnerability SDO is primarily used to link to external definitions of vulnerabilities or to describe 0-day vulnerabilities that do not yet have an external definition. Typically, other SDOs assert relationships to Vulnerability objects when a specific vulnerability is targeted and exploited as part of malicious cyber activity. As such, Vulnerability objects can be used as a linkage to the asset management and compliance process.
 
-
-
-A Vulnerability is "a mistake in software that can be directly used by a hacker to gain access to a system or network" [CVE]. For example, if a piece of malware exploits CVE-2015-12345, a Malware object could be linked to a Vulnerability object that references CVE-2015-12345.
-
-The Vulnerability SDO is primarily used to link to external definitions of vulnerabilities or to describe 0-day vulnerabilities that do not yet have an external definition. Typically, other SDOs assert relationships to Vulnerability objects when a specific vulnerability is targeted and exploited as part of malicious cyber activity. As such, Vulnerability objects can be used as a linkage to the asset management and compliance process.
-
 Name | Type | Description
 --------- | ------- | -----------
 | _See [common properties](#common-properties)_
 | **type** (required) | [string](#string) | The value of this property **MUST** be `vulnerability`.
-| **external_references** (optional) | [list](#list) of type [external-reference](#external-reference) | A list of external references which refer to non-STIX information. This property MAY be used to provide one or more Vulnerability identifiers, such as a CVE ID [CVE]. When specifying a CVE ID, the source_name property of the external reference MUST be set to cve and the external_id property MUST be the exact CVE identifier. |
+| **external_references** (optional) | [list](#list) of type [external-reference](#external-reference) | A list of external references which refer to non-STIX information. This property **MAY** be used to provide one or more Vulnerability identifiers, such as a CVE ID. When specifying a CVE ID, the **source_name** property of the external reference **MUST** be set to cve and the **external_id** property **MUST** be the exact CVE identifier. |
 | **name** (required) | [string](#string) | A name used to identify the Vulnerability. |
 | **description** (optional) | [string](#string) | A description that provides more details and context about the Vulnerability, potentially including its purpose and its key characteristics.
 
@@ -876,7 +870,7 @@ Name | Type | Description
 Source | Name | Target | Description
 ------ | ---- | ------ | -----------
 | _See [common relationships](#common-relationships)_
-| `attack-pattern`, `campaign`, `intrusion-set`, `malware`, `threat-actor`, `tool` | `targets` | `vulnerability` | This Relationship describes that the Attack Pattern, Campaign, Intrusion Set, Malware, Threat Actor, Tool uses exploits of the related Vulnerability. For example, a targets Relationship from the jay-sm17h Threat Actor to a Vulnerability in a blogging platform indicates that attacks performed by John Smith often exploit that Vulnerability. |
+| `attack-pattern`, `campaign`, `intrusion-set`, `malware`, `threat-actor`, `tool` | `targets` | `vulnerability` | This Relationship describes that the Attack Pattern, Campaign, Intrusion Set, Malware, Threat Actor, Tool uses exploits of the related Vulnerability. For example, a `targets` Relationship from the jay-sm17h Threat Actor to a Vulnerability in a blogging platform indicates that attacks performed by John Smith often exploit that Vulnerability. |
 | `course-of-action` | `mitigates` | `vulnerability` | This Relationship describes that the Course of Action can mitigate the related Vulnerability. |
 
 ## Bundle
@@ -916,10 +910,10 @@ Source | Name | Target | Description
 Name | Type | Description
 --------- | ------- | -----------
 | _See [common properties](#common-properties)_
-| **type** (required) | [string](#string) | The type property identifies the type of object. The value of this property MUST be `bundle`.
+| **type** (required) | [string](#string) | The type property identifies the type of object. The value of this property **MUST** be `bundle`.
 | **id** (required) | [identifier](#identifier) | An identifier for this Bundle. The id property for the Bundle is designed to help tools that may need it for processing, but tools are not required to store or track it. Consuming tools should not rely on the presence of this property or the ability to refer to bundles by ID. |
-| **spec_version** (required) | [string](#string) | The version of the STIX specification used to represent the content in this Bundle. This enables non-TAXII transports or other transports without their own content identification mechanisms to know the version of STIX content. The value of this property MUST be `2.0` for bundles containing STIX Objects defined in this specification.
-| **objects** (optional) | [list](#list) of type `<STIX Object or Marking Definition>` | Specifies a set of one or more STIX Objects. Objects in this list MUST be a STIX Object (SDO, SRO or Custom Object) or a Marking Definition object. |
+| **spec_version** (required) | [string](#string) | The version of the STIX specification used to represent the content in this Bundle. This enables non-TAXII transports or other transports without their own content identification mechanisms to know the version of STIX content. The value of this property **MUST** be `2.0` for bundles containing STIX Objects defined in this specification.
+| **objects** (optional) | [list](#list) of type `<STIX Object or Marking Definition>` | Specifies a set of one or more STIX Objects. Objects in this list **MUST** be a STIX Object (SDO, SRO or Custom Object) or a Marking Definition object. |
 
 ### Relationships
 
@@ -941,24 +935,24 @@ Bundle is not a STIX Object and **MUST NOT** have any relationships to it or fro
 }
 ```
 
-The marking-definition object represents a specific marking. Data markings typically represent handling or sharing requirements for data, and are applied in the `object_marking_refs` and granular_markings properties on STIX Objects, which reference a list of IDs for marking-definition objects.
+The marking-definition object represents a specific marking. Data markings typically represent handling or sharing requirements for data, and are applied in the **object_marking_refs** and granular_markings properties on STIX Objects, which reference a list of IDs for `marking-definition` objects.
 
 Two marking definition types are defined in this specification: TLP, to capture TLP markings, and Statement, to capture text marking statements. In addition, it is expected that the FIRST Information Exchange Policy (IEP) will be included in a future version once a machine-usable specification for it has been defined.
 
 Unlike STIX Objects, Marking Definition objects cannot be versioned because it would allow for indirect changes to the markings on a STIX Object. For example, if a Statement marking is changed from "Reuse Allowed" to "Reuse Prohibited", all STIX Objects marked with that Statement marking would effectively have an updated marking without being updated themselves. Instead, a new Statement marking with the new text should be created and the marked objects updated to point to the new marking.
 
-The JSON MTI serialization uses the JSON object type [RFC7159] when representing marking-definition.
+The JSON MTI serialization uses the JSON object type [RFC7159] when representing `marking-definition`.
 
 Name | Type | Description
 --------- | ------- | -----------
 | **type** (required) | [string](#string) | The type property identifies the type of object. The value of this property **MUST** be `marking-definition`.
 | **id** (required) | [identifier](#identifier) | The id property universally and uniquely identifies this Marking Definition. Because the object type is part of the identifier, it is not possible for objects of different types to share the same id.
-| **created_by_ref** (optional) | [identifier](#identifier) | The created_by_ref property specifies the ID of the identity object that describes the entity that created this Marking Definition. If this attribute is omitted, the source of this information is undefined. This may be used by object creators who wish to remain anonymous.
+| **created_by_ref** (optional) | [identifier](#identifier) | The **created_by_ref** property specifies the ID of the identity object that describes the entity that created this Marking Definition. If this attribute is omitted, the source of this information is undefined. This may be used by object creators who wish to remain anonymous.
 | **created** (required) | [timestamp](#timestamp) | The created property represents the time at which the Marking Definition was created. The object creator can use the time it deems most appropriate as the time the object was created.
 | **external_references** (optional)  | [list](#list) of type [external-reference](#external-reference) | The external_references property specifies a list of external references which refers to non-STIX information. This property is used to provide one or more URLs, descriptions, or IDs to records in other systems.
-| **object_marking_refs** (optional) | [list](#list) of type [identifier](#identifier) | The object_marking_refs property specifies a list of IDs of marking-definitions that apply to this Marking Definition. This property MUST NOT contain any references to this Marking Definition object (i.e., it cannot contain any circular references). Though uncommon, in some cases marking definitions themselves may be marked with sharing or handling guidance.
-| **granular_markings** (optional) | [list](#list) of type [granular-marking](#granular-marking) | The granular_markings property specifies a list of granular markings applied to this. This property MUST NOT contain any references to this Marking Definition object (i.e., it cannot contain any circular references). Though uncommon, in some cases Marking Definitions themselves may be marked with sharing or handling guidance.
-| **definition_type** (required) | [open-vocab](#open-vocab) | The definition_type property identifies the type of Marking Definition. The value of the definition_type property SHOULD be one of the types defined in the subsections below: statement or tlp (see sections 4.1.3 and 4.1.4)
+| **object_marking_refs** (optional) | [list](#list) of type [identifier](#identifier) | The **object_marking_refs** property specifies a list of IDs of marking-definitions that apply to this Marking Definition. This property **MUST NOT** contain any references to this Marking Definition object (i.e., it cannot contain any circular references). Though uncommon, in some cases marking definitions themselves may be marked with sharing or handling guidance.
+| **granular_markings** (optional) | [list](#list) of type [granular-marking](#granular-marking) | The **granular_markings** property specifies a list of granular markings applied to this. This property **MUST NOT** contain any references to this Marking Definition object (i.e., it cannot contain any circular references). Though uncommon, in some cases Marking Definitions themselves may be marked with sharing or handling guidance.
+| **definition_type** (required) | [open-vocab](#open-vocab) | The **definition_type** property identifies the type of Marking Definition. The value of the **definition_type** property **SHOULD** be one of the types defined in the subsections below: statement or tlp (see sections 4.1.3 and 4.1.4)
 | **definition** (required) | `<marking-object>` | The definition property contains the marking object itself (e.g., the TLP marking as defined in section 4.1.4, the Statement marking as defined in section 4.1.3, or some other marking definition defined elsewhere).
 
 ### Relationships
@@ -981,7 +975,7 @@ Data Marking is not a STIX Object and **MUST NOT** have any SRO relationships to
 }
 ```
 
-The Statement marking type defines the representation of a textual marking statement (e.g., copyright, terms of use, etc.) in a definition. The value of the definition_type property MUST be statement when using this marking type. Statement markings are generally not machine-readable and this specification does not define any behavior or actions based on their values.
+The Statement marking type defines the representation of a textual marking statement (e.g., copyright, terms of use, etc.) in a definition. The value of the **definition_type** property **MUST** be `statement` when using this marking type. Statement markings are generally not machine-readable and this specification does not define any behavior or actions based on their values.
 
 Content may be marked with multiple Statement marking types that do not override each other. In other words, the same content can be marked both with a statement saying "Copyright 2016" and a statement saying "Terms of use are ..." and both statements apply.
 
@@ -1047,29 +1041,29 @@ Name | Type | Description
 }
 ```
 
-The TLP marking type defines how you would represent a Traffic Light Protocol (TLP) marking in a definition property. The value of the definition_type property MUST be tlp when using this marking type.
+The TLP marking type defines how you would represent a Traffic Light Protocol (TLP) marking in a definition property. The value of the **definition_type** property **MUST** be `tlp` when using this marking type.
 
 Because there are only four TLP levels, STIX has pre-defined the STIX objects used to represent them. To use them, reference them by ID directly (see the objects to the right). You could also include the full objects if you want.
 
 ### Granular Marking
 
-The granular-marking type defines how the marking-definition object referenced by the marking_ref property applies to a set of content identified by the list of selectors in the selectors property.
+The `granular-marking` type defines how the `marking-definition` object referenced by the **marking_ref** property applies to a set of content identified by the list of selectors in the selectors property.
 
 Name | Type | Description
 --------- | ------- | -----------
 | **marking_ref** (required) | [identifier](#identifier) | The marking_ref property specifies the ID of the marking-definition object that describes the marking.
-| **selectors** | [list](#list) of type [string](#string) | The selectors property specifies a list of selectors for content contained within the STIX Object in which this property appears. Selectors MUST conform to the syntax defined in section 4.3.1.1. The marking-definition referenced in the marking_ref property is applied to the content selected by the selectors in this list.
+| **selectors** | [list](#list) of type [string](#string) | The selectors property specifies a list of selectors for content contained within the STIX Object in which this property appears. Selectors **MUST** conform to the syntax defined in section 4.3.1.1. The `marking-definition` referenced in the **marking_ref** property is applied to the content selected by the selectors in this list.
 
 #### Selector Syntax
 
-Selectors contained in the selectors list are strings that consist of multiple components that MUST be separated by the . character. Each component **MUST** be one of:
+Selectors contained in the selectors list are strings that consist of multiple components that **MUST** be separated by the . character. Each component **MUST** be one of:
 
 * A property name, e.g., description, or;
 * A zero-based list index, specified as a non-negative integer in square brackets, e.g., [4]
 
-Selectors denote path traversals: the root of each selector is the STIX Object that the granular_markings property appears in. Starting from that root, for each component in the selector, properties and list items are traversed. When the complete list has been traversed, the value of the content is considered selected.
+Selectors denote path traversals: the root of each selector is the STIX Object that the **granular_markings** property appears in. Starting from that root, for each component in the selector, properties and list items are traversed. When the complete list has been traversed, the value of the content is considered selected.
 
-Selectors MUST refer to properties or list items that are actually present on the marked object.
+Selectors **MUST** refer to properties or list items that are actually present on the marked object.
 
 > Example of a granular marking:
 
@@ -1091,19 +1085,19 @@ Selectors MUST refer to properties or list items that are actually present on th
 
 Considering the example to the right, the following selectors are valid:
 
-* `description` selects the description property ("The (1) TLS...").
-* `external_references.[0].source_name` selects the source_name property of the first value of the external_references list ("cve").
-* `labels.[0]` selects the first item contained within the labels list ("heartbleed").
-* `labels` selects the list contained in the labels property. Due to the recursive nature of the selector, that includes all items in the list (["heartbleed", "has-logo"]).
-* `external_references` selects the list contained in the external_references property. Due to the recursive nature of the selector, that includes all list items and all properties of those list items.
+* `description` selects the **description** property ("The (1) TLS...").
+* `external_references.[0].source_name` selects the **source_name** property of the first value of the **external_references** list ("cve").
+* `labels.[0]` selects the first item contained within the **labels** list ("heartbleed").
+* `labels` selects the list contained in the **labels** property. Due to the recursive nature of the selector, that includes all items in the list (["heartbleed", "has-logo"]).
+* `external_references` selects the list contained in the **external_references** property. Due to the recursive nature of the selector, that includes all list items and all properties of those list items.
 
 On the other hand, still looking at the same example, the following selectors are not valid:
 
 * `pattern` and `external_references.[3]` are invalid selectors because they refer to content not present in that object.
-* `description.[0]` is an invalid selector because the description property is a string and not a list.
-* `labels.name` is an invalid selector because labels property is a list and not an object.
+* `description.[0]` is an invalid selector because the **description** property is a string and not a list.
+* `labels.name` is an invalid selector because **labels** property is a list and not an object.
 
-This syntax is inspired by JSONPath [Goessner 2007] and is in fact a strict subset of allowable JSONPath expressions (with the exception that the '$' to indicate the root is implicit). Care should be taken when passing selectors to JSONPath evaluators to ensure that the root of the query is the individual STIX Object. It is expected, however, that selectors can be easily evaluated in programming languages that implement list and key/value mapping types (dictionaries, hashmaps, etc.) without resorting to an external library.
+This syntax is inspired by JSONPath and is in fact a strict subset of allowable JSONPath expressions (with the exception that the '$' to indicate the root is implicit). Care should be taken when passing selectors to JSONPath evaluators to ensure that the root of the query is the individual STIX Object. It is expected, however, that selectors can be easily evaluated in programming languages that implement list and key/value mapping types (dictionaries, hashmaps, etc.) without resorting to an external library.
 
 > Marks the description and labels properties with the single marking definition referenced in the list.
 
@@ -1184,20 +1178,20 @@ When specifying a hashing algorithm not already defined within the hash-algorith
 
 | Value | Description |
 | ----- | ----------- |
-| **MD5** | Specifies the MD5 message digest algorithm. The corresponding hash string for this value MUST be a valid MD5 message digest as defined in [RFC 1321].
-| **MD6** | Specifies the MD6 message digest algorithm. The corresponding hash string for this value MUST be a valid MD6 message digest as defined in the [MD6] proposal.
-| **RIPEMD-160** | Specifies the RIPEMD­-160 (R​ACE​ Integrity Primitives Evaluation Message Digest)​ cryptographic hash function. The corresponding hash string for this value MUST be a valid RIPEMD-160 message digest as defined in the [RIPEMD-160] specification.
-| **SHA-1** | Specifies the SHA­-1 (secure-­hash algorithm 1) cryptographic hash function. The corresponding hash string for this value MUST be a valid SHA-1 message digest as defined in [RFC 3174].
-| **SHA-224** | Specifies the SHA-­224 cryptographic hash function (part of the SHA­2 family). The corresponding hash string for this value MUST be a valid SHA-224 message digest as defined in [RFC 6234].
-| **SHA-256** | Specifies the SHA-­256 cryptographic hash function (part of the SHA­2 family). The corresponding hash string for this value MUST be a valid SHA-256 message digest as defined in [RFC 6234].
-| **SHA-384** | Specifies the SHA-­384 cryptographic hash function (part of the SHA­2 family). The corresponding hash string for this value MUST be a valid SHA-384 message digest as defined in [RFC 6234].
-| **SHA-512** | Specifies the SHA-­512 cryptographic hash function (part of the SHA­2 family). The corresponding hash string for this value MUST be a valid SHA-512 message digest as defined in [RFC 6234].
-| **SHA3-224** | Specifies the SHA3-224 cryptographic hash function. The corresponding hash string for this value MUST be a valid SHA3-224 message digest as defined in [FIPS202].
-| **SHA3-256** | Specifies the SHA3-256 cryptographic hash function. The corresponding hash string for this value MUST be a valid SHA3-256 message digest as defined in [FIPS202].
-| **SHA3-384** | Specifies the SHA3-384 cryptographic hash function. The corresponding hash string for this value MUST be a valid SHA3-384 message digest as defined in [FIPS202].
-| **SHA3-512** | Specifies the SHA3-512 cryptographic hash function. The corresponding hash string for this value MUST be a valid SHA3-512 message digest as defined in [FIPS202].
-| **ssdeep** | Specifies the ssdeep fuzzy hashing algorithm. The corresponding hash string for this value MUST be a valid piecewise hash as defined in the [SSDEEP] specification.
-| **WHIRLPOOL** | Specifies the whirlpool cryptographic hash function. The corresponding hash string for this value MUST be a valid WHIRLPOOL message digest as defined in [ISO10118].
+| **MD5** | Specifies the MD5 message digest algorithm. The corresponding hash string for this value **MUST** be a valid MD5 message digest as defined in [RFC 1321].
+| **MD6** | Specifies the MD6 message digest algorithm. The corresponding hash string for this value **MUST** be a valid MD6 message digest as defined in the [MD6] proposal.
+| **RIPEMD-160** | Specifies the RIPEMD­-160 (R​ACE​ Integrity Primitives Evaluation Message Digest)​ cryptographic hash function. The corresponding hash string for this value **MUST** be a valid RIPEMD-160 message digest as defined in the [RIPEMD-160] specification.
+| **SHA-1** | Specifies the SHA­-1 (secure-­hash algorithm 1) cryptographic hash function. The corresponding hash string for this value **MUST** be a valid SHA-1 message digest as defined in [RFC 3174].
+| **SHA-224** | Specifies the SHA-­224 cryptographic hash function (part of the SHA­2 family). The corresponding hash string for this value **MUST** be a valid SHA-224 message digest as defined in [RFC 6234].
+| **SHA-256** | Specifies the SHA-­256 cryptographic hash function (part of the SHA­2 family). The corresponding hash string for this value **MUST** be a valid SHA-256 message digest as defined in [RFC 6234].
+| **SHA-384** | Specifies the SHA-­384 cryptographic hash function (part of the SHA­2 family). The corresponding hash string for this value **MUST** be a valid SHA-384 message digest as defined in [RFC 6234].
+| **SHA-512** | Specifies the SHA-­512 cryptographic hash function (part of the SHA­2 family). The corresponding hash string for this value **MUST** be a valid SHA-512 message digest as defined in [RFC 6234].
+| **SHA3-224** | Specifies the SHA3-224 cryptographic hash function. The corresponding hash string for this value **MUST** be a valid SHA3-224 message digest as defined in [FIPS202].
+| **SHA3-256** | Specifies the SHA3-256 cryptographic hash function. The corresponding hash string for this value **MUST** be a valid SHA3-256 message digest as defined in [FIPS202].
+| **SHA3-384** | Specifies the SHA3-384 cryptographic hash function. The corresponding hash string for this value **MUST** be a valid SHA3-384 message digest as defined in [FIPS202].
+| **SHA3-512** | Specifies the SHA3-512 cryptographic hash function. The corresponding hash string for this value **MUST** be a valid SHA3-512 message digest as defined in [FIPS202].
+| **ssdeep** | Specifies the ssdeep fuzzy hashing algorithm. The corresponding hash string for this value **MUST** be a valid piecewise hash as defined in the [SSDEEP] specification.
+| **WHIRLPOOL** | Specifies the whirlpool cryptographic hash function. The corresponding hash string for this value **MUST** be a valid WHIRLPOOL message digest as defined in [ISO10118].
 
 ## Identity Class
 
@@ -1417,7 +1411,7 @@ Tool labels describe the categories of tools that can be used to perform attacks
 
 A boolean is a value of either true or false. Properties with this type **MUST** have a value of `true` or `false`.
 
-The JSON MTI serialization uses the JSON boolean type [RFC7159], which is a literal (unquoted) true or false.
+The JSON MTI serialization uses the JSON boolean type, which is a literal (unquoted) true or false.
 
 ## External Reference
 
@@ -1475,23 +1469,23 @@ The JSON MTI serialization uses the JSON boolean type [RFC7159], which is a lite
 
 External references are used to describe pointers to information represented outside of STIX. For example, a Malware object could use an external reference to indicate an ID for that malware in an external database or a report could use references to represent source material.
 
-The JSON MTI serialization uses the JSON object type [RFC7159] when representing external-reference.
+The JSON MTI serialization uses the JSON object type when representing external-reference.
 
 * In addition to the **source_name** property, at least one of the **description**, **url**, or **external_id** properties **MUST** be present.
 
 Name | Type | Description
 --------- | ------- | -----------
-| **source_name** (required) | [string](#string) | The source within which the external-reference is defined (system, registry, organization, etc.).
+| **source_name** (required) | [string](#string) | The source within which the `external-reference` is defined (system, registry, organization, etc.).
 | **description** (optional) | [string](#string) | A human readable description.
-| **url** (optional) | [string](#string) | A URL reference to an external resource [RFC3986].
-| **hashes** (optional) | [hashes](#hashes) | Specifies a dictionary of hashes for the contents of the url. This SHOULD be provided when the url property is present.
+| **url** (optional) | [string](#string) | A URL reference to an external resource.
+| **hashes** (optional) | [hashes](#hashes) | Specifies a dictionary of hashes for the contents of the url. This **SHOULD** be provided when the url property is present.
 | **external_id** (optional) | [string](#string) | An identifier for the external reference content.
 
 ## Float
 
-The float data type represents an IEEE 754 [IEEE 754-2008] double-precision number (e.g., a number with a fractional part). However, because the values ±Infinity and NaN are not representable in JSON, they are not valid values in STIX.
+The float data type represents an IEEE 754 double-precision number (e.g., a number with a fractional part). However, because the values ±Infinity and NaN are not representable in JSON, they are not valid values in STIX.
 
-In the JSON MTI serialization, floating point values are represented by the JSON number type [RFC7159].
+In the JSON MTI serialization, floating point values are represented by the JSON number type.
 
 ## Hashes
 
@@ -1504,7 +1498,7 @@ In the JSON MTI serialization, floating point values are represented by the JSON
 }
 ```
 
-The Hashes type represents 1 or more cryptographic hashes, as a special set of key/value pairs. Accordingly, the name of each hashing algorithm MUST be specified as a key in the dictionary and **MUST** identify the name of the hashing algorithm used to generate the corresponding value. This name **SHOULD** either be one of the values defined in the hash-algorithm-ov OR a custom value prepended with “x_” (e.g., “x_custom_hash”).
+The Hashes type represents 1 or more cryptographic hashes, as a special set of key/value pairs. Accordingly, the name of each hashing algorithm **MUST** be specified as a key in the dictionary and **MUST** identify the name of the hashing algorithm used to generate the corresponding value. This name **SHOULD** either be one of the values defined in the [hash-algorithm-ov](#hash-algorithm) OR a custom value prepended with “x_” (e.g., “x_custom_hash”).
 
 Keys **MUST** be unique in each hashes property, **MUST** be in ASCII, and are limited to the characters a-z (lowercase ASCII), A-Z (uppercase ASCII), numerals 0-9, hyphen (`-`), and underscore (`_`). Keys **SHOULD** be no longer than 30 ASCII characters in length, **MUST** have a minimum length of 3 ASCII characters, **MUST** be no longer than 256 ASCII characters in length.
 
@@ -1532,9 +1526,9 @@ Keys **MUST** be unique in each hashes property, **MUST** be in ASCII, and are l
 }
 ```
 
-An identifier universally and uniquely identifies a SDO, SRO, Bundle, or Marking Definition. Identifiers **MUST** follow the form `object-type--UUIDv4`, where `object-type` is the exact value (all type names are lowercase strings, by definition) from the `type` property of the object being identified or referenced and where the UUIDv4 is an RFC 4122-compliant Version 4 UUID. The UUID MUST be generated according to the algorithm(s) defined in RFC 4122, section 4.4 (Version 4 UUID) [RFC4122].
+An identifier universally and uniquely identifies a SDO, SRO, Bundle, or Marking Definition. Identifiers **MUST** follow the form `object-type--UUIDv4`, where `object-type` is the exact value (all type names are lowercase strings, by definition) from the `type` property of the object being identified or referenced and where the UUIDv4 is an RFC 4122-compliant Version 4 UUID. The UUID **MUST** be generated according to the algorithm(s) defined in RFC 4122, section 4.4 (Version 4 UUID).
 
-The JSON MTI serialization uses the JSON string type [RFC7159] when representing identifier.
+The JSON MTI serialization uses the JSON string type when representing identifier.
 
 ## Integer
 
@@ -1548,9 +1542,9 @@ The JSON MTI serialization uses the JSON string type [RFC7159] when representing
 }
 ```
 
-The integer data type represents a whole number. Unless otherwise specified, all integers **MUST** be capable of being represented as a signed 64-bit value ([-(2**63)+1, (2**63)-1]). Additional restrictions MAY be placed on the type as described where it is used.
+The integer data type represents a whole number. Unless otherwise specified, all integers **MUST** be capable of being represented as a signed 64-bit value ([-(2**63)+1, (2**63)-1]). Additional restrictions **MAY** be placed on the type as described where it is used.
 
-In the JSON MTI serialization, integers are represented by the JSON number type [RFC7159].
+In the JSON MTI serialization, integers are represented by the JSON number type.
 
 ## Kill Chain Phase
 
@@ -1584,9 +1578,9 @@ In the JSON MTI serialization, integers are represented by the JSON number type 
 }
 ```
 
-The kill-chain-phase represents a phase in a kill chain, which describes the various phases an attacker may undertake in order to achieve their objectives.
+The `kill-chain-phase` represents a phase in a kill chain, which describes the various phases an attacker may undertake in order to achieve their objectives.
 
-The JSON MTI serialization uses the JSON object type [RFC7159] when representing kill-chain-phase.
+The JSON MTI serialization uses the JSON object type when representing `kill-chain-phase`.
 
 Name | Type | Description
 --------- | ------- | -----------
@@ -1609,11 +1603,11 @@ Name | Type | Description
 }
 ```
 
-The list type defines a sequence of values ordered based on how they appear in the list. The phrasing “list of type \<type\>” is used to indicate that all values within the list MUST conform to the specified type. For instance, list of type integer means that all values of the list must be of the integer type. This specification does not specify the maximum number of allowed values in a list, however every instance of a list MUST have at least one value. Specific STIX object properties may define more restrictive upper and/or lower bounds for the length of the list.
+The list type defines a sequence of values ordered based on how they appear in the list. The phrasing “list of type \<type\>” is used to indicate that all values within the list **MUST** conform to the specified type. For instance, list of type integer means that all values of the list must be of the integer type. This specification does not specify the maximum number of allowed values in a list, however every instance of a list **MUST** have at least one value. Specific STIX object properties may define more restrictive upper and/or lower bounds for the length of the list.
 
-Empty lists are prohibited in STIX and MUST NOT be used as a substitute for omitting the property if it is optional. If the property is required, the list MUST be present and MUST have at least one value.
+Empty lists are prohibited in STIX and **MUST NOT** be used as a substitute for omitting the property if it is optional. If the property is required, the list **MUST** be present and **MUST** have at least one value.
 
-The JSON MTI serialization uses the JSON array type [RFC7159], which is an ordered list of zero or more values.
+The JSON MTI serialization uses the JSON array type, which is an ordered list of zero or more values.
 
 ## Open Vocab
 
@@ -1637,11 +1631,11 @@ The JSON MTI serialization uses the JSON array type [RFC7159], which is an order
 }
 ```
 
-The open-vocab type is represented as a string. For properties that use this type there will be a list of suggested values, known as the suggested vocabulary, that is identified in the definition for that property. The suggested vocabularies are defined in section 6. The value of the property SHOULD be chosen from the suggested vocabulary but MAY be any other string value. Values that are not from the suggested vocabulary SHOULD be all lowercase (where lowercase is defined by the locality conventions) and SHOULD use hyphens instead of spaces or underscores as word separators.
+The `open-vocab` type is represented as a string. For properties that use this type there will be a list of suggested values, known as the suggested vocabulary, that is identified in the definition for that property. The suggested vocabularies are defined in section 6. The value of the property **SHOULD** be chosen from the suggested vocabulary but **MAY** be any other string value. Values that are not from the suggested vocabulary **SHOULD** be all lowercase (where lowercase is defined by the locality conventions) and **SHOULD** use hyphens instead of spaces or underscores as word separators.
 
-A consumer that receives STIX content with one or more open-vocab terms not defined in the suggested vocabulary MAY ignore those values.
+A consumer that receives STIX content with one or more `open-vocab` terms not defined in the suggested vocabulary **MAY** ignore those values.
 
-The JSON MTI serialization uses the JSON string type [RFC7159] when representing open-vocab.
+The JSON MTI serialization uses the JSON string type when representing `open-vocab`.
 
 ## String
 
@@ -1655,9 +1649,9 @@ The JSON MTI serialization uses the JSON string type [RFC7159] when representing
 }
 ```
 
-The string data type represents a finite-length string of valid characters from the Unicode coded character set [ISO10646]. Unicode incorporates ASCII and the characters of many other international character sets.
+The string data type represents a finite-length string of valid characters from the Unicode coded character set. Unicode incorporates ASCII and the characters of many other international character sets.
 
-The JSON MTI serialization uses the JSON string type [RFC7159], which mandates the UTF-8 encoding for supporting Unicode.
+The JSON MTI serialization uses the JSON string type, which mandates the UTF-8 encoding for supporting Unicode.
 
 ## Timestamp
 
@@ -1673,10 +1667,10 @@ The JSON MTI serialization uses the JSON string type [RFC7159], which mandates t
 
 The timestamp type defines how dates and times are represented in STIX.
 
-The JSON MTI serialization uses the JSON string type [RFC7159] when representing timestamp.
+The JSON MTI serialization uses the JSON string type when representing timestamp.
 
-* The timestamp property MUST be a valid RFC 3339-formatted timestamp [RFC3339] using the format YYYY-MM-DDTHH:mm:ss[.s+]Z where the “s+” represents 1 or more sub-second values. The brackets denote that sub-second precision is optional, and that if no digits are provided, the decimal place MUST NOT be present.
-* The timestamp MUST be represented in the UTC timezone and MUST use the “Z” designation to indicate this.
+* The timestamp property **MUST** be a valid RFC 3339-formatted timestamp using the format YYYY-MM-DDTHH:mm:ss[.s+]Z where the “s+” represents 1 or more sub-second values. The brackets denote that sub-second precision is optional, and that if no digits are provided, the decimal place **MUST NOT** be present.
+* The timestamp **MUST** be represented in the UTC timezone and **MUST** use the “Z” designation to indicate this.
 
 ## Common Properties
 
@@ -1684,16 +1678,16 @@ This section outlines the common properties and behavior across all SDOs and SRO
 
 Name | Type | Description
 --------- | ------- | -----------
-| **type** (required) | [string](#string) | The type property identifies the type of STIX Object. The value of the type property MUST be the name of one of the types of STIX Object defined in sections 2 and 3 of STIX™ Version 2.0. Part 2: STIX Objects (e.g., indicator) or the name of a custom object as defined by section 7.2. |
-| **id** (required) | [identifier](#identifier) | The id property universally and uniquely identifies this object. All objects with the same id are considered different versions of the same object. Because the object type is part of the identifier, it is invalid for objects of different types to share the same id. |
-| **created_by_ref** (optional) | [identifier](#identifier) | The created_by_ref property specifies the ID of the Identity object that describes the entity that created this object. If this attribute is omitted, the source of this information is undefined. This may be used by object creators who wish to remain anonymous.
-| **created** (required) | [timestamp](#timestamp) | The created property represents the time at which the first version of this object was created. The object creator can use the time it deems most appropriate as the time the object was created. The created property MUST NOT be changed when creating a new version of the object. The created timestamp MUST be precise to the nearest millisecond (exactly three digits after the decimal place in seconds). See section 3.4 for further definition of versioning.
-| **modified** (required) | [timestamp](#timestamp) | The modified property represents the time that this particular version of the object was created. The object creator can use the time it deems most appropriate as the time this version of the object was modified. The value of the modified property for a given object version MUST be later than or equal to the value of the created property. Object creators MUST set the modified property when creating a new version of an object. The modified timestamp MUST be precise to the nearest millisecond (exactly three digits after the decimal place in seconds). See section 3.4 for further definition of versioning.
-| **revoked** (optional) | [boolean](#boolean) | The revoked property indicates whether the object has been revoked. Revoked objects are no longer considered valid by the object creator. Revoking an object is permanent; future versions of the object with this id MUST NOT be created. The default value of this property is false. See section 3.4 for further definition of versioning.
-| **labels** (optional) | [list](#list) of type [string](#string) | The labels property specifies a set of classifications. Each STIX Object can define a suggested vocabulary for the labels property. For example, the Indicator object, as defined in section 2.5 of STIX™ Version 2.0. Part 2: STIX Objects, uses the Indicator Label vocabulary as defined in section 6.5. In some cases (generally, when a suggested vocabulary is defined) the labels property is then required for that specific SDO. If a vocabulary is defined, items in this list SHOULD come from the vocabulary. Additional labels MAY be added beyond what is in the suggested vocabulary.
-| **external_references** (optional)  | [list](#list) of type [external-reference](#external-reference) | The external_references property specifies a list of external references which refers to non-STIX information. This property is used to provide one or more URLs, descriptions, or IDs to records in other systems.
-| **object_marking_refs** (optional) | [list](#list) of type [identifier](#identifier) | The object_marking_refs property specifies a list of IDs of marking-definition objects that apply to this object. See section 4 for further definition of data markings. |
-| **granular_markings** (optional) | [list](#list) of type [granular-marking]($granular-marking) | The granular_markings property specifies a list of granular markings applied to this object.  See section 4 for further definition of data markings.
+| **type** (required) | [string](#string) | The **type** property identifies the type of STIX Object. The value of the type property **MUST** be the name of one of the types of STIX Object defined in sections 2 and 3 of STIX™ Version 2.0. Part 2: STIX Objects (e.g., indicator) or the name of a custom object as defined by section 7.2. |
+| **id** (required) | [identifier](#identifier) | The **id** property universally and uniquely identifies this object. All objects with the same id are considered different versions of the same object. Because the object type is part of the identifier, it is invalid for objects of different types to share the same id. |
+| **created_by_ref** (optional) | [identifier](#identifier) | The **created_by_ref** property specifies the ID of the Identity object that describes the entity that created this object. If this attribute is omitted, the source of this information is undefined. This may be used by object creators who wish to remain anonymous.
+| **created** (required) | [timestamp](#timestamp) | The **created** property represents the time at which the first version of this object was created. The object creator can use the time it deems most appropriate as the time the object was created. The **created** property **MUST NOT** be changed when creating a new version of the object. The created timestamp **MUST** be precise to the nearest millisecond (exactly three digits after the decimal place in seconds). See section 3.4 for further definition of versioning.
+| **modified** (required) | [timestamp](#timestamp) | The **modified** property represents the time that this particular version of the object was created. The object creator can use the time it deems most appropriate as the time this version of the object was modified. The value of the modified property for a given object version **MUST** be later than or equal to the value of the created property. Object creators **MUST** set the modified property when creating a new version of an object. The modified timestamp **MUST** be precise to the nearest millisecond (exactly three digits after the decimal place in seconds). See section 3.4 for further definition of versioning.
+| **revoked** (optional) | [boolean](#boolean) | The **revoked** property indicates whether the object has been revoked. Revoked objects are no longer considered valid by the object creator. Revoking an object is permanent; future versions of the object with this id **MUST NOT** be created. The default value of this property is `false`. See section 3.4 for further definition of versioning.
+| **labels** (optional) | [list](#list) of type [string](#string) | The **labels** property specifies a set of classifications. Each STIX Object can define a suggested vocabulary for the labels property. For example, the Indicator object, as defined in section 2.5 of STIX™ Version 2.0. Part 2: STIX Objects, uses the Indicator Label vocabulary as defined in section 6.5. In some cases (generally, when a suggested vocabulary is defined) the labels property is then required for that specific SDO. If a vocabulary is defined, items in this list **SHOULD** come from the vocabulary. Additional labels **MAY** be added beyond what is in the suggested vocabulary.
+| **external_references** (optional)  | [list](#list) of type [external-reference](#external-reference) | The **external_references** property specifies a list of external references which refers to non-STIX information. This property is used to provide one or more URLs, descriptions, or IDs to records in other systems.
+| **object_marking_refs** (optional) | [list](#list) of type [identifier](#identifier) | The **object_marking_refs** property specifies a list of IDs of `marking-definition` objects that apply to this object. See section 4 for further definition of data markings. |
+| **granular_markings** (optional) | [list](#list) of type [granular-marking]($granular-marking) | The **granular_markings** property specifies a list of granular markings applied to this object.  See section 4 for further definition of data markings.
 
 ## Common Relationships
 
@@ -1701,6 +1695,6 @@ This section outlines the relationships that are available on all SROs.
 
 Source | Name | Target | Description
 ------ | ---- | ------ | -----------
-| `<SDO>` | `derived-from` | `<SDO of the same type>` | The information in the target object is based on information from the source object. derived-from is an explicit relationship between two separate objects and MUST NOT be used as a substitute for the versioning process defined in section 3.4.
-| `<SDO>` | `duplicate-of` | `<SDO of the same type>` | The referenced source and target objects are semantically duplicates of each other. This specification does not address whether the source or the target object is the duplicate object or what action, if any, a consumer should take when receiving an instance of this relationship. As an example, a Campaign object from one organization could be marked as a duplicate-of a Campaign object from another organization if they both described the same campaign.
-| `<SDO>` | `related-to` | `<SDO of any type>` | Asserts a non-specific relationship between two SDOs. This relationship can be used when none of the other predefined relationships are appropriate. As an example, a Malware object describing a piece of malware could be marked as a related-to a Tool if they are commonly used together. That relationship is not common enough to standardize on, but may be useful to some analysts.
+| `<SDO>` | `derived-from` | `<SDO of the same type>` | The information in the target object is based on information from the source object. derived-from is an explicit relationship between two separate objects and **MUST NOT** be used as a substitute for the versioning process defined in section 3.4.
+| `<SDO>` | `duplicate-of` | `<SDO of the same type>` | The referenced source and target objects are semantically duplicates of each other. This specification does not address whether the source or the target object is the duplicate object or what action, if any, a consumer should take when receiving an instance of this relationship. As an example, a Campaign object from one organization could be marked as a `duplicate-of` a Campaign object from another organization if they both described the same campaign.
+| `<SDO>` | `related-to` | `<SDO of any type>` | Asserts a non-specific relationship between two SDOs. This relationship can be used when none of the other predefined relationships are appropriate. As an example, a Malware object describing a piece of malware could be marked as a `related-to` a Tool if they are commonly used together. That relationship is not common enough to standardize on, but may be useful to some analysts.
