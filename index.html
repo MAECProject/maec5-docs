@@ -410,9 +410,9 @@
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>Welcome to STIX 2, sharing threat intelligence just got easier!</p>
+<p>Welcome to STIX 2! Sharing threat intelligence just got easier.</p>
 
-<p>This documentation is just a basic outline of the STIX 2.0 data model. If you&#39;re looking for an introduction or conceptual overview of STIX, see the <a href="http://docs.oasis-open.org/cti/stix/v2.0/stix-v2.0-part1-stix-core.html">full specification</a>. There&#39;s also the <a href="https://oasis-open.github.io/cti-documentation/">documentation website</a> if you&#39;re looking for more examples.</p>
+<p>This page is just a basic outline of the STIX 2.0 data model. If you&#39;re looking for an introduction or conceptual overview of STIX, see the <a href="http://docs.oasis-open.org/cti/stix/v2.0/stix-v2.0-part1-stix-core.html">full specification</a>. There&#39;s also the <a href="https://oasis-open.github.io/cti-documentation/">documentation website</a> if you&#39;re looking for more examples and walkthroughs.</p>
 
 <p>This documentation is divided into three major sections&hellip;</p>
 
@@ -486,7 +486,7 @@
 
 <p>Attack Patterns are a type of TTP that describe ways that adversaries attempt to compromise targets. Attack Patterns are used to help categorize attacks, generalize specific attacks to the patterns that they follow, and provide detailed information about how attacks are performed. An example of an attack pattern is &quot;spear phishing&quot;: a common type of attack where an attacker sends a carefully crafted e-mail message to a party with the intent of getting them to click a link or open an attachment to deliver malware. Attack Patterns can also be more specific; spear phishing as practiced by a particular threat actor (e.g., they might generally say that the target won a contest) can also be an Attack Pattern.</p>
 
-<p>The Attack Pattern SDO contains textual descriptions of the pattern along with references to externally-defined taxonomies of attacks such as CAPEC [CAPEC]. Relationships from Attack Pattern can be used to relate it to what it targets (Vulnerabilities and Identities) and which tools and malware use it (Tool and Malware).</p>
+<p>The Attack Pattern SDO contains textual descriptions of the pattern along with references to externally-defined taxonomies of attacks such as CAPEC. Relationships from Attack Pattern can be used to relate it to what it targets (Vulnerabilities and Identities) and which tools and malware use it (Tool and Malware).</p>
 
 <table><thead>
 <tr>
@@ -503,7 +503,7 @@
 <tr>
 <td><strong>type</strong> (required)</td>
 <td><a href="#string">string</a></td>
-<td>The value of property field MUST be <code>attack-pattern</code>.</td>
+<td>The value of property field <strong>MUST</strong> be <code>attack-pattern</code>.</td>
 </tr>
 <tr>
 <td><strong>external_references</strong> (optional)</td>
@@ -545,13 +545,13 @@
 <td><code>attack-pattern</code></td>
 <td><code>targets</code></td>
 <td><code>identity</code>, <code>vulnerability</code></td>
-<td>This Relationship describes that this Attack Pattern typically targets the type of victims or vulnerability represented by the related Identity or Vulnerability object. For example, a targets Relationship linking an Attack Pattern for SQL injection to an Identity object representing domain administrators means that the form of SQL injection characterized by the Attack Pattern targets domain administrators in order to achieve its objectives. Another example is a Relationship linking an Attack Pattern for SQL injection to a Vulnerability in blogging software means that the particular SQL injection attack exploits that vulnerability.</td>
+<td>This Relationship describes that this Attack Pattern typically targets the type of victims or vulnerability represented by the related Identity or Vulnerability object. For example, a <code>targets</code> Relationship linking an Attack Pattern for SQL injection to an Identity object representing domain administrators means that the form of SQL injection characterized by the Attack Pattern targets domain administrators in order to achieve its objectives. Another example is a Relationship linking an Attack Pattern for SQL injection to a Vulnerability in blogging software means that the particular SQL injection attack exploits that vulnerability.</td>
 </tr>
 <tr>
 <td><code>attack-pattern</code></td>
 <td><code>uses</code></td>
 <td><code>malware</code>, <code>tool</code></td>
-<td>This Relationship describes that the related Malware or Tool is used to perform the behavior identified in the Attack Pattern. For example, a uses Relationship linking an Attack Pattern for a distributed denial of service (DDoS) to a Tool for Low Orbit Ion Cannon (LOIC) indicates that the tool can be used to perform those DDoS attacks.</td>
+<td>This Relationship describes that the related Malware or Tool is used to perform the behavior identified in the Attack Pattern. For example, a <code>uses</code> Relationship linking an Attack Pattern for a distributed denial of service (DDoS) to a Tool for Low Orbit Ion Cannon (LOIC) indicates that the tool can be used to perform those DDoS attacks.</td>
 </tr>
 <tr>
 <td><code>indicator</code></td>
@@ -569,7 +569,7 @@
 <td><code>campaign</code>, <code>intrusion-set</code>, <code>threat-actor</code></td>
 <td><code>uses</code></td>
 <td><code>attack-pattern</code></td>
-<td>This Relationship describes that attacks carried out as part of the Campaign, Intrusion Set, or Threat Actor typically use the related Attack Pattern. For example, a uses Relationship from the Glass Gazelle Campaign to the Spear Phishing Attack Pattern indicates that Spear Phishing is often used during attacks attributed to that Campaign.</td>
+<td>This Relationship describes that attacks carried out as part of the Campaign, Intrusion Set, or Threat Actor typically use the related Attack Pattern. For example, a <code>uses</code> Relationship from the Glass Gazelle Campaign to the Spear Phishing Attack Pattern indicates that Spear Phishing is often used during attacks attributed to that Campaign.</td>
 </tr>
 </tbody></table>
 <h2 id='campaign'>Campaign</h2>
@@ -611,7 +611,7 @@
 <tr>
 <td><strong>type</strong> (required)</td>
 <td><a href="#string">string</a></td>
-<td>The value of property field MUST be <code>campaign</code>.</td>
+<td>The value of property field <strong>MUST</strong> be <code>campaign</code>.</td>
 </tr>
 <tr>
 <td><strong>name</strong> (required)</td>
@@ -674,13 +674,13 @@
 <td><code>campaign</code></td>
 <td><code>targets</code></td>
 <td><code>identity</code>, <code>vulnerability</code></td>
-<td>This Relationship describes that the Campaign uses exploits of the related Vulnerability or targets the type of victims described by the related Identity. For example, a targets Relationship from the Glass Gazelle Campaign to a Vulnerability in a blogging platform indicates that attacks performed as part of Glass Gazelle often exploit that Vulnerability. Similarly, a targets Relationship from the Glass Gazelle Campaign to a Identity describing the energy sector in the United States means that the Campaign typically carries out attacks against targets in that sector.</td>
+<td>This Relationship describes that the Campaign uses exploits of the related Vulnerability or targets the type of victims described by the related Identity. For example, a <code>targets</code> Relationship from the Glass Gazelle Campaign to a Vulnerability in a blogging platform indicates that attacks performed as part of Glass Gazelle often exploit that Vulnerability. Similarly, a targets Relationship from the Glass Gazelle Campaign to a Identity describing the energy sector in the United States means that the Campaign typically carries out attacks against targets in that sector.</td>
 </tr>
 <tr>
 <td><code>campaign</code></td>
 <td><code>uses</code></td>
 <td><code>attack-pattern</code>, <code>malware</code>, <code>tool</code></td>
-<td>This Relationship describes that attacks carried out as part of the Campaign typically use the related Attack Pattern, Malware, or Tool. For example, a uses Relationship from the Glass Gazelle Campaign to the xInject Malware indicates that xInject is often used during attacks attributed to that Campaign.</td>
+<td>This Relationship describes that attacks carried out as part of the Campaign typically use the related Attack Pattern, Malware, or Tool. For example, a <code>uses</code> Relationship from the Glass Gazelle Campaign to the xInject Malware indicates that xInject is often used during attacks attributed to that Campaign.</td>
 </tr>
 <tr>
 <td><code>indicator</code></td>
@@ -746,7 +746,7 @@
 <tr>
 <td><strong>type</strong> (required)</td>
 <td><a href="#string">string</a></td>
-<td>The value of property field MUST be <code>course-of-action</code>.</td>
+<td>The value of property field <strong>MUST</strong> be <code>course-of-action</code>.</td>
 </tr>
 <tr>
 <td><strong>name</strong> (required)</td>
@@ -829,7 +829,7 @@
 <tr>
 <td><strong>type</strong> (required)</td>
 <td><a href="#string">string</a></td>
-<td>The value of property field MUST be <code>identity</code>.</td>
+<td>The value of property field <strong>MUST</strong> be <code>identity</code>.</td>
 </tr>
 <tr>
 <td><strong>labels</strong> (required)</td>
@@ -849,12 +849,12 @@
 <tr>
 <td><strong>identity_class</strong> (required)</td>
 <td><a href="#open-vocab">open-vocab</a></td>
-<td>The type of entity that this Identity describes, e.g., an individual or organization. This is an open vocabulary and the values <strong>SHOULD</strong> come from the <a href="#identity-class-ov">identity-class-ov</a> vocabulary.</td>
+<td>The type of entity that this Identity describes, e.g., an individual or organization. This is an open vocabulary and the values <strong>SHOULD</strong> come from the <a href="#identity-class">identity-class-ov</a> vocabulary.</td>
 </tr>
 <tr>
 <td><strong>sectors</strong> (optional)</td>
 <td><a href="#list">list</a> of type <a href="#open-vocab">open-vocab</a></td>
-<td>The list of industry sectors that this Identity belongs to. This is an open vocabulary and values <strong>SHOULD</strong> come from the <a href="#industry-sector-ov">industry-sector-ov</a> vocabulary.</td>
+<td>The list of industry sectors that this Identity belongs to. This is an open vocabulary and values <strong>SHOULD</strong> come from the <a href="#industry-sector">industry-sector-ov</a> vocabulary.</td>
 </tr>
 <tr>
 <td><strong>contact_information</strong> (optional)</td>
@@ -937,7 +937,7 @@
 
 <p>Indicators contain a pattern that can be used to detect suspicious or malicious cyber activity. For example, an Indicator may be used to represent a set of malicious domains and use the STIX Patterning Language (STIX™ Version 2.0. Part 5: STIX Patterning) to specify these domains.</p>
 
-<p>The Indicator SDO contains a simple textual description, the Kill Chain Phases that it detects behavior in, a time window for when the Indicator is valid or useful, and a required pattern property to capture a structured detection pattern. Conforming STIX implementations MUST support the STIX Patterning Language as defined in STIX™ Version 2.0. Part 5: STIX Patterning. While each structured pattern language has different syntax and potentially different  semantics, in general an Indicator is considered to have &quot;matched&quot; (or been &quot;sighted&quot;) when the conditions specified in the structured pattern are satisfied in whatever context they are evaluated in.</p>
+<p>The Indicator SDO contains a simple textual description, the Kill Chain Phases that it detects behavior in, a time window for when the Indicator is valid or useful, and a required pattern property to capture a structured detection pattern. Conforming STIX implementations <strong>MUST</strong> support the STIX Patterning Language as defined in STIX™ Version 2.0. Part 5: STIX Patterning. While each structured pattern language has different syntax and potentially different  semantics, in general an Indicator is considered to have &quot;matched&quot; (or been &quot;sighted&quot;) when the conditions specified in the structured pattern are satisfied in whatever context they are evaluated in.</p>
 
 <p>Relationships from the Indicator can describe the malicious or suspicious behavior that it directly detects (Malware, Tool, and Attack Pattern) as well as the Campaigns, Intrusion Sets, and Threat Actors that it might indicate the presence of.</p>
 
@@ -961,7 +961,7 @@
 <tr>
 <td><strong>labels</strong> (required)</td>
 <td><a href="#list">list</a> of type <a href="#open-vocab">open-vocab</a></td>
-<td>Specifies the type of indicator. This is an open vocabulary and values <strong>SHOULD</strong> come from the <a href="#indicator-label-ov">indicator-label-ov</a> vocabulary.</td>
+<td>Specifies the type of indicator. This is an open vocabulary and values <strong>SHOULD</strong> come from the <a href="#indicator-label">indicator-label-ov</a> vocabulary.</td>
 </tr>
 <tr>
 <td><strong>name</strong> (optional)</td>
@@ -1090,17 +1090,17 @@
 <tr>
 <td><strong>resource_level</strong> (optional)</td>
 <td><a href="#open-vocab">open-vocab</a></td>
-<td>This defines the organizational level at which this Intrusion Set typically works, which in turn determines the resources available to this Intrusion Set for use in an attack. This is an open vocabulary and values <strong>SHOULD</strong> come from the <a href="#attack-resource-level-ov">attack-resource-level-ov</a> vocabulary.</td>
+<td>This defines the organizational level at which this Intrusion Set typically works, which in turn determines the resources available to this Intrusion Set for use in an attack. This is an open vocabulary and values <strong>SHOULD</strong> come from the <a href="#attack-resource-level">attack-resource-level-ov</a> vocabulary.</td>
 </tr>
 <tr>
 <td><strong>primary_motivation</strong> (optional)</td>
 <td><a href="#open-vocab">open-vocab</a></td>
-<td>The primary reason, motivation, or purpose behind this Intrusion Set. The motivation is why the Intrusion Set wishes to achieve the goal (what they are trying to achieve). For example, an Intrusion Set with a goal to disrupt the finance sector in a country might be motivated by ideological hatred of capitalism. This is an open vocabulary and values SHOULD come from the <a href="#attack-motivation-ov">attack-motivation-ov</a> vocabulary.</td>
+<td>The primary reason, motivation, or purpose behind this Intrusion Set. The motivation is why the Intrusion Set wishes to achieve the goal (what they are trying to achieve). For example, an Intrusion Set with a goal to disrupt the finance sector in a country might be motivated by ideological hatred of capitalism. This is an open vocabulary and values <strong>SHOULD</strong> come from the <a href="#attack-motivation">attack-motivation-ov</a> vocabulary.</td>
 </tr>
 <tr>
 <td><strong>secondary_motivations</strong> (optional)</td>
 <td><a href="#list">list</a> of type <a href="#open-vocab">open-vocab</a></td>
-<td>The secondary reasons, motivations, or purposes behind this Intrusion Set. These motivations can exist as an equal or near-equal cause to the primary motivation. However, it does not replace or necessarily magnify the primary motivation, but it might indicate additional context. This is an open vocabulary and values <strong>SHOULD</strong> come from the <a href="#attack-motivation-ov">attack-motivation-ov</a> vocabulary.</td>
+<td>The secondary reasons, motivations, or purposes behind this Intrusion Set. These motivations can exist as an equal or near-equal cause to the primary motivation. However, it does not replace or necessarily magnify the primary motivation, but it might indicate additional context. This is an open vocabulary and values <strong>SHOULD</strong> come from the <a href="#attack-motivation">attack-motivation-ov</a> vocabulary.</td>
 </tr>
 </tbody></table>
 <h3 id='relationships-6'>Relationships</h3>
@@ -1122,7 +1122,7 @@
 <td><code>campaign</code></td>
 <td><code>attributed-to</code></td>
 <td><code>intrusion-set</code></td>
-<td>This Relationship describes that the Intrusion Set is involved in carrying out the Campaign. For example, an attributed-to Relationship from the Glass Gazelle Campaign to the Urban Fowl Threat Actor means that the actor carried out or was involved in some of the activity described by the Campaign.</td>
+<td>This Relationship describes that the Intrusion Set is involved in carrying out the Campaign. For example, an <code>attributed-to</code> Relationship from the Glass Gazelle Campaign to the Urban Fowl Threat Actor means that the actor carried out or was involved in some of the activity described by the Campaign.</td>
 </tr>
 <tr>
 <td><code>indicator</code></td>
@@ -1134,19 +1134,19 @@
 <td><code>intrusion-set</code></td>
 <td><code>attributed-to</code></td>
 <td><code>threat-actor</code></td>
-<td>This Relationship describes that the related Threat Actor is involved in carrying out the Intrusion Set. For example, an attributed-to Relationship from the Red Orca Intrusion Set to the Urban Fowl Threat Actor means that the actor carried out or was involved in some of the activity described by the Intrusion Set.</td>
+<td>This Relationship describes that the related Threat Actor is involved in carrying out the Intrusion Set. For example, an <code>attributed-to</code> Relationship from the Red Orca Intrusion Set to the Urban Fowl Threat Actor means that the actor carried out or was involved in some of the activity described by the Intrusion Set.</td>
 </tr>
 <tr>
 <td><code>intrusion-set</code></td>
 <td><code>targets</code></td>
 <td><code>identity</code>, <code>vulnerability</code></td>
-<td>This Relationship describes that the Intrusion Set uses exploits of the related Vulnerability or targets the type of victims described by the related Identity. For example, a targets Relationship from the Red Orca Intrusion Set to a Vulnerability in a blogging platform indicates that attacks performed as part of Red Orca often exploit that Vulnerability. Similarly, a targets Relationship from the Red Orca Intrusion Set to an Identity describing the energy sector in the United States means that the Intrusion Set typically carries out attacks against targets in that sector.</td>
+<td>This Relationship describes that the Intrusion Set uses exploits of the related Vulnerability or targets the type of victims described by the related Identity. For example, a <code>targets</code> Relationship from the Red Orca Intrusion Set to a Vulnerability in a blogging platform indicates that attacks performed as part of Red Orca often exploit that Vulnerability. Similarly, a targets Relationship from the Red Orca Intrusion Set to an Identity describing the energy sector in the United States means that the Intrusion Set typically carries out attacks against targets in that sector.</td>
 </tr>
 <tr>
 <td><code>intrusion-set</code></td>
 <td><code>uses</code></td>
 <td><code>attack-pattern</code>, <code>malware</code>, <code>tool</code></td>
-<td>This Relationship describes that attacks carried out as part of the Intrusion Set typically use the related Attack Pattern, Malware, or Tool. For example, a uses Relationship from the Red Orca Intrusion Set to the xInject Malware indicates that xInject is often used during attacks attributed to that Intrusion Set.</td>
+<td>This Relationship describes that attacks carried out as part of the Intrusion Set typically use the related Attack Pattern, Malware, or Tool. For example, a <code>uses</code> Relationship from the Red Orca Intrusion Set to the xInject Malware indicates that xInject is often used during attacks attributed to that Intrusion Set.</td>
 </tr>
 </tbody></table>
 <h2 id='malware'>Malware</h2>
@@ -1189,7 +1189,7 @@
 <tr>
 <td><strong>labels</strong> (required)</td>
 <td><a href="#list">list</a> of type <a href="#open-vocab">open-vocab</a></td>
-<td>The type of malware being described. This is an open vocabulary and values SHOULD come from the malware-label-ov vocabulary.</td>
+<td>The type of malware being described. This is an open vocabulary and values <strong>SHOULD</strong> come from the <a href="#malware-label">malware-label-ov</a> vocabulary.</td>
 </tr>
 <tr>
 <td><strong>name</strong> (optional)</td>
@@ -1244,7 +1244,7 @@
 <td><code>malware</code></td>
 <td><code>targets</code></td>
 <td><code>identity</code>, <code>vulnerability</code></td>
-<td>This Relationship documents that this Malware is being used to target this Identity or exploit the Vulnerability. For example, a targets Relationship linking a Malware representing a downloader to a Vulnerability for CVE-2016-0001 means that the malware exploits that vulnerability. Similarly, a targets Relationship linking a Malware representing a downloader to an Identity representing the energy sector means that downloader is typically used against targets in the energy sector.</td>
+<td>This Relationship documents that this Malware is being used to target this Identity or exploit the Vulnerability. For example, a <code>targets</code> Relationship linking a Malware representing a downloader to a Vulnerability for CVE-2016-0001 means that the malware exploits that vulnerability. Similarly, a targets Relationship linking a Malware representing a downloader to an Identity representing the energy sector means that downloader is typically used against targets in the energy sector.</td>
 </tr>
 <tr>
 <td><code>malware</code></td>
@@ -1282,7 +1282,7 @@
 </span></code></pre>
 <p>Observed Data conveys information that was observed on systems and networks using the Cyber Observable specification defined in parts 3 and 4 of this specification. For example, Observed Data can capture the observation of an IP address, a network connection, a file, or a registry key. Observed Data is not an intelligence assertion, it is simply information: this file was seen, without any context for what it means.</p>
 
-<p>Observed Data captures both a single observation of a single entity (file, network connection) as well as the aggregation of multiple observations of an entity. When the<code>number_observed</code> property is 1 the Observed Data is of a single entity. When the <code>number_observed</code> property is greater than 1, the observed data consists of several instances of an entity collected over the time window specified by the <code>first_observed</code> and <code>last_observed</code> properties. When used to collect aggregate data, it is likely that some fields in the Cyber Observable Object (e.g., timestamp fields) will be omitted because they would differ for each of the individual observations.</p>
+<p>Observed Data captures both a single observation of a single entity (file, network connection) as well as the aggregation of multiple observations of an entity. When the <strong>number_observed</strong> property is 1 the Observed Data is of a single entity. When the <strong>number_observed</strong> property is greater than 1, the observed data consists of several instances of an entity collected over the time window specified by the <strong>first_observed</strong> and <strong>last_observed</strong> properties. When used to collect aggregate data, it is likely that some fields in the Cyber Observable Object (e.g., timestamp fields) will be omitted because they would differ for each of the individual observations.</p>
 
 <p>Observed Data may be used by itself (without relationships) to convey raw data collected from network and host-based detection tools. A firewall could emit a single Observed Data instance containing a single Network Traffic object for each connection it sees. The firewall could also aggregate data and instead send out an Observed Data instance every ten minutes with an IP address and an appropriate number_observed value to indicate the number of times that IP address was observed in that window.</p>
 
@@ -1318,12 +1318,12 @@
 <tr>
 <td><strong>number_observed</strong> (required)</td>
 <td><a href="#integer">integer</a></td>
-<td>The number of times the data represented in the objects property was observed. This MUST be an integer between 1 and 999,999,999 inclusive. If the number_observed property is greater than 1, the data contained in the objects property was observed multiple times. In these cases, object creators MAY omit properties of the Cyber Observable object (such as timestamps) that are specific to a single instance of that observed data.</td>
+<td>The number of times the data represented in the objects property was observed. This <strong>MUST</strong> be an integer between 1 and 999,999,999 inclusive. If the <strong>number_observed</strong> property is greater than 1, the data contained in the objects property was observed multiple times. In these cases, object creators <strong>MAY</strong> omit properties of the Cyber Observable object (such as timestamps) that are specific to a single instance of that observed data.</td>
 </tr>
 <tr>
 <td><strong>objects</strong> (required)</td>
 <td>observable-objects</td>
-<td>A dictionary of Cyber Observable Objects representing the observation. The dictionary MUST contain at least one object. The observable-objects type is defined in STIX™ Version 2.0. Part 3: Cyber Observable Core Concepts. The Cyber Observable content MAY include multiple objects if those objects are related as part of a single observation. Multiple objects not related to each other via Cyber Observable Relationships MUST NOT be contained within the same Observed Data instance. For example, a Network Traffic object and two IPv4 Address objects related via the src_ref and dst_ref properties can be contained in the same Observed Data because they are all related and used to characterize that single entity. Two unrelated IPv4 address objects that just happened to be observed at the same time, however, must be represented in separate Observed Data instances.</td>
+<td>A dictionary of Cyber Observable Objects representing the observation. The dictionary <strong>MUST</strong> contain at least one object. The <code>observable-objects</code> type is defined in STIX™ Version 2.0. Part 3: Cyber Observable Core Concepts. The Cyber Observable content <strong>MAY</strong> include multiple objects if those objects are related as part of a single observation. Multiple objects not related to each other via Cyber Observable Relationships <strong>MUST NOT</strong> be contained within the same Observed Data instance. For example, a Network Traffic object and two IPv4 Address objects related via the src_ref and dst_ref properties can be contained in the same Observed Data because they are all related and used to characterize that single entity. Two unrelated IPv4 address objects that just happened to be observed at the same time, however, must be represented in separate Observed Data instances.</td>
 </tr>
 </tbody></table>
 <h3 id='relationships-8'>Relationships</h3>
@@ -1331,9 +1331,9 @@
 <h2 id='relationship'>Relationship</h2>
 <p>The Relationship object is used to link together two SDOs (objects other than Sighting, Relationship, Bundle, and Data Marking) in order to describe how they are related to each other. If SDOs are considered &quot;nodes&quot; or &quot;vertices&quot; in the graph, the Relationship Objects (SROs) represent &quot;edges&quot;.</p>
 
-<p>STIX defines many relationship types to link together SDOs. These relationships are contained in the &quot;Relationships&quot; table under each SDO definition. Relationship types defined in the specification SHOULD be used to ensure consistency. An example of a specification-defined relationship is that an indicator indicates a campaign. That relationship type is listed in the Relationships section of the Indicator SDO definition.</p>
+<p>STIX defines many relationship types to link together SDOs. These relationships are contained in the &quot;Relationships&quot; table under each SDO definition. Relationship types defined in the specification <strong>SHOULD</strong> be used to ensure consistency. An example of a specification-defined relationship is that an indicator indicates a campaign. That relationship type is listed in the Relationships section of the Indicator SDO definition.</p>
 
-<p>STIX also allows relationships from any SDO to any SDO that have not been defined in this specification. These relationships MAY use the related-to relationship type or MAY use a custom relationship type. As an example, a user might want to link malware directly to a tool. They can do so using related-to to say that the Malware is related to the Tool but not describe how, or they could use delivered-by (a custom name they determined) to indicate more detail.</p>
+<p>STIX also allows relationships from any SDO to any SDO that have not been defined in this specification. These relationships <strong>MAY</strong> use the <code>related-to</code> relationship type or <strong>MAY</strong> use a custom relationship type. As an example, a user might want to link malware directly to a tool. They can do so using <code>related-to</code> to say that the Malware is related to the Tool but not describe how, or they could use <code>delivered-by</code> (a custom name they determined) to indicate more detail.</p>
 
 <p>Note that some relationships in STIX may seem like &quot;shortcuts&quot;. For example, an Indicator doesn&#39;t really detect a Campaign: it detects activity (Attack Patterns, Malware, etc.) that are often used by that campaign. While some analysts might want all of the source data and think that shortcuts are misleading, in many cases it&#39;s helpful to provide just the key points (shortcuts) and leave out the low-level details. In other cases, the low-level analysis may not be known or sharable, while the high-level analysis is. For these reasons, relationships that might appear to be &quot;shortcuts&quot; are not excluded from STIX.</p>
 
@@ -1352,7 +1352,7 @@
 <tr>
 <td><strong>relationship_type</strong> (required)</td>
 <td><a href="#string">string</a></td>
-<td>The name used to identify the type of Relationship. This value SHOULD be an exact value listed in the relationships for the source and target SDO, but MAY be any string. The value of this property MUST be in ASCII and is limited to characters a–z (lowercase ASCII), 0–9, and hyphen (-).</td>
+<td>The name used to identify the type of Relationship. This value <strong>SHOULD</strong> be an exact value listed in the relationships for the source and target SDO, but <strong>MAY</strong> be any string. The value of this property <strong>MUST</strong> be in ASCII and is limited to characters a–z (lowercase ASCII), 0–9, and hyphen (-).</td>
 </tr>
 <tr>
 <td><strong>description</strong> (optional)</td>
@@ -1362,12 +1362,12 @@
 <tr>
 <td><strong>source_ref</strong> (required)</td>
 <td><a href="#identifier">identifier</a></td>
-<td>The id of the source (from) object. The value MUST be an ID reference to an SDO (i.e., it cannot point to an SRO, Bundle, or Marking Definition).</td>
+<td>The id of the source (from) object. The value <strong>MUST</strong> be an ID reference to an SDO (i.e., it cannot point to an SRO, Bundle, or Marking Definition).</td>
 </tr>
 <tr>
 <td><strong>target_ref</strong> (required)</td>
 <td><a href="#identifier">identifier</a></td>
-<td>The id of the target (to) object. The value MUST be an ID reference to an SDO (i.e., it cannot point to an SRO, Bundle, or Marking Definition).</td>
+<td>The id of the target (to) object. The value <strong>MUST</strong> be an ID reference to an SDO (i.e., it cannot point to an SRO, Bundle, or Marking Definition).</td>
 </tr>
 </tbody></table>
 <h3 id='relationships-9'>Relationships</h3>
@@ -1480,7 +1480,7 @@
 <tr>
 <td><strong>labels</strong> (required)</td>
 <td><a href="#list">list</a> of type <a href="#open-vocab">open-vocab</a></td>
-<td>This property is an Open Vocabulary that specifies the primary subject of this report. This is an open vocabulary and values SHOULD come from the report-label-ov vocabulary.</td>
+<td>This property is an Open Vocabulary that specifies the primary subject of this report. This is an open vocabulary and values <strong>SHOULD</strong> come from the <a href="#report-label">report-label-ov</a> vocabulary.</td>
 </tr>
 <tr>
 <td><strong>name</strong> (required)</td>
@@ -1558,15 +1558,15 @@
 <p>The Sighting relationship object is a special type of SRO; it is a relationship that contains extra properties not present on the generic Relationship object. These extra properties are included to represent data specific to sighting relationships (e.g., count, representing how many times something was seen), but for other purposes a Sighting can be thought of as a Relationship with a name of &quot;sighting-of&quot;. Sighting is captured as a relationship because you cannot have a sighting unless you have something that has been sighted. Sighting does not make sense without the relationship to what was sighted.</p>
 
 <p>Sighting relationships relate three aspects of the sighting:
-* What was sighted, such as the Indicator, Malware, Campaign, or other SDO (sighting_of_ref)
-* Who sighted it and/or where it was sighted, represented as an Identity (where_sighted_refs) and
-* What was actually seen on systems and networks, represented as Observed Data (observed_data_refs)</p>
+* What was sighted, such as the Indicator, Malware, Campaign, or other SDO (<strong>sighting_of_ref</strong>)
+* Who sighted it and/or where it was sighted, represented as an Identity (<strong>where_sighted_refs</strong>) and
+* What was actually seen on systems and networks, represented as Observed Data (<strong>observed_data_refs</strong>)</p>
 
 <p>What was sighted is required; a sighting does not make sense unless you say what you saw. Who sighted it, where it was sighted, and what was actually seen are optional. In many cases it is not necessary to provide that level of detail in order to provide value.</p>
 
 <p>Sightings are used whenever any SDO has been &quot;seen&quot;. In some cases, the object creator wishes to convey very little information about the sighting; the details might be sensitive, but the fact that they saw a malware instance or threat actor could still be very useful. In other cases, providing the details may be helpful or even necessary; saying exactly which of the 1000 IP addresses in an indicator were sighted is helpful when tracking which of those IPs is still malicious.</p>
 
-<p>Sighting is distinct from Observed Data in that Sighting is an intelligence assertion (&quot;I saw this threat actor&quot;) while Observed Data is simply information (&quot;I saw this file&quot;). When you combine them by including the linked Observed Data (observed_data_refs) from a Sighting, you can say &quot;I saw this file, and that makes me think I saw this threat actor&quot;. Although confidence is currently reserved, notionally confidence would be added to Sighting (the intelligence relationship) but not to Observed Data (the raw information).</p>
+<p>Sighting is distinct from Observed Data in that Sighting is an intelligence assertion (&quot;I saw this threat actor&quot;) while Observed Data is simply information (&quot;I saw this file&quot;). When you combine them by including the linked Observed Data (<strong>observed_data_refs</strong>) from a Sighting, you can say &quot;I saw this file, and that makes me think I saw this threat actor&quot;. Although confidence is currently reserved, notionally confidence would be added to Sighting (the intelligence relationship) but not to Observed Data (the raw information).</p>
 
 <table><thead>
 <tr>
@@ -1598,27 +1598,27 @@
 <tr>
 <td><strong>count</strong> (optional)</td>
 <td><a href="#integer">integer</a></td>
-<td>This MUST be an integer between 0 and 999,999,999 inclusive and represents the number of times the SDO referenced by the <code>sighting_of_ref</code> property was sighted. Observed Data has a similar property called <code>number_observed</code>, which refers to the number of times the data was observed. These counts refer to different concepts and are distinct. For example, a single sighting of a DDoS bot might have many millions of observations of the network traffic that it generates. Thus, the Sighting count would be 1 (the bot was observed once) but the Observed Data <code>number_observed</code> would be much higher. As another example, a sighting with a count of 0 can be used to express that an indicator was not seen at all.</td>
+<td>This <strong>MUST</strong> be an integer between 0 and 999,999,999 inclusive and represents the number of times the SDO referenced by the <strong>sighting_of_ref</strong> property was sighted. Observed Data has a similar property called <strong>number_observed</strong>, which refers to the number of times the data was observed. These counts refer to different concepts and are distinct. For example, a single sighting of a DDoS bot might have many millions of observations of the network traffic that it generates. Thus, the Sighting count would be <code>1</code> (the bot was observed once) but the Observed Data <strong>number_observed</strong> would be much higher. As another example, a sighting with a count of 0 can be used to express that an indicator was not seen at all.</td>
 </tr>
 <tr>
 <td><strong>sighting_of_ref</strong> (required)</td>
 <td><a href="#identifier">identifier</a></td>
-<td>An ID reference to the SDO that was sighted (e.g., Indicator or Malware). For example, if this is a Sighting of an Indicator, that Indicator’s ID would be the value of this property. This property MUST reference only an SDO or a Custom Object.</td>
+<td>An ID reference to the SDO that was sighted (e.g., Indicator or Malware). For example, if this is a Sighting of an Indicator, that Indicator’s ID would be the value of this property. This property <strong>MUST</strong> reference only an SDO or a Custom Object.</td>
 </tr>
 <tr>
 <td><strong>observed_data_refs</strong> (optional)</td>
 <td><a href="#list">list</a> of type <a href="#identifier">identifier</a></td>
-<td>A list of ID references to the Observed Data objects that contain the raw cyber data for this Sighting. For example, a Sighting of an Indicator with an IP address could include the Observed Data for the network connection that the Indicator was used to detect. This property MUST reference only Observed Data SDOs.</td>
+<td>A list of ID references to the Observed Data objects that contain the raw cyber data for this Sighting. For example, a Sighting of an Indicator with an IP address could include the Observed Data for the network connection that the Indicator was used to detect. This property <strong>MUST</strong> reference only Observed Data SDOs.</td>
 </tr>
 <tr>
 <td><strong>where_sighted_refs</strong> (optional)</td>
 <td><a href="#list">list</a> of type <a href="#identifier">identifier</a></td>
-<td>A list of ID references to the Identity (victim) objects of the entities that saw the sighting. Omitting the where_sighted_refs property does not imply that the sighting was seen by the object creator. To indicate that the sighting was seen by the object creator, an Identity representing the object creator should be listed in where_sighted_refs. This property MUST reference only Identity SDOs.</td>
+<td>A list of ID references to the Identity (victim) objects of the entities that saw the sighting. Omitting the <strong>where_sighted_refs</strong> property does not imply that the sighting was seen by the object creator. To indicate that the sighting was seen by the object creator, an Identity representing the object creator should be listed in <strong>where_sighted_refs</strong>. This property <strong>MUST</strong> reference only Identity SDOs.</td>
 </tr>
 <tr>
 <td><strong>summary</strong> (optional)</td>
 <td><a href="#boolean">boolean</a></td>
-<td>The summary property indicates whether the Sighting should be considered summary data. Summary data is an aggregation of previous Sightings reports and should not be considered primary source data. Default value is false.</td>
+<td>The summary property indicates whether the Sighting should be considered summary data. Summary data is an aggregation of previous Sightings reports and should not be considered primary source data. Default value is <code>false</code>.</td>
 </tr>
 </tbody></table>
 <h3 id='relationships-11'>Relationships</h3>
@@ -1670,7 +1670,7 @@
 <tr>
 <td><strong>labels</strong> (required)</td>
 <td><a href="#list">list</a> of type <a href="#open-vocab">open-vocab</a></td>
-<td>This property specifies the type of Threat Actor. This is an open vocabulary and values SHOULD come from the threat-actor-label-ov vocabulary.</td>
+<td>This property specifies the type of Threat Actor. This is an open vocabulary and values <strong>SHOULD</strong> come from the <a href="#threat-actor-label">threat-actor-label-ov</a> vocabulary.</td>
 </tr>
 <tr>
 <td><strong>name</strong> (required)</td>
@@ -1690,7 +1690,7 @@
 <tr>
 <td><strong>roles</strong> (optional)</td>
 <td><a href="#list">list</a> of type <a href="#open-vocab">open-vocab</a></td>
-<td>A list of roles the Threat Actor plays. This is an open vocabulary and the values SHOULD come from the threat-actor-role-ov vocabulary.</td>
+<td>A list of roles the Threat Actor plays. This is an open vocabulary and the values <strong>SHOULD</strong> come from the <a href="#threat-actor-role">threat-actor-role-ov</a> vocabulary.</td>
 </tr>
 <tr>
 <td><strong>goals</strong> (optional)</td>
@@ -1700,27 +1700,27 @@
 <tr>
 <td><strong>sophistication</strong> (optional)</td>
 <td><a href="#open-vocab">open-vocab</a></td>
-<td>The skill, specific knowledge, special training, or expertise a Threat Actor must have to perform the attack. This is an open vocabulary and values SHOULD come from the threat-actor-sophistication-ov vocabulary.</td>
+<td>The skill, specific knowledge, special training, or expertise a Threat Actor must have to perform the attack. This is an open vocabulary and values <strong>SHOULD</strong> come from the <a href="#threat-actor-sophistication]">threat-actor-sophistication-ov</a> vocabulary.</td>
 </tr>
 <tr>
 <td><strong>resource_level</strong> (optional)</td>
 <td><a href="#open-vocab">open-vocab</a></td>
-<td>This defines the organizational level at which this Threat Actor typically works, which in turn determines the resources available to this Threat Actor for use in an attack. This attribute is linked to the sophistication property — a specific resource level implies that the Threat Actor has access to at least a specific sophistication level. This is an open vocabulary and values SHOULD come from the attack-resource-level-ov vocabulary.</td>
+<td>This defines the organizational level at which this Threat Actor typically works, which in turn determines the resources available to this Threat Actor for use in an attack. This attribute is linked to the sophistication property — a specific resource level implies that the Threat Actor has access to at least a specific sophistication level. This is an open vocabulary and values <strong>SHOULD</strong> come from the <a href="#attack-resource-level">attack-resource-level-ov</a> vocabulary.</td>
 </tr>
 <tr>
 <td><strong>primary_motivation</strong> (optional)</td>
 <td><a href="#open-vocab">open-vocab</a></td>
-<td>The primary reason, motivation, or purpose behind this Threat Actor. The motivation is why the Threat Actor wishes to achieve the goal (what they are trying to achieve). For example, a Threat Actor with a goal to disrupt the finance sector in a country might be motivated by ideological hatred of capitalism. This is an open vocabulary and values SHOULD come from the attack-motivation-ov vocabulary.</td>
+<td>The primary reason, motivation, or purpose behind this Threat Actor. The motivation is why the Threat Actor wishes to achieve the goal (what they are trying to achieve). For example, a Threat Actor with a goal to disrupt the finance sector in a country might be motivated by ideological hatred of capitalism. This is an open vocabulary and values <strong>SHOULD</strong> come from the <a href="#attack-motivation">attack-motivation-ov</a> vocabulary.</td>
 </tr>
 <tr>
 <td><strong>secondary_motivations</strong> (optional)</td>
 <td><a href="#list">list</a> of type <a href="#open-vocab">open-vocab</a></td>
-<td>The secondary reasons, motivations, or purposes behind this Threat Actor. These motivations can exist as an equal or near-equal cause to the primary motivation. However, it does not replace or necessarily magnify the primary motivation, but it might indicate additional context. This is an open vocabulary and values SHOULD come from the attack-motivation-ov vocabulary.</td>
+<td>The secondary reasons, motivations, or purposes behind this Threat Actor. These motivations can exist as an equal or near-equal cause to the primary motivation. However, it does not replace or necessarily magnify the primary motivation, but it might indicate additional context. This is an open vocabulary and values <strong>SHOULD</strong> come from the <a href="#attack-motivation">attack-motivation-ov</a> vocabulary.</td>
 </tr>
 <tr>
 <td><strong>personal_motivations</strong> (optional)</td>
 <td><a href="#list">list</a> of type <a href="#open-vocab">open-vocab</a></td>
-<td>The personal reasons, motivations, or purposes of the Threat Actor regardless of organizational goals. Personal motivation, which is independent of the organization’s goals, describes what impels an individual to carry out an attack. Personal motivation may align with the organization’s motivation—as is common with activists—but more often it supports personal goals. For example, an individual analyst may join a Data Miner corporation because his or her skills may align with the corporation’s objectives. But the analyst most likely performs his or her daily work toward those objectives for personal reward in the form of a paycheck. The motivation of personal reward may be even stronger for Threat Actors who commit illegal acts, as it is more difficult for someone to cross that line purely for altruistic reasons. This is an open vocabulary and values SHOULD come from the attack-motivation-ov vocabulary.</td>
+<td>The personal reasons, motivations, or purposes of the Threat Actor regardless of organizational goals. Personal motivation, which is independent of the organization’s goals, describes what impels an individual to carry out an attack. Personal motivation may align with the organization’s motivation—as is common with activists—but more often it supports personal goals. For example, an individual analyst may join a Data Miner corporation because his or her skills may align with the corporation’s objectives. But the analyst most likely performs his or her daily work toward those objectives for personal reward in the form of a paycheck. The motivation of personal reward may be even stronger for Threat Actors who commit illegal acts, as it is more difficult for someone to cross that line purely for altruistic reasons. This is an open vocabulary and values <strong>SHOULD</strong> come from the <a href="#attack-motivation">attack-motivation-ov</a> vocabulary.</td>
 </tr>
 </tbody></table>
 <h3 id='relationships-12'>Relationships</h3>
@@ -1742,37 +1742,37 @@
 <td><code>campaign</code>, <code>intrusion-set</code></td>
 <td><code>attributed-to</code></td>
 <td><code>threat-actor</code></td>
-<td>This Relationship describes that the related Threat Actor is involved in carrying out the Intrusion Set. For example, an attributed-to Relationship from the Red Orca Intrusion Set to the Urban Fowl Threat Actor means that the actor carried out or was involved in some of the activity described by the Intrusion Set.</td>
+<td>This Relationship describes that the related Threat Actor is involved in carrying out the Intrusion Set. For example, an <code>attributed-to</code> Relationship from the Red Orca Intrusion Set to the Urban Fowl Threat Actor means that the actor carried out or was involved in some of the activity described by the Intrusion Set.</td>
 </tr>
 <tr>
 <td><code>indicator</code></td>
 <td><code>indicates</code></td>
 <td><code>threat-actor</code></td>
-<td>This Relationship describes that the Indicator can detect evidence of the related Threat Actor. This evidence may not be direct: for example, the Indicator may detect secondary evidence of the Threat Actor, such as malware or behavior commonly used by that actor. For example, an indicates Relationship from an Indicator to a Threat Actor object representing Glass Gazelle means that the Indicator is capable of detecting evidence of Glass Gazelle, such as command and control IPs commonly used by that Threat Actor.</td>
+<td>This Relationship describes that the Indicator can detect evidence of the related Threat Actor. This evidence may not be direct: for example, the Indicator may detect secondary evidence of the Threat Actor, such as malware or behavior commonly used by that actor. For example, an <code>indicates</code> Relationship from an Indicator to a Threat Actor object representing Glass Gazelle means that the Indicator is capable of detecting evidence of Glass Gazelle, such as command and control IPs commonly used by that Threat Actor.</td>
 </tr>
 <tr>
 <td><code>threat-actor</code></td>
 <td><code>attributed-to</code></td>
 <td><code>identity</code></td>
-<td>This Relationship describes that the Threat Actor&#39;s real identity is the related Identity. For example, an attributed-to Relationship from the jay-sm17h Threat Actor to the John Smith Identity means that the actor known as jay-sm17h is John Smith.</td>
+<td>This Relationship describes that the Threat Actor&#39;s real identity is the related Identity. For example, an <code>attributed-to</code> Relationship from the jay-sm17h Threat Actor to the John Smith Identity means that the actor known as jay-sm17h is John Smith.</td>
 </tr>
 <tr>
 <td><code>threat-actor</code></td>
 <td><code>impersonates</code></td>
 <td><code>identity</code></td>
-<td>This Relationship describes that the Threat Actor impersonates the related Identity. For example, an  impersonates Relationship from the gh0st Threat Actor to the ACME Corp. Identity means that the actor known as gh0st impersonates ACME Corp.</td>
+<td>This Relationship describes that the Threat Actor impersonates the related Identity. For example, an  <code>impersonates</code> Relationship from the gh0st Threat Actor to the ACME Corp. Identity means that the actor known as gh0st impersonates ACME Corp.</td>
 </tr>
 <tr>
 <td><code>threat-actor</code></td>
 <td><code>targets</code></td>
 <td><code>identity</code>, <code>vulnerability</code></td>
-<td>This Relationship describes that the Threat Actor uses exploits of the related Vulnerability or targets the type of victims described by the related Identity. For example, a targets Relationship from the jay-sm17h Threat Actor to a Vulnerability in a blogging platform indicates that attacks performed by John Smith often exploit that Vulnerability. Similarly, a targets Relationship from the jay-sm17h Threat Actor to an Identity describing the energy sector in the United States means that John Smith often carries out attacks against targets in that sector.</td>
+<td>This Relationship describes that the Threat Actor uses exploits of the related Vulnerability or targets the type of victims described by the related Identity. For example, a <code>targets</code> Relationship from the jay-sm17h Threat Actor to a Vulnerability in a blogging platform indicates that attacks performed by John Smith often exploit that Vulnerability. Similarly, a targets Relationship from the jay-sm17h Threat Actor to an Identity describing the energy sector in the United States means that John Smith often carries out attacks against targets in that sector.</td>
 </tr>
 <tr>
 <td><code>threat-actor</code></td>
 <td><code>uses</code></td>
 <td><code>attack-pattern</code>, <code>malware</code>, <code>tool</code></td>
-<td>This Relationship describes that attacks carried out as part of the Threat Actor typically use the related Attack Pattern, Malware, or Tool. For example, a uses Relationship from the jay-sm17h Threat Actor to the xInject Malware indicates that xInject is often used by John Smith.</td>
+<td>This Relationship describes that attacks carried out as part of the Threat Actor typically use the related Attack Pattern, Malware, or Tool. For example, a <code>uses</code> Relationship from the jay-sm17h Threat Actor to the xInject Malware indicates that xInject is often used by John Smith.</td>
 </tr>
 </tbody></table>
 <h2 id='tool'>Tool</h2>
@@ -1793,7 +1793,7 @@
 
 <p>The Tool SDO characterizes the properties of these software tools and can be used as a basis for making an assertion about how a Threat Actor uses them during an attack. It contains properties to name and describe the tool, a list of Kill Chain Phases the tool can be used to carry out, and the version of the tool.</p>
 
-<p>This SDO MUST NOT be used to characterize malware. Further, Tool MUST NOT be used to characterise tools used as part of a course of action in response to an attack. Tools used during response activities can be included directly as part of a Course of Action SDO.</p>
+<p>This SDO <strong>MUST NOT</strong> be used to characterize malware. Further, Tool <strong>MUST NOT</strong> be used to characterise tools used as part of a course of action in response to an attack. Tools used during response activities can be included directly as part of a Course of Action SDO.</p>
 
 <table><thead>
 <tr>
@@ -1815,7 +1815,7 @@
 <tr>
 <td><strong>labels</strong> (required)</td>
 <td><a href="#list">list</a> of type <a href="#open-vocab">open-vocab</a></td>
-<td>The kind(s) of tool(s) being described. This is an open vocabulary and values SHOULD come from the tool-label-ov vocabulary.</td>
+<td>The kind(s) of tool(s) being described. This is an open vocabulary and values <strong>SHOULD</strong> come from the <a href="#tool-label">tool-label-ov</a> vocabulary.</td>
 </tr>
 <tr>
 <td><strong>name</strong> (optional)</td>
@@ -1857,7 +1857,7 @@
 <td><code>attack-pattern</code>, <code>campaign</code>, <code>intrusion-set</code>, <code>malware</code></td>
 <td><code>uses</code></td>
 <td><code>tool</code></td>
-<td>This Relationship describes that the Attack Pattern, Campaign, Intrusion Set, or Malware uses the related Tool. For example, a uses Relationship linking an Attack Pattern for a distributed denial of service (DDoS) to a Tool for Low Orbit Ion Cannon (LOIC) indicates that the tool can be used to perform those DDoS attacks.</td>
+<td>This Relationship describes that the Attack Pattern, Campaign, Intrusion Set, or Malware uses the related Tool. For example, a <code>uses</code> Relationship linking an Attack Pattern for a distributed denial of service (DDoS) to a Tool for Low Orbit Ion Cannon (LOIC) indicates that the tool can be used to perform those DDoS attacks.</td>
 </tr>
 <tr>
 <td><code>course-of-action</code></td>
@@ -1875,7 +1875,7 @@
 <td><code>tool</code></td>
 <td><code>targets</code></td>
 <td><code>identity</code>, <code>vulnerability</code></td>
-<td>This Relationship documents that this Tool is being used to target this Identity or exploit the Vulnerability. For example, a targets Relationship linking an exploit Tool to a Vulnerability for CVE-2016-0001 means that the tool exploits that vulnerability. Similarly, a targets Relationship linking a DDoS Tool to an Identity representing the energy sector means that Tool is typically used against targets in the energy sector.</td>
+<td>This Relationship documents that this Tool is being used to target this Identity or exploit the Vulnerability. For example, a <code>targets</code> Relationship linking an exploit Tool to a Vulnerability for CVE-2016-0001 means that the tool exploits that vulnerability. Similarly, a <code>targets</code> Relationship linking a DDoS Tool to an Identity representing the energy sector means that Tool is typically used against targets in the energy sector.</td>
 </tr>
 </tbody></table>
 <h2 id='vulnerability'>Vulnerability</h2>
@@ -1900,10 +1900,6 @@
 
 <p>The Vulnerability SDO is primarily used to link to external definitions of vulnerabilities or to describe 0-day vulnerabilities that do not yet have an external definition. Typically, other SDOs assert relationships to Vulnerability objects when a specific vulnerability is targeted and exploited as part of malicious cyber activity. As such, Vulnerability objects can be used as a linkage to the asset management and compliance process.</p>
 
-<p>A Vulnerability is &quot;a mistake in software that can be directly used by a hacker to gain access to a system or network&quot; [CVE]. For example, if a piece of malware exploits CVE-2015-12345, a Malware object could be linked to a Vulnerability object that references CVE-2015-12345.</p>
-
-<p>The Vulnerability SDO is primarily used to link to external definitions of vulnerabilities or to describe 0-day vulnerabilities that do not yet have an external definition. Typically, other SDOs assert relationships to Vulnerability objects when a specific vulnerability is targeted and exploited as part of malicious cyber activity. As such, Vulnerability objects can be used as a linkage to the asset management and compliance process.</p>
-
 <table><thead>
 <tr>
 <th>Name</th>
@@ -1924,7 +1920,7 @@
 <tr>
 <td><strong>external_references</strong> (optional)</td>
 <td><a href="#list">list</a> of type <a href="#external-reference">external-reference</a></td>
-<td>A list of external references which refer to non-STIX information. This property MAY be used to provide one or more Vulnerability identifiers, such as a CVE ID [CVE]. When specifying a CVE ID, the source_name property of the external reference MUST be set to cve and the external_id property MUST be the exact CVE identifier.</td>
+<td>A list of external references which refer to non-STIX information. This property <strong>MAY</strong> be used to provide one or more Vulnerability identifiers, such as a CVE ID. When specifying a CVE ID, the <strong>source_name</strong> property of the external reference <strong>MUST</strong> be set to cve and the <strong>external_id</strong> property <strong>MUST</strong> be the exact CVE identifier.</td>
 </tr>
 <tr>
 <td><strong>name</strong> (required)</td>
@@ -1956,7 +1952,7 @@
 <td><code>attack-pattern</code>, <code>campaign</code>, <code>intrusion-set</code>, <code>malware</code>, <code>threat-actor</code>, <code>tool</code></td>
 <td><code>targets</code></td>
 <td><code>vulnerability</code></td>
-<td>This Relationship describes that the Attack Pattern, Campaign, Intrusion Set, Malware, Threat Actor, Tool uses exploits of the related Vulnerability. For example, a targets Relationship from the jay-sm17h Threat Actor to a Vulnerability in a blogging platform indicates that attacks performed by John Smith often exploit that Vulnerability.</td>
+<td>This Relationship describes that the Attack Pattern, Campaign, Intrusion Set, Malware, Threat Actor, Tool uses exploits of the related Vulnerability. For example, a <code>targets</code> Relationship from the jay-sm17h Threat Actor to a Vulnerability in a blogging platform indicates that attacks performed by John Smith often exploit that Vulnerability.</td>
 </tr>
 <tr>
 <td><code>course-of-action</code></td>
@@ -2012,7 +2008,7 @@
 <tr>
 <td><strong>type</strong> (required)</td>
 <td><a href="#string">string</a></td>
-<td>The type property identifies the type of object. The value of this property MUST be <code>bundle</code>.</td>
+<td>The type property identifies the type of object. The value of this property <strong>MUST</strong> be <code>bundle</code>.</td>
 </tr>
 <tr>
 <td><strong>id</strong> (required)</td>
@@ -2022,12 +2018,12 @@
 <tr>
 <td><strong>spec_version</strong> (required)</td>
 <td><a href="#string">string</a></td>
-<td>The version of the STIX specification used to represent the content in this Bundle. This enables non-TAXII transports or other transports without their own content identification mechanisms to know the version of STIX content. The value of this property MUST be <code>2.0</code> for bundles containing STIX Objects defined in this specification.</td>
+<td>The version of the STIX specification used to represent the content in this Bundle. This enables non-TAXII transports or other transports without their own content identification mechanisms to know the version of STIX content. The value of this property <strong>MUST</strong> be <code>2.0</code> for bundles containing STIX Objects defined in this specification.</td>
 </tr>
 <tr>
 <td><strong>objects</strong> (optional)</td>
 <td><a href="#list">list</a> of type <code>&lt;STIX Object or Marking Definition&gt;</code></td>
-<td>Specifies a set of one or more STIX Objects. Objects in this list MUST be a STIX Object (SDO, SRO or Custom Object) or a Marking Definition object.</td>
+<td>Specifies a set of one or more STIX Objects. Objects in this list <strong>MUST</strong> be a STIX Object (SDO, SRO or Custom Object) or a Marking Definition object.</td>
 </tr>
 </tbody></table>
 <h3 id='relationships-15'>Relationships</h3>
@@ -2046,13 +2042,13 @@
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>The marking-definition object represents a specific marking. Data markings typically represent handling or sharing requirements for data, and are applied in the <code>object_marking_refs</code> and granular_markings properties on STIX Objects, which reference a list of IDs for marking-definition objects.</p>
+<p>The marking-definition object represents a specific marking. Data markings typically represent handling or sharing requirements for data, and are applied in the <strong>object_marking_refs</strong> and granular_markings properties on STIX Objects, which reference a list of IDs for <code>marking-definition</code> objects.</p>
 
 <p>Two marking definition types are defined in this specification: TLP, to capture TLP markings, and Statement, to capture text marking statements. In addition, it is expected that the FIRST Information Exchange Policy (IEP) will be included in a future version once a machine-usable specification for it has been defined.</p>
 
 <p>Unlike STIX Objects, Marking Definition objects cannot be versioned because it would allow for indirect changes to the markings on a STIX Object. For example, if a Statement marking is changed from &quot;Reuse Allowed&quot; to &quot;Reuse Prohibited&quot;, all STIX Objects marked with that Statement marking would effectively have an updated marking without being updated themselves. Instead, a new Statement marking with the new text should be created and the marked objects updated to point to the new marking.</p>
 
-<p>The JSON MTI serialization uses the JSON object type [RFC7159] when representing marking-definition.</p>
+<p>The JSON MTI serialization uses the JSON object type [RFC7159] when representing <code>marking-definition</code>.</p>
 
 <table><thead>
 <tr>
@@ -2074,7 +2070,7 @@
 <tr>
 <td><strong>created_by_ref</strong> (optional)</td>
 <td><a href="#identifier">identifier</a></td>
-<td>The created_by_ref property specifies the ID of the identity object that describes the entity that created this Marking Definition. If this attribute is omitted, the source of this information is undefined. This may be used by object creators who wish to remain anonymous.</td>
+<td>The <strong>created_by_ref</strong> property specifies the ID of the identity object that describes the entity that created this Marking Definition. If this attribute is omitted, the source of this information is undefined. This may be used by object creators who wish to remain anonymous.</td>
 </tr>
 <tr>
 <td><strong>created</strong> (required)</td>
@@ -2089,17 +2085,17 @@
 <tr>
 <td><strong>object_marking_refs</strong> (optional)</td>
 <td><a href="#list">list</a> of type <a href="#identifier">identifier</a></td>
-<td>The object_marking_refs property specifies a list of IDs of marking-definitions that apply to this Marking Definition. This property MUST NOT contain any references to this Marking Definition object (i.e., it cannot contain any circular references). Though uncommon, in some cases marking definitions themselves may be marked with sharing or handling guidance.</td>
+<td>The <strong>object_marking_refs</strong> property specifies a list of IDs of marking-definitions that apply to this Marking Definition. This property <strong>MUST NOT</strong> contain any references to this Marking Definition object (i.e., it cannot contain any circular references). Though uncommon, in some cases marking definitions themselves may be marked with sharing or handling guidance.</td>
 </tr>
 <tr>
 <td><strong>granular_markings</strong> (optional)</td>
 <td><a href="#list">list</a> of type <a href="#granular-marking">granular-marking</a></td>
-<td>The granular_markings property specifies a list of granular markings applied to this. This property MUST NOT contain any references to this Marking Definition object (i.e., it cannot contain any circular references). Though uncommon, in some cases Marking Definitions themselves may be marked with sharing or handling guidance.</td>
+<td>The <strong>granular_markings</strong> property specifies a list of granular markings applied to this. This property <strong>MUST NOT</strong> contain any references to this Marking Definition object (i.e., it cannot contain any circular references). Though uncommon, in some cases Marking Definitions themselves may be marked with sharing or handling guidance.</td>
 </tr>
 <tr>
 <td><strong>definition_type</strong> (required)</td>
 <td><a href="#open-vocab">open-vocab</a></td>
-<td>The definition_type property identifies the type of Marking Definition. The value of the definition_type property SHOULD be one of the types defined in the subsections below: statement or tlp (see sections 4.1.3 and 4.1.4)</td>
+<td>The <strong>definition_type</strong> property identifies the type of Marking Definition. The value of the <strong>definition_type</strong> property <strong>SHOULD</strong> be one of the types defined in the subsections below: statement or tlp (see sections 4.1.3 and 4.1.4)</td>
 </tr>
 <tr>
 <td><strong>definition</strong> (required)</td>
@@ -2123,7 +2119,7 @@
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>The Statement marking type defines the representation of a textual marking statement (e.g., copyright, terms of use, etc.) in a definition. The value of the definition_type property MUST be statement when using this marking type. Statement markings are generally not machine-readable and this specification does not define any behavior or actions based on their values.</p>
+<p>The Statement marking type defines the representation of a textual marking statement (e.g., copyright, terms of use, etc.) in a definition. The value of the <strong>definition_type</strong> property <strong>MUST</strong> be <code>statement</code> when using this marking type. Statement markings are generally not machine-readable and this specification does not define any behavior or actions based on their values.</p>
 
 <p>Content may be marked with multiple Statement marking types that do not override each other. In other words, the same content can be marked both with a statement saying &quot;Copyright 2016&quot; and a statement saying &quot;Terms of use are ...&quot; and both statements apply.</p>
 
@@ -2193,11 +2189,11 @@
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>The TLP marking type defines how you would represent a Traffic Light Protocol (TLP) marking in a definition property. The value of the definition_type property MUST be tlp when using this marking type.</p>
+<p>The TLP marking type defines how you would represent a Traffic Light Protocol (TLP) marking in a definition property. The value of the <strong>definition_type</strong> property <strong>MUST</strong> be <code>tlp</code> when using this marking type.</p>
 
 <p>Because there are only four TLP levels, STIX has pre-defined the STIX objects used to represent them. To use them, reference them by ID directly (see the objects to the right). You could also include the full objects if you want.</p>
 <h3 id='granular-marking'>Granular Marking</h3>
-<p>The granular-marking type defines how the marking-definition object referenced by the marking_ref property applies to a set of content identified by the list of selectors in the selectors property.</p>
+<p>The <code>granular-marking</code> type defines how the <code>marking-definition</code> object referenced by the <strong>marking_ref</strong> property applies to a set of content identified by the list of selectors in the selectors property.</p>
 
 <table><thead>
 <tr>
@@ -2214,20 +2210,20 @@
 <tr>
 <td><strong>selectors</strong></td>
 <td><a href="#list">list</a> of type <a href="#string">string</a></td>
-<td>The selectors property specifies a list of selectors for content contained within the STIX Object in which this property appears. Selectors MUST conform to the syntax defined in section 4.3.1.1. The marking-definition referenced in the marking_ref property is applied to the content selected by the selectors in this list.</td>
+<td>The selectors property specifies a list of selectors for content contained within the STIX Object in which this property appears. Selectors <strong>MUST</strong> conform to the syntax defined in section 4.3.1.1. The <code>marking-definition</code> referenced in the <strong>marking_ref</strong> property is applied to the content selected by the selectors in this list.</td>
 </tr>
 </tbody></table>
 <h4 id='selector-syntax'>Selector Syntax</h4>
-<p>Selectors contained in the selectors list are strings that consist of multiple components that MUST be separated by the . character. Each component <strong>MUST</strong> be one of:</p>
+<p>Selectors contained in the selectors list are strings that consist of multiple components that <strong>MUST</strong> be separated by the . character. Each component <strong>MUST</strong> be one of:</p>
 
 <ul>
 <li>A property name, e.g., description, or;</li>
 <li>A zero-based list index, specified as a non-negative integer in square brackets, e.g., [4]</li>
 </ul>
 
-<p>Selectors denote path traversals: the root of each selector is the STIX Object that the granular_markings property appears in. Starting from that root, for each component in the selector, properties and list items are traversed. When the complete list has been traversed, the value of the content is considered selected.</p>
+<p>Selectors denote path traversals: the root of each selector is the STIX Object that the <strong>granular_markings</strong> property appears in. Starting from that root, for each component in the selector, properties and list items are traversed. When the complete list has been traversed, the value of the content is considered selected.</p>
 
-<p>Selectors MUST refer to properties or list items that are actually present on the marked object.</p>
+<p>Selectors <strong>MUST</strong> refer to properties or list items that are actually present on the marked object.</p>
 
 <blockquote>
 <p>Example of a granular marking:</p>
@@ -2249,22 +2245,22 @@
 <p>Considering the example to the right, the following selectors are valid:</p>
 
 <ul>
-<li><code>description</code> selects the description property (&quot;The (1) TLS...&quot;).</li>
-<li><code>external_references.[0].source_name</code> selects the source_name property of the first value of the external_references list (&quot;cve&quot;).</li>
-<li><code>labels.[0]</code> selects the first item contained within the labels list (&quot;heartbleed&quot;).</li>
-<li><code>labels</code> selects the list contained in the labels property. Due to the recursive nature of the selector, that includes all items in the list ([&quot;heartbleed&quot;, &quot;has-logo&quot;]).</li>
-<li><code>external_references</code> selects the list contained in the external_references property. Due to the recursive nature of the selector, that includes all list items and all properties of those list items.</li>
+<li><code>description</code> selects the <strong>description</strong> property (&quot;The (1) TLS...&quot;).</li>
+<li><code>external_references.[0].source_name</code> selects the <strong>source_name</strong> property of the first value of the <strong>external_references</strong> list (&quot;cve&quot;).</li>
+<li><code>labels.[0]</code> selects the first item contained within the <strong>labels</strong> list (&quot;heartbleed&quot;).</li>
+<li><code>labels</code> selects the list contained in the <strong>labels</strong> property. Due to the recursive nature of the selector, that includes all items in the list ([&quot;heartbleed&quot;, &quot;has-logo&quot;]).</li>
+<li><code>external_references</code> selects the list contained in the <strong>external_references</strong> property. Due to the recursive nature of the selector, that includes all list items and all properties of those list items.</li>
 </ul>
 
 <p>On the other hand, still looking at the same example, the following selectors are not valid:</p>
 
 <ul>
 <li><code>pattern</code> and <code>external_references.[3]</code> are invalid selectors because they refer to content not present in that object.</li>
-<li><code>description.[0]</code> is an invalid selector because the description property is a string and not a list.</li>
-<li><code>labels.name</code> is an invalid selector because labels property is a list and not an object.</li>
+<li><code>description.[0]</code> is an invalid selector because the <strong>description</strong> property is a string and not a list.</li>
+<li><code>labels.name</code> is an invalid selector because <strong>labels</strong> property is a list and not an object.</li>
 </ul>
 
-<p>This syntax is inspired by JSONPath [Goessner 2007] and is in fact a strict subset of allowable JSONPath expressions (with the exception that the &#39;$&#39; to indicate the root is implicit). Care should be taken when passing selectors to JSONPath evaluators to ensure that the root of the query is the individual STIX Object. It is expected, however, that selectors can be easily evaluated in programming languages that implement list and key/value mapping types (dictionaries, hashmaps, etc.) without resorting to an external library.</p>
+<p>This syntax is inspired by JSONPath and is in fact a strict subset of allowable JSONPath expressions (with the exception that the &#39;$&#39; to indicate the root is implicit). Care should be taken when passing selectors to JSONPath evaluators to ensure that the root of the query is the individual STIX Object. It is expected, however, that selectors can be easily evaluated in programming languages that implement list and key/value mapping types (dictionaries, hashmaps, etc.) without resorting to an external library.</p>
 
 <blockquote>
 <p>Marks the description and labels properties with the single marking definition referenced in the list.</p>
@@ -2404,59 +2400,59 @@
 </thead><tbody>
 <tr>
 <td><strong>MD5</strong></td>
-<td>Specifies the MD5 message digest algorithm. The corresponding hash string for this value MUST be a valid MD5 message digest as defined in [RFC 1321].</td>
+<td>Specifies the MD5 message digest algorithm. The corresponding hash string for this value <strong>MUST</strong> be a valid MD5 message digest as defined in [RFC 1321].</td>
 </tr>
 <tr>
 <td><strong>MD6</strong></td>
-<td>Specifies the MD6 message digest algorithm. The corresponding hash string for this value MUST be a valid MD6 message digest as defined in the [MD6] proposal.</td>
+<td>Specifies the MD6 message digest algorithm. The corresponding hash string for this value <strong>MUST</strong> be a valid MD6 message digest as defined in the [MD6] proposal.</td>
 </tr>
 <tr>
 <td><strong>RIPEMD-160</strong></td>
-<td>Specifies the RIPEMD­-160 (R​ACE​ Integrity Primitives Evaluation Message Digest)​ cryptographic hash function. The corresponding hash string for this value MUST be a valid RIPEMD-160 message digest as defined in the [RIPEMD-160] specification.</td>
+<td>Specifies the RIPEMD­-160 (R​ACE​ Integrity Primitives Evaluation Message Digest)​ cryptographic hash function. The corresponding hash string for this value <strong>MUST</strong> be a valid RIPEMD-160 message digest as defined in the [RIPEMD-160] specification.</td>
 </tr>
 <tr>
 <td><strong>SHA-1</strong></td>
-<td>Specifies the SHA­-1 (secure-­hash algorithm 1) cryptographic hash function. The corresponding hash string for this value MUST be a valid SHA-1 message digest as defined in [RFC 3174].</td>
+<td>Specifies the SHA­-1 (secure-­hash algorithm 1) cryptographic hash function. The corresponding hash string for this value <strong>MUST</strong> be a valid SHA-1 message digest as defined in [RFC 3174].</td>
 </tr>
 <tr>
 <td><strong>SHA-224</strong></td>
-<td>Specifies the SHA-­224 cryptographic hash function (part of the SHA­2 family). The corresponding hash string for this value MUST be a valid SHA-224 message digest as defined in [RFC 6234].</td>
+<td>Specifies the SHA-­224 cryptographic hash function (part of the SHA­2 family). The corresponding hash string for this value <strong>MUST</strong> be a valid SHA-224 message digest as defined in [RFC 6234].</td>
 </tr>
 <tr>
 <td><strong>SHA-256</strong></td>
-<td>Specifies the SHA-­256 cryptographic hash function (part of the SHA­2 family). The corresponding hash string for this value MUST be a valid SHA-256 message digest as defined in [RFC 6234].</td>
+<td>Specifies the SHA-­256 cryptographic hash function (part of the SHA­2 family). The corresponding hash string for this value <strong>MUST</strong> be a valid SHA-256 message digest as defined in [RFC 6234].</td>
 </tr>
 <tr>
 <td><strong>SHA-384</strong></td>
-<td>Specifies the SHA-­384 cryptographic hash function (part of the SHA­2 family). The corresponding hash string for this value MUST be a valid SHA-384 message digest as defined in [RFC 6234].</td>
+<td>Specifies the SHA-­384 cryptographic hash function (part of the SHA­2 family). The corresponding hash string for this value <strong>MUST</strong> be a valid SHA-384 message digest as defined in [RFC 6234].</td>
 </tr>
 <tr>
 <td><strong>SHA-512</strong></td>
-<td>Specifies the SHA-­512 cryptographic hash function (part of the SHA­2 family). The corresponding hash string for this value MUST be a valid SHA-512 message digest as defined in [RFC 6234].</td>
+<td>Specifies the SHA-­512 cryptographic hash function (part of the SHA­2 family). The corresponding hash string for this value <strong>MUST</strong> be a valid SHA-512 message digest as defined in [RFC 6234].</td>
 </tr>
 <tr>
 <td><strong>SHA3-224</strong></td>
-<td>Specifies the SHA3-224 cryptographic hash function. The corresponding hash string for this value MUST be a valid SHA3-224 message digest as defined in [FIPS202].</td>
+<td>Specifies the SHA3-224 cryptographic hash function. The corresponding hash string for this value <strong>MUST</strong> be a valid SHA3-224 message digest as defined in [FIPS202].</td>
 </tr>
 <tr>
 <td><strong>SHA3-256</strong></td>
-<td>Specifies the SHA3-256 cryptographic hash function. The corresponding hash string for this value MUST be a valid SHA3-256 message digest as defined in [FIPS202].</td>
+<td>Specifies the SHA3-256 cryptographic hash function. The corresponding hash string for this value <strong>MUST</strong> be a valid SHA3-256 message digest as defined in [FIPS202].</td>
 </tr>
 <tr>
 <td><strong>SHA3-384</strong></td>
-<td>Specifies the SHA3-384 cryptographic hash function. The corresponding hash string for this value MUST be a valid SHA3-384 message digest as defined in [FIPS202].</td>
+<td>Specifies the SHA3-384 cryptographic hash function. The corresponding hash string for this value <strong>MUST</strong> be a valid SHA3-384 message digest as defined in [FIPS202].</td>
 </tr>
 <tr>
 <td><strong>SHA3-512</strong></td>
-<td>Specifies the SHA3-512 cryptographic hash function. The corresponding hash string for this value MUST be a valid SHA3-512 message digest as defined in [FIPS202].</td>
+<td>Specifies the SHA3-512 cryptographic hash function. The corresponding hash string for this value <strong>MUST</strong> be a valid SHA3-512 message digest as defined in [FIPS202].</td>
 </tr>
 <tr>
 <td><strong>ssdeep</strong></td>
-<td>Specifies the ssdeep fuzzy hashing algorithm. The corresponding hash string for this value MUST be a valid piecewise hash as defined in the [SSDEEP] specification.</td>
+<td>Specifies the ssdeep fuzzy hashing algorithm. The corresponding hash string for this value <strong>MUST</strong> be a valid piecewise hash as defined in the [SSDEEP] specification.</td>
 </tr>
 <tr>
 <td><strong>WHIRLPOOL</strong></td>
-<td>Specifies the whirlpool cryptographic hash function. The corresponding hash string for this value MUST be a valid WHIRLPOOL message digest as defined in [ISO10118].</td>
+<td>Specifies the whirlpool cryptographic hash function. The corresponding hash string for this value <strong>MUST</strong> be a valid WHIRLPOOL message digest as defined in [ISO10118].</td>
 </tr>
 </tbody></table>
 <h2 id='identity-class'>Identity Class</h2>
@@ -2993,7 +2989,7 @@ Identity</p>
 <h1 id='common-types'>Common Types</h1><h2 id='boolean'>Boolean</h2>
 <p>A boolean is a value of either true or false. Properties with this type <strong>MUST</strong> have a value of <code>true</code> or <code>false</code>.</p>
 
-<p>The JSON MTI serialization uses the JSON boolean type [RFC7159], which is a literal (unquoted) true or false.</p>
+<p>The JSON MTI serialization uses the JSON boolean type, which is a literal (unquoted) true or false.</p>
 <h2 id='external-reference'>External Reference</h2>
 <blockquote>
 <p>An external-reference to a VERIS Community Database (VCDB) [VERIS] entry:</p>
@@ -3046,7 +3042,7 @@ Identity</p>
 </span></code></pre>
 <p>External references are used to describe pointers to information represented outside of STIX. For example, a Malware object could use an external reference to indicate an ID for that malware in an external database or a report could use references to represent source material.</p>
 
-<p>The JSON MTI serialization uses the JSON object type [RFC7159] when representing external-reference.</p>
+<p>The JSON MTI serialization uses the JSON object type when representing external-reference.</p>
 
 <ul>
 <li>In addition to the <strong>source_name</strong> property, at least one of the <strong>description</strong>, <strong>url</strong>, or <strong>external_id</strong> properties <strong>MUST</strong> be present.</li>
@@ -3062,7 +3058,7 @@ Identity</p>
 <tr>
 <td><strong>source_name</strong> (required)</td>
 <td><a href="#string">string</a></td>
-<td>The source within which the external-reference is defined (system, registry, organization, etc.).</td>
+<td>The source within which the <code>external-reference</code> is defined (system, registry, organization, etc.).</td>
 </tr>
 <tr>
 <td><strong>description</strong> (optional)</td>
@@ -3072,12 +3068,12 @@ Identity</p>
 <tr>
 <td><strong>url</strong> (optional)</td>
 <td><a href="#string">string</a></td>
-<td>A URL reference to an external resource [RFC3986].</td>
+<td>A URL reference to an external resource.</td>
 </tr>
 <tr>
 <td><strong>hashes</strong> (optional)</td>
 <td><a href="#hashes">hashes</a></td>
-<td>Specifies a dictionary of hashes for the contents of the url. This SHOULD be provided when the url property is present.</td>
+<td>Specifies a dictionary of hashes for the contents of the url. This <strong>SHOULD</strong> be provided when the url property is present.</td>
 </tr>
 <tr>
 <td><strong>external_id</strong> (optional)</td>
@@ -3086,9 +3082,9 @@ Identity</p>
 </tr>
 </tbody></table>
 <h2 id='float'>Float</h2>
-<p>The float data type represents an IEEE 754 [IEEE 754-2008] double-precision number (e.g., a number with a fractional part). However, because the values ±Infinity and NaN are not representable in JSON, they are not valid values in STIX.</p>
+<p>The float data type represents an IEEE 754 double-precision number (e.g., a number with a fractional part). However, because the values ±Infinity and NaN are not representable in JSON, they are not valid values in STIX.</p>
 
-<p>In the JSON MTI serialization, floating point values are represented by the JSON number type [RFC7159].</p>
+<p>In the JSON MTI serialization, floating point values are represented by the JSON number type.</p>
 <h2 id='hashes'>Hashes</h2>
 <blockquote>
 <p>A SHA-256 hash with a custom hash&quot;</p>
@@ -3098,7 +3094,7 @@ Identity</p>
   </span><span class="s2">"x_foo_hash"</span><span class="p">:</span><span class="w"> </span><span class="s2">"aaaabbbbccccddddeeeeffff0123457890"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>The Hashes type represents 1 or more cryptographic hashes, as a special set of key/value pairs. Accordingly, the name of each hashing algorithm MUST be specified as a key in the dictionary and <strong>MUST</strong> identify the name of the hashing algorithm used to generate the corresponding value. This name <strong>SHOULD</strong> either be one of the values defined in the hash-algorithm-ov OR a custom value prepended with “x_” (e.g., “x_custom_hash”).</p>
+<p>The Hashes type represents 1 or more cryptographic hashes, as a special set of key/value pairs. Accordingly, the name of each hashing algorithm <strong>MUST</strong> be specified as a key in the dictionary and <strong>MUST</strong> identify the name of the hashing algorithm used to generate the corresponding value. This name <strong>SHOULD</strong> either be one of the values defined in the <a href="#hash-algorithm">hash-algorithm-ov</a> OR a custom value prepended with “x_” (e.g., “x_custom_hash”).</p>
 
 <p>Keys <strong>MUST</strong> be unique in each hashes property, <strong>MUST</strong> be in ASCII, and are limited to the characters a-z (lowercase ASCII), A-Z (uppercase ASCII), numerals 0-9, hyphen (<code>-</code>), and underscore (<code>_</code>). Keys <strong>SHOULD</strong> be no longer than 30 ASCII characters in length, <strong>MUST</strong> have a minimum length of 3 ASCII characters, <strong>MUST</strong> be no longer than 256 ASCII characters in length.</p>
 <h2 id='identifier'>Identifier</h2>
@@ -3122,9 +3118,9 @@ Identity</p>
   </span><span class="err">...</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>An identifier universally and uniquely identifies a SDO, SRO, Bundle, or Marking Definition. Identifiers <strong>MUST</strong> follow the form <code>object-type--UUIDv4</code>, where <code>object-type</code> is the exact value (all type names are lowercase strings, by definition) from the <code>type</code> property of the object being identified or referenced and where the UUIDv4 is an RFC 4122-compliant Version 4 UUID. The UUID MUST be generated according to the algorithm(s) defined in RFC 4122, section 4.4 (Version 4 UUID) [RFC4122].</p>
+<p>An identifier universally and uniquely identifies a SDO, SRO, Bundle, or Marking Definition. Identifiers <strong>MUST</strong> follow the form <code>object-type--UUIDv4</code>, where <code>object-type</code> is the exact value (all type names are lowercase strings, by definition) from the <code>type</code> property of the object being identified or referenced and where the UUIDv4 is an RFC 4122-compliant Version 4 UUID. The UUID <strong>MUST</strong> be generated according to the algorithm(s) defined in RFC 4122, section 4.4 (Version 4 UUID).</p>
 
-<p>The JSON MTI serialization uses the JSON string type [RFC7159] when representing identifier.</p>
+<p>The JSON MTI serialization uses the JSON string type when representing identifier.</p>
 <h2 id='integer'>Integer</h2>
 <blockquote>
 <p>Example:</p>
@@ -3135,9 +3131,9 @@ Identity</p>
   </span><span class="err">...</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>The integer data type represents a whole number. Unless otherwise specified, all integers <strong>MUST</strong> be capable of being represented as a signed 64-bit value ([-(2*<em>63)+1, (2</em>*63)-1]). Additional restrictions MAY be placed on the type as described where it is used.</p>
+<p>The integer data type represents a whole number. Unless otherwise specified, all integers <strong>MUST</strong> be capable of being represented as a signed 64-bit value ([-(2*<em>63)+1, (2</em><em>63)-1]). Additional restrictions **MAY</em>* be placed on the type as described where it is used.</p>
 
-<p>In the JSON MTI serialization, integers are represented by the JSON number type [RFC7159].</p>
+<p>In the JSON MTI serialization, integers are represented by the JSON number type.</p>
 <h2 id='kill-chain-phase'>Kill Chain Phase</h2>
 <blockquote>
 <p>The “reconnaissance” phase from the Lockheed Martin Cyber Kill Chain:</p>
@@ -3167,9 +3163,9 @@ Identity</p>
   </span><span class="err">...</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>The kill-chain-phase represents a phase in a kill chain, which describes the various phases an attacker may undertake in order to achieve their objectives.</p>
+<p>The <code>kill-chain-phase</code> represents a phase in a kill chain, which describes the various phases an attacker may undertake in order to achieve their objectives.</p>
 
-<p>The JSON MTI serialization uses the JSON object type [RFC7159] when representing kill-chain-phase.</p>
+<p>The JSON MTI serialization uses the JSON object type when representing <code>kill-chain-phase</code>.</p>
 
 <table><thead>
 <tr>
@@ -3203,11 +3199,11 @@ Identity</p>
   </span><span class="err">...</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>The list type defines a sequence of values ordered based on how they appear in the list. The phrasing “list of type &lt;type&gt;” is used to indicate that all values within the list MUST conform to the specified type. For instance, list of type integer means that all values of the list must be of the integer type. This specification does not specify the maximum number of allowed values in a list, however every instance of a list MUST have at least one value. Specific STIX object properties may define more restrictive upper and/or lower bounds for the length of the list.</p>
+<p>The list type defines a sequence of values ordered based on how they appear in the list. The phrasing “list of type &lt;type&gt;” is used to indicate that all values within the list <strong>MUST</strong> conform to the specified type. For instance, list of type integer means that all values of the list must be of the integer type. This specification does not specify the maximum number of allowed values in a list, however every instance of a list <strong>MUST</strong> have at least one value. Specific STIX object properties may define more restrictive upper and/or lower bounds for the length of the list.</p>
 
-<p>Empty lists are prohibited in STIX and MUST NOT be used as a substitute for omitting the property if it is optional. If the property is required, the list MUST be present and MUST have at least one value.</p>
+<p>Empty lists are prohibited in STIX and <strong>MUST NOT</strong> be used as a substitute for omitting the property if it is optional. If the property is required, the list <strong>MUST</strong> be present and <strong>MUST</strong> have at least one value.</p>
 
-<p>The JSON MTI serialization uses the JSON array type [RFC7159], which is an ordered list of zero or more values.</p>
+<p>The JSON MTI serialization uses the JSON array type, which is an ordered list of zero or more values.</p>
 <h2 id='open-vocab'>Open Vocab</h2>
 <blockquote>
 <p>Example using value from the suggested vocabulary:</p>
@@ -3227,11 +3223,11 @@ Identity</p>
   </span><span class="err">...</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>The open-vocab type is represented as a string. For properties that use this type there will be a list of suggested values, known as the suggested vocabulary, that is identified in the definition for that property. The suggested vocabularies are defined in section 6. The value of the property SHOULD be chosen from the suggested vocabulary but MAY be any other string value. Values that are not from the suggested vocabulary SHOULD be all lowercase (where lowercase is defined by the locality conventions) and SHOULD use hyphens instead of spaces or underscores as word separators.</p>
+<p>The <code>open-vocab</code> type is represented as a string. For properties that use this type there will be a list of suggested values, known as the suggested vocabulary, that is identified in the definition for that property. The suggested vocabularies are defined in section 6. The value of the property <strong>SHOULD</strong> be chosen from the suggested vocabulary but <strong>MAY</strong> be any other string value. Values that are not from the suggested vocabulary <strong>SHOULD</strong> be all lowercase (where lowercase is defined by the locality conventions) and <strong>SHOULD</strong> use hyphens instead of spaces or underscores as word separators.</p>
 
-<p>A consumer that receives STIX content with one or more open-vocab terms not defined in the suggested vocabulary MAY ignore those values.</p>
+<p>A consumer that receives STIX content with one or more <code>open-vocab</code> terms not defined in the suggested vocabulary <strong>MAY</strong> ignore those values.</p>
 
-<p>The JSON MTI serialization uses the JSON string type [RFC7159] when representing open-vocab.</p>
+<p>The JSON MTI serialization uses the JSON string type when representing <code>open-vocab</code>.</p>
 <h2 id='string'>String</h2>
 <blockquote>
 <p>Example:</p>
@@ -3242,9 +3238,9 @@ Identity</p>
   </span><span class="err">...</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>The string data type represents a finite-length string of valid characters from the Unicode coded character set [ISO10646]. Unicode incorporates ASCII and the characters of many other international character sets.</p>
+<p>The string data type represents a finite-length string of valid characters from the Unicode coded character set. Unicode incorporates ASCII and the characters of many other international character sets.</p>
 
-<p>The JSON MTI serialization uses the JSON string type [RFC7159], which mandates the UTF-8 encoding for supporting Unicode.</p>
+<p>The JSON MTI serialization uses the JSON string type, which mandates the UTF-8 encoding for supporting Unicode.</p>
 <h2 id='timestamp'>Timestamp</h2>
 <blockquote>
 <p>Example:</p>
@@ -3257,11 +3253,11 @@ Identity</p>
 </span></code></pre>
 <p>The timestamp type defines how dates and times are represented in STIX.</p>
 
-<p>The JSON MTI serialization uses the JSON string type [RFC7159] when representing timestamp.</p>
+<p>The JSON MTI serialization uses the JSON string type when representing timestamp.</p>
 
 <ul>
-<li>The timestamp property MUST be a valid RFC 3339-formatted timestamp [RFC3339] using the format YYYY-MM-DDTHH:mm:ss[.s+]Z where the “s+” represents 1 or more sub-second values. The brackets denote that sub-second precision is optional, and that if no digits are provided, the decimal place MUST NOT be present.</li>
-<li>The timestamp MUST be represented in the UTC timezone and MUST use the “Z” designation to indicate this.</li>
+<li>The timestamp property <strong>MUST</strong> be a valid RFC 3339-formatted timestamp using the format YYYY-MM-DDTHH:mm:ss[.s+]Z where the “s+” represents 1 or more sub-second values. The brackets denote that sub-second precision is optional, and that if no digits are provided, the decimal place <strong>MUST NOT</strong> be present.</li>
+<li>The timestamp <strong>MUST</strong> be represented in the UTC timezone and <strong>MUST</strong> use the “Z” designation to indicate this.</li>
 </ul>
 <h2 id='common-properties'>Common Properties</h2>
 <p>This section outlines the common properties and behavior across all SDOs and SROs. All objects, other than <code>bundle</code> and <code>data-marking</code>, have all of these properties.</p>
@@ -3276,52 +3272,52 @@ Identity</p>
 <tr>
 <td><strong>type</strong> (required)</td>
 <td><a href="#string">string</a></td>
-<td>The type property identifies the type of STIX Object. The value of the type property MUST be the name of one of the types of STIX Object defined in sections 2 and 3 of STIX™ Version 2.0. Part 2: STIX Objects (e.g., indicator) or the name of a custom object as defined by section 7.2.</td>
+<td>The <strong>type</strong> property identifies the type of STIX Object. The value of the type property <strong>MUST</strong> be the name of one of the types of STIX Object defined in sections 2 and 3 of STIX™ Version 2.0. Part 2: STIX Objects (e.g., indicator) or the name of a custom object as defined by section 7.2.</td>
 </tr>
 <tr>
 <td><strong>id</strong> (required)</td>
 <td><a href="#identifier">identifier</a></td>
-<td>The id property universally and uniquely identifies this object. All objects with the same id are considered different versions of the same object. Because the object type is part of the identifier, it is invalid for objects of different types to share the same id.</td>
+<td>The <strong>id</strong> property universally and uniquely identifies this object. All objects with the same id are considered different versions of the same object. Because the object type is part of the identifier, it is invalid for objects of different types to share the same id.</td>
 </tr>
 <tr>
 <td><strong>created_by_ref</strong> (optional)</td>
 <td><a href="#identifier">identifier</a></td>
-<td>The created_by_ref property specifies the ID of the Identity object that describes the entity that created this object. If this attribute is omitted, the source of this information is undefined. This may be used by object creators who wish to remain anonymous.</td>
+<td>The <strong>created_by_ref</strong> property specifies the ID of the Identity object that describes the entity that created this object. If this attribute is omitted, the source of this information is undefined. This may be used by object creators who wish to remain anonymous.</td>
 </tr>
 <tr>
 <td><strong>created</strong> (required)</td>
 <td><a href="#timestamp">timestamp</a></td>
-<td>The created property represents the time at which the first version of this object was created. The object creator can use the time it deems most appropriate as the time the object was created. The created property MUST NOT be changed when creating a new version of the object. The created timestamp MUST be precise to the nearest millisecond (exactly three digits after the decimal place in seconds). See section 3.4 for further definition of versioning.</td>
+<td>The <strong>created</strong> property represents the time at which the first version of this object was created. The object creator can use the time it deems most appropriate as the time the object was created. The <strong>created</strong> property <strong>MUST NOT</strong> be changed when creating a new version of the object. The created timestamp <strong>MUST</strong> be precise to the nearest millisecond (exactly three digits after the decimal place in seconds). See section 3.4 for further definition of versioning.</td>
 </tr>
 <tr>
 <td><strong>modified</strong> (required)</td>
 <td><a href="#timestamp">timestamp</a></td>
-<td>The modified property represents the time that this particular version of the object was created. The object creator can use the time it deems most appropriate as the time this version of the object was modified. The value of the modified property for a given object version MUST be later than or equal to the value of the created property. Object creators MUST set the modified property when creating a new version of an object. The modified timestamp MUST be precise to the nearest millisecond (exactly three digits after the decimal place in seconds). See section 3.4 for further definition of versioning.</td>
+<td>The <strong>modified</strong> property represents the time that this particular version of the object was created. The object creator can use the time it deems most appropriate as the time this version of the object was modified. The value of the modified property for a given object version <strong>MUST</strong> be later than or equal to the value of the created property. Object creators <strong>MUST</strong> set the modified property when creating a new version of an object. The modified timestamp <strong>MUST</strong> be precise to the nearest millisecond (exactly three digits after the decimal place in seconds). See section 3.4 for further definition of versioning.</td>
 </tr>
 <tr>
 <td><strong>revoked</strong> (optional)</td>
 <td><a href="#boolean">boolean</a></td>
-<td>The revoked property indicates whether the object has been revoked. Revoked objects are no longer considered valid by the object creator. Revoking an object is permanent; future versions of the object with this id MUST NOT be created. The default value of this property is false. See section 3.4 for further definition of versioning.</td>
+<td>The <strong>revoked</strong> property indicates whether the object has been revoked. Revoked objects are no longer considered valid by the object creator. Revoking an object is permanent; future versions of the object with this id <strong>MUST NOT</strong> be created. The default value of this property is <code>false</code>. See section 3.4 for further definition of versioning.</td>
 </tr>
 <tr>
 <td><strong>labels</strong> (optional)</td>
 <td><a href="#list">list</a> of type <a href="#string">string</a></td>
-<td>The labels property specifies a set of classifications. Each STIX Object can define a suggested vocabulary for the labels property. For example, the Indicator object, as defined in section 2.5 of STIX™ Version 2.0. Part 2: STIX Objects, uses the Indicator Label vocabulary as defined in section 6.5. In some cases (generally, when a suggested vocabulary is defined) the labels property is then required for that specific SDO. If a vocabulary is defined, items in this list SHOULD come from the vocabulary. Additional labels MAY be added beyond what is in the suggested vocabulary.</td>
+<td>The <strong>labels</strong> property specifies a set of classifications. Each STIX Object can define a suggested vocabulary for the labels property. For example, the Indicator object, as defined in section 2.5 of STIX™ Version 2.0. Part 2: STIX Objects, uses the Indicator Label vocabulary as defined in section 6.5. In some cases (generally, when a suggested vocabulary is defined) the labels property is then required for that specific SDO. If a vocabulary is defined, items in this list <strong>SHOULD</strong> come from the vocabulary. Additional labels <strong>MAY</strong> be added beyond what is in the suggested vocabulary.</td>
 </tr>
 <tr>
 <td><strong>external_references</strong> (optional)</td>
 <td><a href="#list">list</a> of type <a href="#external-reference">external-reference</a></td>
-<td>The external_references property specifies a list of external references which refers to non-STIX information. This property is used to provide one or more URLs, descriptions, or IDs to records in other systems.</td>
+<td>The <strong>external_references</strong> property specifies a list of external references which refers to non-STIX information. This property is used to provide one or more URLs, descriptions, or IDs to records in other systems.</td>
 </tr>
 <tr>
 <td><strong>object_marking_refs</strong> (optional)</td>
 <td><a href="#list">list</a> of type <a href="#identifier">identifier</a></td>
-<td>The object_marking_refs property specifies a list of IDs of marking-definition objects that apply to this object. See section 4 for further definition of data markings.</td>
+<td>The <strong>object_marking_refs</strong> property specifies a list of IDs of <code>marking-definition</code> objects that apply to this object. See section 4 for further definition of data markings.</td>
 </tr>
 <tr>
 <td><strong>granular_markings</strong> (optional)</td>
 <td><a href="#list">list</a> of type <a href="$granular-marking">granular-marking</a></td>
-<td>The granular_markings property specifies a list of granular markings applied to this object.  See section 4 for further definition of data markings.</td>
+<td>The <strong>granular_markings</strong> property specifies a list of granular markings applied to this object.  See section 4 for further definition of data markings.</td>
 </tr>
 </tbody></table>
 <h2 id='common-relationships'>Common Relationships</h2>
@@ -3339,19 +3335,19 @@ Identity</p>
 <td><code>&lt;SDO&gt;</code></td>
 <td><code>derived-from</code></td>
 <td><code>&lt;SDO of the same type&gt;</code></td>
-<td>The information in the target object is based on information from the source object. derived-from is an explicit relationship between two separate objects and MUST NOT be used as a substitute for the versioning process defined in section 3.4.</td>
+<td>The information in the target object is based on information from the source object. derived-from is an explicit relationship between two separate objects and <strong>MUST NOT</strong> be used as a substitute for the versioning process defined in section 3.4.</td>
 </tr>
 <tr>
 <td><code>&lt;SDO&gt;</code></td>
 <td><code>duplicate-of</code></td>
 <td><code>&lt;SDO of the same type&gt;</code></td>
-<td>The referenced source and target objects are semantically duplicates of each other. This specification does not address whether the source or the target object is the duplicate object or what action, if any, a consumer should take when receiving an instance of this relationship. As an example, a Campaign object from one organization could be marked as a duplicate-of a Campaign object from another organization if they both described the same campaign.</td>
+<td>The referenced source and target objects are semantically duplicates of each other. This specification does not address whether the source or the target object is the duplicate object or what action, if any, a consumer should take when receiving an instance of this relationship. As an example, a Campaign object from one organization could be marked as a <code>duplicate-of</code> a Campaign object from another organization if they both described the same campaign.</td>
 </tr>
 <tr>
 <td><code>&lt;SDO&gt;</code></td>
 <td><code>related-to</code></td>
 <td><code>&lt;SDO of any type&gt;</code></td>
-<td>Asserts a non-specific relationship between two SDOs. This relationship can be used when none of the other predefined relationships are appropriate. As an example, a Malware object describing a piece of malware could be marked as a related-to a Tool if they are commonly used together. That relationship is not common enough to standardize on, but may be useful to some analysts.</td>
+<td>Asserts a non-specific relationship between two SDOs. This relationship can be used when none of the other predefined relationships are appropriate. As an example, a Malware object describing a piece of malware could be marked as a <code>related-to</code> a Tool if they are commonly used together. That relationship is not common enough to standardize on, but may be useful to some analysts.</td>
 </tr>
 </tbody></table>
 
