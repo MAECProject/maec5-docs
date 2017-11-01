@@ -596,162 +596,17 @@ Source | Name | Target | Description
 | `malware-instance` | `has-distance` | `malware-family`, `malware-instance` | Indicates that the source malware instance is installed by the target malware instance or family.|
 | `malware-instance` | `variant-of` | `malware-family`, `malware-instance` | Indicates that the source malware instance is a variant of the target malware instance or family.|
 
-### Statement Marking
+# MAEC Types
 
-> Example:
+## API call
+**Type Name**: `api-call`
 
-```json
-{
-  "type": "marking-definition",
-  "id": "marking-definition--34098fce-860f-48ae-8e50-ebd3cc5e41da",
-  "created": "2016-08-01T00:00:00.000Z",
-  "definition_type": "statement",
-  "definition": {
-    "statement": "Copyright 2016, Example Corp"
-  }
-}
-```
-
-The Statement marking type defines the representation of a textual marking statement (e.g., copyright, terms of use, etc.) in a definition. The value of the **definition_type** property **MUST** be `statement` when using this marking type. Statement markings are generally not machine-readable and this specification does not define any behavior or actions based on their values.
-
-Content may be marked with multiple Statement marking types that do not override each other. In other words, the same content can be marked both with a statement saying "Copyright 2016" and a statement saying "Terms of use are ..." and both statements apply.
+The api-call type serves as a method for characterizing API Calls, as implementations of Malware Actions.
 
 Name | Type | Description
 --------- | ------- | -----------
-| **statement** (required) | [string](#string) | A Statement (e.g., copyright, terms of use) applied to the content marked by this marking definition.
-
-### TLP Marking
-
-> TLP:WHITE (always use this ID):
-
-```json
-{
-  "type": "marking-definition",
-  "id": "marking-definition--613f2e26-407d-48c7-9eca-b8e91df99dc9",
-  "created": "2017-01-20T00:00:00.000Z",
-  "definition_type": "tlp",
-  "definition": {
-    "tlp": "white"
-  }
-}
-```
-
-> TLP:GREEN (always use this ID):
-
-```json
-{
-  "type": "marking-definition",
-  "id": "marking-definition--34098fce-860f-48ae-8e50-ebd3cc5e41da",
-  "created": "2017-01-20T00:00:00.000Z",
-  "definition_type": "tlp",
-  "definition": {
-    "tlp": "green"
-  }
-}
-```
-
-> TLP:AMBER (always use this ID):
-
-```json
-{
-  "type": "marking-definition",
-  "id": "marking-definition--f88d31f6-486f-44da-b317-01333bde0b82",
-  "created": "2017-01-20T00:00:00.000Z",
-  "definition_type": "tlp",
-  "definition": {
-    "tlp": "amber"
-  }
-}
-```
-
-> TLP:RED (always use this ID):
-
-```json
-{
-  "type": "marking-definition",
-  "id": "marking-definition--5e57c739-391a-4eb3-b6be-7d15ca92d5ed",
-  "created": "2017-01-20T00:00:00.000Z",
-  "definition_type": "tlp",
-  "definition": {
-    "tlp": "red"
-  }
-}
-```
-
-The TLP marking type defines how you would represent a Traffic Light Protocol (TLP) marking in a definition property. The value of the **definition_type** property **MUST** be `tlp` when using this marking type.
-
-Because there are only four TLP levels, STIX has pre-defined the STIX objects used to represent them. To use them, reference them by ID directly (see the objects to the right). You could also include the full objects if you want.
-
-### Granular Marking
-
-The `granular-marking` type defines how the `marking-definition` object referenced by the **marking_ref** property applies to a set of content identified by the list of selectors in the selectors property.
-
-Name | Type | Description
---------- | ------- | -----------
-| **marking_ref** (required) | [identifier](#identifier) | The marking_ref property specifies the ID of the marking-definition object that describes the marking.
-| **selectors** | [list](#list) of type [string](#string) | The selectors property specifies a list of selectors for content contained within the STIX Object in which this property appears. Selectors **MUST** conform to the syntax defined in section 4.3.1.1. The `marking-definition` referenced in the **marking_ref** property is applied to the content selected by the selectors in this list.
-
-#### Selector Syntax
-
-Selectors contained in the selectors list are strings that consist of multiple components that **MUST** be separated by the . character. Each component **MUST** be one of:
-
-* A property name, e.g., description, or;
-* A zero-based list index, specified as a non-negative integer in square brackets, e.g., [4]
-
-Selectors denote path traversals: the root of each selector is the STIX Object that the **granular_markings** property appears in. Starting from that root, for each component in the selector, properties and list items are traversed. When the complete list has been traversed, the value of the content is considered selected.
-
-Selectors **MUST** refer to properties or list items that are actually present on the marked object.
-
-> Example of a granular marking:
-
-```json
-{
-  "id": "vulnerability--ee916c28-c7a4-4d0d-ad56-a8d357f89fef",
-  "created": "2016-02-14T00:00:00.000Z",
-  "modified": "2016-02-14T00:00:00.000Z",
-  "type": "vulnerability",
-  "name": "CVE-2014-0160",
-  "description": "The (1) TLS...",
-  "external_references": [{
-    "source_name": "cve",
-    "external_id": "CVE-2014-0160"
-  }],
-  "labels": ["heartbleed", "has-logo"]
-}
-```
-
-Considering the example to the right, the following selectors are valid:
-
-* `description` selects the **description** property ("The (1) TLS...").
-* `external_references.[0].source_name` selects the **source_name** property of the first value of the **external_references** list ("cve").
-* `labels.[0]` selects the first item contained within the **labels** list ("heartbleed").
-* `labels` selects the list contained in the **labels** property. Due to the recursive nature of the selector, that includes all items in the list (["heartbleed", "has-logo"]).
-* `external_references` selects the list contained in the **external_references** property. Due to the recursive nature of the selector, that includes all list items and all properties of those list items.
-
-On the other hand, still looking at the same example, the following selectors are not valid:
-
-* `pattern` and `external_references.[3]` are invalid selectors because they refer to content not present in that object.
-* `description.[0]` is an invalid selector because the **description** property is a string and not a list.
-* `labels.name` is an invalid selector because **labels** property is a list and not an object.
-
-This syntax is inspired by JSONPath and is in fact a strict subset of allowable JSONPath expressions (with the exception that the '$' to indicate the root is implicit). Care should be taken when passing selectors to JSONPath evaluators to ensure that the root of the query is the individual STIX Object. It is expected, however, that selectors can be easily evaluated in programming languages that implement list and key/value mapping types (dictionaries, hashmaps, etc.) without resorting to an external library.
-
-> Marks the description and labels properties with the single marking definition referenced in the list.
-
-```json
-{
-  ...
-  "granular_markings": [
-    {
-      "marking_ref": "marking-definition--089a6ecb-cc15-43cc-9494-767639779123",
-      "selectors": ["description", "labels"]
-    }
-  ],
-  "description": "Some description",
-  "name": "Some name",
-  "labels": ["first", "second"]
-}
-```
+| **address** (optional) | [hex](#hex) | Captures the hexadecimal address of the API call in the binary.|
+| **return_value** (optional) | [string](#string) | Captures the return value of the API call.|
 
 # Vocabularies
 
