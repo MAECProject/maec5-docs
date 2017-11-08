@@ -55,33 +55,19 @@ This page is a basic outline of the MAEC 5.0 data model. If you're looking for a
 
 This documentation is divided into seven major sections:
 
-**Top-level Objects**
+* **Top-level Objects** - This section describes the top-level objects (TLOs) in MAEC. It includes objects such as the Malware Instance and the Behavior Objects.
 
-This section describes the top-level objects (TLOs) in MAEC. It includes objects such as the Malware Instance and the Behavior Objects.
+* **MAEC Types** - These MAEC 5.0 types are used by MAEC’s TLOs.
 
-**MAEC Types**
+* **MAEC Relationships** - MAEC Relationships are defined between MAEC TLOs.
 
-These MAEC 5.0 types are used by MAEC’s TLOs.
+* **MAEC Package** - The MAEC Package is MAEC's standard output format.
 
-**MAEC Relationships**
+* **Common Data Types** - These common data types are used by MAEC TLOs and data types.
 
-MAEC Relationships are defined between MAEC TLOs.
+* **Cyber Observable Object Extensions** - MAEC-specific extensions are defined for STIX Cyber Observable Objects used in the context of MAEC.
 
-**MAEC Package**
-
-The MAEC Package is MAEC's standard output format.
-
-**Common Data Types**
-
-These common data types are used by MAEC TLOs and data types.
-
-**Cyber Observable Object Extensions**
-
-MAEC-specific extensions are defined for STIX Cyber Observable Objects used in the context of MAEC.
-
-**Vocabularies**
-
-Many of MAEC's core objects contain properties that let you choose from a list of values. These vocabularies define those lists. In most cases, you don't have to use a value from the vocabulary, but it's recommended to improve compatibility.
+* **Vocabularies** - Many of MAEC's core objects contain properties that let you choose from a list of values. These vocabularies define those lists. In most cases, you don't have to use a value from the vocabulary, but it's recommended to improve compatibility.
 
 # Top-level Objects
 
