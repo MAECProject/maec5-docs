@@ -1352,9 +1352,10 @@ Name | Type | Description
 | **configuration_parameters** (optional) | [dictionary](#dictionary) | Captures any configuration parameters specified for the malware instance. Each key in the dictionary **MUST** be of type `string` and **SHOULD** come from the [malware-configuration-parameter-ov](#malware-configuration-parameter) vocabulary, which is based on the data reported by the Malware Configuration Parser (MWCP) tool developed by the Department of Defense Cyber Crime Center (DC3). Each corresponding key value **MUST** also be of type `string`, and should capture the actual value of the configuration parameter.|
 | **development_environment** (optional) | [malware-development-environment](#malware-development-environment) | Captures details of the development environment used to create the malware instance.|
 
-# MAEC Relationships
+# Relationships
 
 > Example: Malware Instances (downloaded)
+
 ```json
 {
   "type":"package",
@@ -1395,6 +1396,7 @@ Name | Type | Description
 ```
 
 > Example: Malware Instances (distance score)
+
 ```json
 {
   "type":"package",
@@ -1454,8 +1456,41 @@ Name | Type | Description
 | **relationship_type** (required) | [string](#string) | Specifies the type of relationship being expressed. This value **SHOULD** be an exact value listed in the relationships for the source and target top-level object, but **MAY** be any string. The value of this field **MUST** be in ASCII and is limited to characters a–z (lowercase ASCII), 0–9, and dash (-).|
 | **metadata** (optional) | [dictionary](#dictionary) | Specifies a dictionary of additional metadata around the relationship. Standard dictionary keys include `distance`, which is used for capturing any distance-related metadata. The corresponding value for this key **MUST** be an object of type `relationship-distance`. Custom entries in the dictionary **MAY** also be included. Each custom entry **MUST** have a key of type `string` and the key **MUST** be in ASCII and is limited to characters a–z (lowercase ASCII), 0–9, and dash (-). Each custom entry **MUST** have a key value that is a valid [common datatype](#Common-Data-Types).
 
+## Common Relationships
 
-# MAEC Package
+Each MAEC top-level object has its own set of relationship types that are specified in the definition of that TLO. The following common relationship types are defined for all TLOs.
+
+Relationship Type | Source | Target | Description
+--------- | ------- | ----------- | --------------
+| `related-to` | `<MAEC Object>` | `<MAEC Object>` | Asserts a non-specific relationship between two TLOs. This relationship can be used when none of the other predefined relationships are appropriate.|
+
+## Relationship Summary
+
+This relationship summary is provided as a convenience. If there is a discrepancy between this table and the relationships defined with each of the TLOs, then the relationships defined with the TLOs **MUST** be viewed as authoritative.
+
+Source | Relationship Type | Target 
+--------- | ------- | ----------- 
+| `behavior` | `dependent-on` | `behavior` |
+| `behavior` | `discovered-by` | `software` |
+| `malware-action` | `dependent-on` | `malware-action` |
+| `malware-action` | `discovered-by` | `software` |
+| `malware-family` | `dropped-by` | `malware-family` |
+| `malware-family` | `derived-from` | `malware-family` |
+| `malware-instance` | `ancestor-of` | `malware-instance` |
+| `malware-instance` | `has-distance` | `malware-instance` |
+| `malware-instance` | `installed-by` | `malware-family` |
+| `malware-instance` | `installed-by` | `malware-instance` |
+| `malware-instance` | `derived-from` | `malware-family` |
+| `malware-instance` | `derived-from` | `malware-instance` |
+| `malware-instance` | `variant-of` | `malware-family` |
+| `malware-instance` | `variant-of` | `malware-instance` |
+| `malware-instance` | `downloaded-by` | `malware-family` |
+| `malware-instance` | `downloaded-by` | `malware-instance` |
+| `malware-instance` | `dropped-by` | `malware-family` |
+| `malware-instance` | `dropped-by` | `malware-instance` |
+| `malware-instance` | `extracted-from` | `malware-instance` |
+
+# Package
 
 > Package example
 
@@ -1510,7 +1545,7 @@ Name | Type | Description
 | **relationships** (optional) | [list](#list) of type [relationship](#relationship) | Specifies a set of one or more MAEC Relationships. Each entry in this list **MUST** be of type relationship.|
 
 
-# Cyber Observable Object Extensions
+# STIX Cyber Observable Object Extensions
 
 ## AV Classification
 The following are MAEC-specific extensions defined for STIX Cyber Observable Objects used in the context of MAEC.
@@ -1919,12 +1954,14 @@ The Analysis Conclusion vocabulary is used by the following object/property:
 
 * Malware Instance --> analysis_metadata --> *conclusion*
 
+This vocabulary is an enumeration of conclusions resulting from the analysis of a malware instance.
+
 | Value | Description |
 | ----- | ----------- |
-| **benign** | As a conclusion of the analysis, the malware instance was determined to be benign.
-| **malicious** | As a conclusion of the analysis, the malware instance was determined to be malicious.
-| **suspicious** | As a conclusion of the analysis, the malware instance was determined to be suspicious.
-| **indeterminate** | The conclusion of the analysis was indeterminate.
+| **benign** | As a conclusion of the analysis, the malware instance was determined to be benign.|
+| **malicious** | As a conclusion of the analysis, the malware instance was determined to be malicious.|
+| **suspicious** | As a conclusion of the analysis, the malware instance was determined to be suspicious.|
+| **indeterminate** | The conclusion of the analysis was indeterminate.|
 
 
 ## Analysis Environment
@@ -1935,19 +1972,195 @@ The Analysis Environment vocabulary is currently used by the following object/pr
 
 * Malware Instance --> analysis_metadata --> *analysis_environment*
 
+This vocabulary is an enumeration of properties associated with the environment used in malware analysis.
+
 | Value | Description |
 | ----- | ----------- |
-| **operating-system** | The operating system...
+| **operating-system** | The operating system used for the dynamic analysis of the malware instance. This applies to virtualized operating systems as well as those running on bare metal. The corresponding value for this entry MUST be of type `object-ref` and the referenced STIX Cyber Observable Object **MUST** be of type `software`.|
+| **host-vm** |The virtual machine used to host the guest operating system (if applicable) used for the the dynamic analysis of the malware instance. If this value is not included in conjunction with `operating-system`, this means that the dynamic analysis was performed on bare metal (i.e., without virtualization). The corresponding value for this entry **MUST** be of type `object-ref` and the referenced STIX Cyber Observable Object **MUST** be of type `software`.|
+| **installed-software** | Any non-standard software installed on the operating system (specified through the `operating-system` value) used for the dynamic analysis of the malware instance. The corresponding value for this entry **MUST** be of type `list` and each STIX Cyber Observable Object(s) referenced in the list **MUST** be of type `software`.|
 
 
 ## Analysis Types
 
 **Vocabulary Name**: `analysis-type-ov`
 
+The Analysis Type open vocabulary is used by the following object/property:
+
+* Malware Instance --> analysis_metadata --> *analysis_type* 
+
+This vocabulary is an enumeration of malware analysis types.
+
+| Value | Description |
+| ----- | ----------- |
+| **static** | Static malware analysis, achieved by inspecting but not executing the malware instance. For example, inspection can be done by studying memory dumps captured after the instance is run.|
+| **dynamic** |Dynamic malware analysis, achieved by executing the malware instance (e.g., in a sandbox) and recording its behavior.|
+| **combination** | A combination of dynamic and static malware analysis, achieved by both inspecting and executing the malware instance.|
+
 
 ## Behaviors
 
 **Vocabulary Name**: `behavior-ov`
+
+The Behavior open vocabulary is used in the following object/property:
+
+* Behavior --> *name*
+
+This vocabulary is a non-exhaustive enumeration of malware behaviors.
+
+| Value | Description |
+| ----- | ----------- |
+| **access-premium-service** | Accesses a premium service, such as a premium SMS service.|
+| **autonomous-remote-infection** | Infects a remote machine autonomously, without the involvement of any end user (e.g., through the exploitation of a remote procedure call vulnerability).|
+| **block-security-websites** | Prevents access from the system on which the malware instance is executing to one or more security vendor or security-related websites.|
+| **capture-camera-input** | Captures data from a system's camera, including from embedded cameras (i.e. on mobile devices) and/or attached webcams.|
+| **capture-file-system-data** | Captures data from a file system.|
+| **capture-gps-data** | Captures GPS data from the system on which the malware instance is executing.|
+| **capture-keyboard-input** | Captures data from the keyboard attached to the system on which the malware instance is running.|
+| **capture-microphone-input** | Capture data from a system's microphone, including from embedded microphones (i.e. on mobile devices) and those that may be attached externally.|
+| **capture-mouse-input** | Captures data from a system's mouse.|
+| **capture-printer-output** | Captures data sent to a system's printer, either locally or remotely.|
+| **capture-system-memory** | Captures data from a system's RAM.|
+| **capture-system-network-traffic** | Captures network traffic from the system on which the malware instance is executing.|
+| **capture-system-screenshot** | Captures images of what is currently being displayed on a system's screen, either locally (i.e. on a display) or remotely via a remote desktop protocol.|
+| **capture-touchscreen-input** | Captures data from a system's touchscreen.|
+| **check-for-payload** | Queries a command and control server to check whether a new payload is available for download.|
+| **check-language** | Checks the language of the host system on which it executes.|
+| **click-fraud** | Simulates legitimate user clicks on website advertisements for the purpose of revenue generation.|
+| **compare-host-fingerprints** | Compares a previously computed host fingerprint to one computed for the current system on which the malware instance is executing, to determine if the malware instance is still executing on the same system.|
+| **compromise-remote-machine** | Gains control of a remote machine through compromise, e.g., by exploiting a particular vulnerability.|
+| **control-local-machine-via-remote-command** | Controls the machine on which the malware instance is executing, through one or more remotely sent commands.|
+| **control-malware-via-remote-command** | Executes commands issued to the malware instance from a remote source such as a command and control server, for the purpose of controlling its behavior.|
+| **crack-passwords** | Consumes system resources for the purpose of password cracking.|
+| **defeat-call-graph-generation** | Defeats accurate call graph generation during disassembly of the malware instance.|
+| **defeat-emulator** | Defeats or prevents the execution of the malware instance in an emulator.|
+| **defeat-flow-oriented-disassembler** | Defeats disassembly of the malware instance in a flow-oriented (recursive traversal) disassembler.|
+| **defeat-linear-disassembler** | Prevents the disassembly of the malware instance in a linear disassembler.|
+| **degrade-security-program** | Degrades one or more security programs running on a system, either by stopping them from executing or by making changes to their code or configuration parameters.|
+| **denial-of-service** | Causes the local machine on which the malware instance is executing and/or a remote network resource to be unavailable.|
+| **destroy-hardware** | Physically destroys a piece of hardware, e.g., by causing it to overheat.|
+| **detect-debugging** | Detects whether the malware instance is being executed inside of a debugger.|
+| **detect-emulator** | Detects whether the malware instance is being executed inside of an emulator.|
+| **detect-installed-analysis-tools** | Indicates that the malware instance attempts to detect whether certain analysis tools are present on the system on which it is executing.|
+| **detect-installed-av-tools** | Indicates that the malware instance attempts to detect whether certain anti-virus tools are present on the system on which it is executing.|
+| **detect-sandbox-environment** | Detects whether the malware instance is being executed in a sandbox environment.|
+| **detect-vm-environment** | Detects whether the malware instance is being executed in a virtual machine (VM).|
+| **determine-host-ip-address** | Determines the IP address of the host system on which the malware instance is executing.|
+| **disable-access-rights-checking** | Bypasses, disables, or modifies access tokens or access control lists, thereby enabling the malware instance to read, write, or execute a file with one or more of these controls set.|
+| **disable-firewall** | Evades or disables the host-based firewall running on the system on which the malware instance is executing.|
+| **disable-kernel-patch-protection** | Bypasses or disables kernel patch protection mechanisms such as Windows' PatchGuard, enabling the malware instance to operate at the same level as the operating system kernel and kernel mode drivers (KMD).|
+| **disable-os-security-alerts** | Disables operating system (OS) security alert messages that could lead to identification and/or notification of the presence of the malware instance.|
+| **disable-privilege-limiting** | Bypasses or disables mechanisms that limit the privileges that can be granted to a user or entity.|
+| **disable-service-pack-patch-installation** | Disables the system's ability to install service packs and/or patches.|
+| **disable-system-file-overwrite-protection** | Disables system file overwrite protection mechanisms such as Windows file protection, thereby enabling system files to be modified or replaced.|
+| **disable-update-services-daemons** | Disables system update services or daemons that may be already be running on the system on which the malware instance is executing.|
+| **disable-user-account-control** | Bypasses or disables Windows' user account control (UAC), enabling the malware instance and/or its component to execute with elevated privileges.|
+| **drop-retrieve-debug-log-file** | Generates and retrieves a log file of errors relating to the execution of the malware instance.|
+| **elevate-privilege** | Elevates the privilege level under which the malware instance is executing.|
+| **encrypt-data** | Encrypts data that will be exfiltrated.|
+| **encrypt-files** | Encrypts one or more files on the system on which the malware instance is executing, to make them unavailable for use by the users of the system.|
+| **encrypt-self** | Encrypts the executing code (in memory) that belongs to the malware instance.|
+| **erase-data** | Destroys data stored on a disk or in memory by erasure.|
+| **evade-static-heuristic** | Evades a static anti-virus heuristic. For example, an heuristic engine can try to figure out if a file are using a dual extension (e.g: invoice.doc.exe) and determine the file as being malicious.|
+| **execute-before-external-to-kernel-hypervisor** | Executes some or all of the malware instance's code before or external to the system's kernel or hypervisor (e.g., through the BIOS).|
+| **execute-non-main-cpu-code** | Executes some or all of the code of the malware instance on a secondary, non-CPU processor (e.g., a GPU).|
+| **execute-stealthy-code** | Executes code in a hidden manner (e.g., by injecting it into a benign process).|
+| **exfiltrate-data-via-covert channel** | Exfiltrates data using a covert channel, such as a DNS tunnel or NTP.|
+| **exfiltrate-data-via- -dumpster-dive** | Exfiltrates data via dumpster dive - i.e, encoded data printed by malware is viewed as garbage and thrown away to then be physically picked up.|
+| **exfiltrate-data-via-fax** | Exfiltrates data using a fax system.|
+| **exfiltrate-data-via-network** | Exfiltrates data through the computer network connected to the system on which the malware instance is executing.|
+| **exfiltrate-data-via-physical-media** | Exfiltrates data by writing it to physical media (e.g., to a USB flash drive).|
+| **exfiltrate-data-via-voip-phone** | Exfiltrates data (encoded as audio) using a phone system, such as through voice over IP (VoIP).|
+| **feed-misinformation-during-physical-memory-acquisition** | Reports inaccurate data when the contents of the physical memory of the system on which the malware instance is executing is retrieved.|
+| **file-system-instantiation** | Indicates that the malware instance instantiates itself on the file system of the machine that it is infecting, in one or more locations.|
+| **fingerprint-host** | Creates a unique fingerprint for the system on which the malware instance is executing, e.g., based on the applications that are installed on the system.|
+| **generate-c2-domain-names** | Generates the domain name of the command and control server to which the malware connects to.|
+| **hide-arbitrary-virtual-memory** | Hides arbitrary segments of virtual memory belonging to the malware instance in order to prevent their retrieval.|
+| **hide-data-in-other-formats** | Hides data that will be exfiltrated in other formats (e.g., image files).|
+| **hide-file-system-artifacts** | Hides one or more file system artifacts (e.g., files and/or directories) associated with the malware instance.|
+| **hide-kernel-modules** | Hides the usage of any kernel modules by the malware instance.|
+| **hide-network-traffic** | Hides network traffic associated with the malware instance.|
+| **hide-open-network-ports** | Hides one or more open network ports associated with the malware instance.|
+| **hide-processes** | Hides one or more of the processes in which the malware instance is executing.|
+| **hide-registry-artifacts** | Hides one or more Windows registry artifacts (e.g., keys and/or values) associated with the malware instance.|
+| **hide-services** | Hides any system services that the malware instance creates or injects itself into.|
+| **hide-threads** | Hides one or more threads that belong to the malware instance.|
+| **hide-userspace-libraries** | Hides the usage of userspace libraries by the malware instance.|
+| **identify-file** | Identifies one or more files on a local, removable, and/or network drive for infection.|
+| **identify-os** | Identifies the operating system under which the malware instance is executing.|
+| **identify-target-machines** | Identifies one or more machines to be targeted for infection via some remote means (e.g., via email or the network).|
+| **impersonate-user** | Impersonates another user in order to operate within a different security context.|
+| **install-backdoor** | Installs a backdoor on the system on which the malware instance is executing, capable of providing covert remote access to the system.|
+| **install-legitimate-software** | Installs legitimate (i.e. non-malware) software on the same system on which the malware instance is executing.|
+| **install-secondary-malware** | Installs another, different malware instance on the system on which the malware instance is executing.|
+| **install-secondary-module** | Installs a secondary module (typically related to the malware instance itself) on the same system on which the malware instance is executing.|
+| **intercept-manipulate-network-traffic** | Intercepts and/or manipulates network traffic going to or originating from the system on which the malware instance is executing.|
+| **inventory-security-products** | Creates an inventory of the security products installed or running on a system.|
+| **inventory-system-applications** | Inventories the applications installed on the system on which the malware instance is executing.|
+| **inventory-victims** | Keeps an inventory of the victims that are remotely infected by the malware instance.|
+| **limit-application-type-version** | Limits the type or version of an application that runs on a system in order to ensure that the malware instance is able to continue executing.|
+| **log-activity** | Logs the activity of the malware instance.|
+| **manipulate-file-system-data** | Manipulates data stored on the file system of the system on which the malware instance is executing in order to compromise its integrity.|
+| **map-local-network** | Maps the layout of the local network environment in which the malware instance is executing.|
+| **mine-for-cryptocurrency** | Consumes system resources for cryptocurrency (e.g., Bitcoin, Litecoin, etc.) mining.|
+| **modify-file** | Modifies a file in some other manner than writing code to it, such as packing it (in terms of binary executable packing).|
+| **modify-security-software-configuration** | Modifies the configuration of one or more instances of security software (e.g., anti-virus) running on a system in order to negatively impact their usefulness and ability to detect the malware instance.|
+| **move-data-to-staging-server** | Moves data to be exfiltrated to a particular server, to prepare it for exfiltration.|
+| **obfuscate-artifact-properties** | Hides the properties of one or more artifacts associated with the malware instance (e.g., by altering file system timestamps).|
+| **overload-sandbox** | Overloads a sandbox (e.g., by generating a flood of meaningless behavioral data).|
+| **package-data** | Packages data for exfiltration, e.g., by adding it to an archive file.|
+| **persist-after-hardware-changes** | Continues the execution of the malware instance after hardware changes to the system on which it is executing have been made, such as replacement of the hard drive on which the operating system was residing.|
+| **persist-after-os-changes** | Continues the execution of the malware instance after the operating system under which it is executing is modified, such as being installed or reinstalled.|
+| **persist-after-system-reboot** | Continues the execution of the malware instance after a system reboot.|
+| **prevent-api-unhooking** | Prevents the API hooks installed by the malware instance from being removed.|
+| **prevent-concurrent-execution** | Checks to see if it is already running on a system, in order to prevent multiple instances of the malware running concurrently.|
+| **prevent-debugging** | Prevents the execution of the malware instance in a debugger.|
+| **prevent-file-access** | Prevents access to the file system, including to specific files and/or directories associated with the malware instance.|
+| **prevent-file-deletion** | Prevents files and/or directories associated with the malware instance from being deleted from a system.|
+| **prevent-memory-access** | Prevents access to system memory where the malware instance may be storing code or data.|
+| **prevent-native-api-hooking** | Prevents other software from hooking native system APIs.|
+| **prevent-physical-memory-acquisition** | Prevents the contents of the physical memory of the system on which the malware instance is executing from being retrieved.|
+| **prevent-registry-access** | Prevents access to the Windows registry, including to the entire registry and/or to particular registry keys/values.|
+| **prevent-registry-deletion** | Prevent Windows registry keys and/or values associated with the malware instance from being deleted from a system.|
+| **prevent-security-software- -from-executing** | Prevents one or more instances of security software from executing on a system.|
+| **re-instantiate-self** | Re-establishes the malware instance on the system after it is initially detected and partially removed.|
+| **remove-self** | Removes the malware instance from the system on which it is executing.|
+| **remove-sms-warning-messages** | Captures the message body of incoming SMS messages and aborts displaying messages that meets a certain criteria.|
+| **remove-system-artifacts** | Removes artifacts associated with the malware instance (e.g., files, directories, Windows registry keys, etc.) from the system on which it is executing.|
+| **request-email-address-list** | Requests the current list of email addresses, for sending email spam messages to, from the command and control server.|
+| **request-email-template** | Requests the current template, for use in generating email spam messages, from the command and control server.|
+| **search-for-remote-machines** | Searches for one or more remote machines to target.|
+| **send-beacon** | Sends 'beacon' data to a command and control server, indicating that the malware instance is still active on the host system and able to communicate.|
+| **send-email-message** | Sends an email message from the system on which the malware instance is executing to one or more recipients, most commonly for the purpose of spamming.|
+| **send-system-information** | Sends data regarding the system on which it is executing to a command and control server.|
+| **social-engineering-based-remote-infection** | Infects remote machines via some method that involves social engineering (e.g., sending an email with a malicious attachment).|
+| **steal-browser-cache** | Steals a user's browser cache.|
+| **steal-browser-cookies** | Steals one or more browser cookies stored on the system on which the malware instance is executing.|
+| **steal-browser-history** | Steals a user's browser history.|
+| **steal-contact-list-data** | Steals a user's contact list.|
+| **steal-cryptocurrency-data** | Steals cryptocurrency data that may be stored on a system (e.g., Bitcoin wallets).|
+| **steal-database-content** | Steals content from a database that the malware instance may be able to access.|
+| **steal-dialed-phone-numbers** | Steals the list of phone numbers that a user has dialed (i.e. on a mobile device).|
+| **steal-digital-certificates** | Steals one or more digital private keys that may be present on the system on which the malware instance is executing, to then use to hijack the corresponding digital certificates, e.g., those used in public-key infrastructure (PKI).|
+| **steal-documents** | Steals document files (e.g., PDF) stored on a system.|
+| **steal-email-data** | Steals a user's email data.|
+| **steal-images** | Seals image files that may be stored on a system.|
+| **steal-password-hashes** | Steals password hashes.|
+| **steal-pki-key** | Steals one or more public key infrastructure (PKI) keys.|
+| **steal-referrer-urls** | Steals HTTP referrer information (URL of the webpage that linked to the resource being requested).|
+| **steal-serial-numbers** | Steals serial numbers stored on a system.|
+| **steal-sms-database** | Steals a user's short message service (SMS) (text messaging) database (i.e. on a mobile device).|
+| **steal-web-network-credential** | Steals usernames, passwords, or other forms of web (e.g., for logging into a website) and/or network credentials.|
+| **stop-execution-of-security-software** | Stops the execution of one or more instances of security software that may already be executing on a system.|
+| **suicide-exit** | Terminates the execution of the malware instance based on some trigger condition or value.|
+| **test-for-firewall** | Tests whether the network environment in which the malware instance is executing contains a hardware or software firewall.|
+| **test-for-internet-connectivity** | Tests whether the network environment in which the malware instance is executing is connected to the internet.|
+| **test-for-network-drives** | Tests for network drives that may be present in the network environment in which the malware instance is executing.|
+| **test-for-proxy** | Tests whether the network environment in which the malware instance is executing contains a hardware or software proxy.|
+| **test-smtp-connection** | Tests whether an outgoing SMTP connection can be made from the system on which the malware instance is executing to some SMTP server, by sending a test SMTP transaction.|
+| **update-configuration** | Updates the configuration of the malware instance using data received from a command and control server.|
+| **validate-data** | Validates the integrity of data received from a command and control server.|
+| **write-code-into-file** | Writes code into one or more files.|
 
 ## Capabilities
 
@@ -1982,26 +2195,57 @@ The malware label vocabulary is currently used in the following objects/properti
 * Malware Instance --> *labels*
 * Malware Family --> *labels*
 
+This vocabulary is a non-exhaustive enumeration of common malware labels.
+
 | Value | Description |
 | ----- | ----------- |
-|**adware**|Any software that is funded by advertising. Adware may also gather sensitive user information from a system.
-|**appender**|
-|**backdoor**|A malicious program that allows an attacker to perform actions on a remote system, such as transferring files, acquiring passwords, or executing arbitrary commands [Mell2005].
-|**bot**|A program that resides on an infected system, communicating with and forming part of a botnet. The bot may be implanted by a worm or Trojan, which opens a backdoor. The bot then monitors the backdoor for further instructions.
-|**ddos**|A tool used to perform a distributed denial of service attack.
-|**dropper**|A type of trojan that deposits an enclosed payload (generally, other malware) onto the target computer.
-|**exploit-kit**|A software toolkit to target common vulnerabilities.
-|**keylogger**|A type of malware that surreptitiously monitors keystrokes and either records them for later retrieval or sends them back to a central collection point.
-|**ransomware**|A type of malware that encrypts files on a victim's system, demanding payment of ransom in return for the access codes required to unlock files.
-|**remote-access-trojan**|A remote access trojan program (or RAT), is a trojan horse capable of controlling a machine through commands issued by a remote attacker.
-|**resource-exploitation**|A type of malware that steals a system's resources (e.g., CPU cycles), such as a bitcoin miner.
-|**rogue-security-software**|A fake security product that demands money to clean phony infections.
-|**rootkit**|A type of malware that hides its files or processes from normal methods of monitoring in order to conceal its presence and activities. Rootkits can operate at a number of levels, from the application level — simply replacing or adjusting the settings of system software to prevent the display of certain information — through hooking certain functions or inserting modules or drivers into the operating system kernel, to the deeper level of firmware or virtualization rootkits, which are activated before the operating system and thus even harder to detect while the system is running.
-|**screen-capture**|A type of malware used to capture images from the target systems screen, used for exfiltration and command and control.
-|**spyware**|Software that gathers information on a user's system without their knowledge and sends it to another party. Spyware is generally used to track activities for the purpose of delivering advertising.
-|**trojan**|Any malicious computer program which is used to hack into a computer by misleading users of its true intent.
-|**virus**|A malicious computer program that replicates by reproducing itself or infecting other programs by modifying them.
-|**worm**|A self-replicating, self-contained program that usually executes itself without user intervention.
+| **adware** | Any software that is funded by advertising. Adware may also gather sensitive user information from a system.|
+| **appender** | File-infecting malware that places its code at the end of the files it infects, adjusting the file's entry point to cause its code to be executed before that in the original file.|
+| **backdoor** | Malware which, once running on a system, opens a communication vector to the outside so the computer can be accessed remotely by an attacker.|
+| **boot-sector-virus** | Malware that infects the master boot record of a storage device.|
+| **bot** | Malware that resides on an infected system, communicating with and forming part of a botnet. The bot may be implanted by a worm or trojan, which opens a backdoor. The bot then monitors the backdoor for further instructions.|
+| **cavity-filler** | A type of file-infecting virus that seeks unused space within the files it infects, inserting its code into these gaps to avoid changing the size of the file and thus not alerting integrity-checking software to its presence.|
+| **clicker** | A trojan that makes a system visit a specific web page, often very frequently and usually with the aim of increasing the traffic recorded by the site and thus increasing revenue from advertising. Clickers may also be used to carry out DDoS attacks.|
+| **companion-virus** | A virus that takes the place of a particular file on a system instead of injecting code into it.|
+| **data-diddler** | A type of malware that makes small, random changes to data, such as data in a spreadsheet, to render the data contained in a document inaccurate and in some cases worthless.|
+| **ddos** | A tool used to perform a distributed denial of service attack.|
+| **downloader** | Malware programmed to download and execute other files, usually more complex malware.|
+| **dropper** | A type of Trojan that deposits an enclosed payload onto a destination host computer by loading itself into memory, extracting the malicious payload, and then writing it to the file system.|
+| **exploit-kit** | A software toolkit to target common vulnerabilities.|
+| **file-infector-virus** | A virus that infects a system by inserting itself somewhere in existing files; this is the classic form of virus.|
+| **file-less** | Malware that is file-less, i.e., executes through some other mechanism such as Powershell.|
+| **fork-bomb** | A simple form of malware, a type of rabbit which launches more copies of itself. Once a fork bomb is executed, it will attempt to run several identical processes, which will do the same, the number growing exponentially until the system resources are overwhelmed by the number of identical processes running, which may in some cases bring the system down and cause a denial of service.|
+| **greyware** | Software that, while not definitely malicious, has a suspicious or potentially unwanted aspect.|
+| **implant** | Code inserted into an existing program using a code patcher or other tool.|
+| **keylogger** | A type of program implanted on a system to monitor the keys pressed and thus record any sensitive data, such as passwords, entered by the user.|
+| **kleptographic-worm** | A worm that encrypts information assets on compromised systems so they can only be decrypted by the worm's author, also known as information-stealing worm.|
+| **macro-virus** | A virus that uses a macro language, for example in Microsoft Office documents.|
+| **malware-as-a-service** | Malware that is sold or produced as a service.|
+| **mass-mailer** | A worm that uses email to propagate across the internet.|
+| **metamorphic-virus** | A virus that changes its own code with each infection.|
+| **mid-infector** | A type of file-infecting virus which places its code in the middle of files it infects. It may move a section of the original code to the end of the file, or simply push the code aside to make space for its own code.|
+| **mobile-code** | Either code received from remote, possibly untrusted systems, but executed on a local system; or software transferred between systems (e.g across a network) and executed on a local system without explicit installation or execution by the recipient.|
+| **multipartite-virus** | Malware that infects boot records, boot sectors, and files.|
+| **parental-control** | A program that monitors or limits machine usage. Such programs can run undetected and can transmit monitoring information to another machine.|
+| **password-stealer** | A type of trojan designed to steal passwords, personal data and details, or other sensitive information from an infected system.|
+| **polymorphic-virus** | A type of virus that encrypts its code differently with each infection (or with each generation of infections).|
+| **premium-dialer-smser** | A type of malware whose primary aim is to dial (or send SMS messages to) premium rate numbers.|
+| **prepender** | A file-infecting virus that inserts code at the beginning of the files it infects.|
+| **ransomware** | Malware that encrypts files on a victim's system, demanding payment of ransom in return for the access codes required to unlock files.|
+| **remote-access-trojan** | A remote access trojan program (or RAT), is a trojan horse capable of controlling a machine through commands issued by a remote attacker.|
+| **resource-exploiter** | A type of malware that steals a system's resources (e.g., CPU cycles), such as a bitcoin miner.|
+| **rogue-security-software** | A fake security product that demands money to clean phony infections.|
+| **rootkit** | A method of hiding files or processes from normal methods of monitoring; often used by malware to conceal its presence and activities.|
+| **scareware** | A program that reports false or significantly misleading information on the presence of security risks, threats, or system issues on the target computer.|
+| **screen-capture** | A type of malware used to capture images from the target systems screen, used for exfiltration and command and control.|
+| **security-assessment-tool** | A program that can be used to gather information for unauthorized access to computer systems.|
+| **shellcode** | Either a small piece of code that activates a command-line interface to a system that can be used to disable security measures, open a backdoor, or download further malicious code; or a small piece of code that opens a system up for exploitation, sometimes by not necessarily involving a command-line shell.|
+| **spyware** | Software that gathers information and passes it to a third-party without adequate permission from the owner of the data. It may also refer to software that makes changes to a system or any of its component software, or which makes use of system resources without the full understanding and consent of the system owner.|
+| **trackware** | Malware that traces a user's path on the Internet and sends information to third parties. Compare to spyware, which monitors system activity to capture confidential information such as passwords.|
+| **trojan** | Malware disguised as something inert or benign.|
+| **virus** | Self-replicating malware that requires human interaction to spread; also, self-replicating malware that runs and spreads by modifying and inserting itself into other programs or files.|
+| **web-bug** | Code embedded in a web page or email that checks whether a user has accessed the content (e.g., a tiny, transparent GIF image).|
+| **worm** | Self-replicating malware that propagates across a network either with or without human interaction.|
 
 ## Operating System Features
 
@@ -2026,56 +2270,60 @@ The malware label vocabulary is currently used in the following objects/properti
 
 **Vocabulary Name**: `refined-capability-ov`
 
+The Refined Capability open vocabulary is used in the following object/property:
+
+* Capability --> *name*
+
 | Value | Description |
 | ----- | ----------- |
-|**access-control-degradation** | Indicates that the malware instance or family is able to bypass or disable access control mechanisms designed to prevent unauthorized or unprivileged use or execution of applications or files.
-|**anti-debugging** | Indicates that the malware instance or family is able to prevent itself from being debugged and/or from being run in a debugger or is able to make debugging more difficult.
-|**anti-disassembly** | Indicates that the malware instance or family is able to prevent itself from being disassembled or make disassembly more difficult.
-|**anti-emulation** | Indicates that the malware instance or family is able to prevent its execution inside of an emulator or is able to make emulation more difficult.
-|**anti-memory-forensics** | Indicates that the malware instance or family is able to prevent or make memory forensics more difficult.
-|**anti-sandbox** | Indicates that the malware instance or family is able to prevent sandbox-based behavioral analysis or make it more difficult.
-|**anti-virus-evasion** | Indicates that the malware instance or family is able to evade detection by anti-virus tools.
-|**anti-vm** | Indicates that the malware instance or family is able to prevent virtual machine (VM) based behavioral analysis or make it more difficult.
-|**authentication-credentials-theft** | Indicates that the malware instance is able to steal authentication credentials.
-|**clean-traces-of-infection** | Indicates that the malware instance or family is able to clean traces of its infection (e.g., file system artifacts) from a system.
-|**communicate-with-c2-server** | Indicates that the malware instance or family is able to communicate (i.e., send or receive data) with a command and control (C2) server.
-|**compromise-data-availability** | Indicates that the malware instance or family is able to compromise the availability of data on the local system on which it is executing and/or one or more remote systems.
-|**compromise-system-availability** | Indicates that the malware instance or family is able to compromise the availability of the local system on which it is executing and/or one or more remote systems.
-|**consume-system-resources** | Indicates that the malware instance or family is able to consume system resources for its own purposes, such as password cracking.
-|**continuous-execution** | Indicates that the malware instance or family is able to continue to execute on a system after significant system events, such as a system reboot.
-|**data-integrity-violation** | Indicates that the malware instance or family is able to compromise the integrity of some data that resides on (e.g., in the case of files) or is received/transmitted (e.g., in the case of network traffic) by the system on which it is executing.
-|**data-obfuscation** | Indicates that the malware instance or family is able to obfuscate data that will be exfiltrated.
-|**data-staging** | Indicates that the malware instance or family is able to gather, prepare, and stage data for exfiltration.
-|**determine-c2-server** | Indicates that the malware instance or family is able to identify one or more command and control (C2) servers with which to communicate.
-|**email-spam** | Indicates that the malware instance or family is able to send spam email messages.
-|**ensure-compatibility** | Indicates that the malware instance or family is able to manipulate or modify the system on which it executes to ensure that it is able to continue executing.
-|**environment-awareness** | Indicates that the malware instance or family can fingerprint or otherwise identify the environment in which it is executing, for the purpose of altering its behavior based on this environment.
-|**file-infection** | Indicates that the malware instance or family is able to infect one or more files on the system on which it executes.
-|**hide-artifacts** | Indicates that the malware instance or family is able to hide its artifacts, such as files and open ports.
-|**hide-executing-code** | Indicates that the malware instance or family is able to hide its executing code.
-|**hide-non-executing-code** | Indicates that the malware instance or family is able to hide its non-executing code.
-|**host-configuration-probing** | Indicates that the malware instance or family is able to probe the configuration of the host system on which it executes.
-|**information-gathering-for-improvement** | Indicates that the malware instance or family is able to gather information from its environment to make itself less likely to be detected.
-|**input-peripheral-capture** | Indicates that the malware instance or family is able to capture data from a system's input peripheral devices, such as a keyboard or mouse.
-|**install-other-components** | Indicates that the malware instance or family is able to install additional components. This encompasses the dropping/downloading of other malicious components such as libraries, other malware, and tools.
-|**local-machine-control** | Indicates that the malware instance or family is able to control the machine on which it is executing.
-|**network-environment-probing** | Indicates that the malware instance or family is able to probe the properties of its network environment, e.g. to determine whether it funnels traffic through a proxy.
-|**os-security-feature-degradation** | Indicates that the malware instance or family is able to bypass or disable operating system (OS) security mechanisms.
-|**output-peripheral-capture** | Indicates that the malware instance or family captures data sent to a system's output peripherals, such as a display.
-|**physical-entity-destruction** | Indicates that the malware instance or family is able to destroy physical entities.
-|**prevent-artifact-access** | Indicates that the malware instance or family is able to prevent its artifacts (e.g., files, registry keys, etc.) from being accessed.
-|**prevent-artifact-deletion** | Indicates that the malware instance or family is able to prevent its artifacts (e.g., files, registry keys, etc.) from being deleted.
-|**remote-machine-access** | Indicates that the malware instance or family is able to access one or more remote machines.
-|**remote-machine-infection** | Indicates that the malware instance or family is able to self-propagate to a remote machine or infect a machine with malware that is different than itself.
-|**security-software-degradation** | Indicates that the malware instance or family is able to bypass or disable security programs running on a system, either by stopping them from executing or by making changes to their code or configuration parameters.
-|**security-software-evasion** | Indicates that the malware instance or family is able to evade security software (e.g., anti-virus tools).
-|**self-modification** | Indicates that the malware instance or family is able to modify itself.
-|**service-provider-security-feature-degradation** | Indicates that the malware instance or family is able to bypass or disable mobile device service provider security features that would otherwise identify or notify users of its presence.
-|**stored-information-theft** | Indicates that the malware instance or family is able to steal information stored on a system (e.g., files).
-|**system-interface-data-capture** | Indicates that the malware instance or family is able to capture data from a system's logical or physical interfaces, such as from a network interface.
-|**system-operational-integrity-violation** | Indicates that the malware instance or family is able to compromise the operational integrity of the system on which it is executing and/or one or more remote systems, e.g., by causing them to operate beyond their set of specified operational parameters.
-|**system-re-infection** | Indicates that the malware instance or family is able to re-infect a system after one or more of its components have been removed.
-|**system-state-data-capture** | Indicates that the malware instance or family is able to capture information about a system's state (e.g., data currently in its RAM).
-|**system-update-degradation** | Indicates that the malware instance or family is able to disable the downloading and installation of system updates and patches.
-|**user-data-theft** | Indicates that the malware instance or family is able to steal data associated with one or more users (e.g., browser history).
-|**virtual-entity-destruction** | Indicates that the malware instance or family is able to destroy a virtual entity.
+|**access-control-degradation** | Indicates that the malware instance or family is able to bypass or disable access control mechanisms designed to prevent unauthorized or unprivileged use or execution of applications or files.|
+|**anti-debugging** | Indicates that the malware instance or family is able to prevent itself from being debugged and/or from being run in a debugger or is able to make debugging more difficult.|
+|**anti-disassembly** | Indicates that the malware instance or family is able to prevent itself from being disassembled or make disassembly more difficult.|
+|**anti-emulation** | Indicates that the malware instance or family is able to prevent its execution inside of an emulator or is able to make emulation more difficult.|
+|**anti-memory-forensics** | Indicates that the malware instance or family is able to prevent or make memory forensics more difficult.|
+|**anti-sandbox** | Indicates that the malware instance or family is able to prevent sandbox-based behavioral analysis or make it more difficult.|
+|**anti-virus-evasion** | Indicates that the malware instance or family is able to evade detection by anti-virus tools.|
+|**anti-vm** | Indicates that the malware instance or family is able to prevent virtual machine (VM) based behavioral analysis or make it more difficult.|
+|**authentication-credentials-theft** | Indicates that the malware instance is able to steal authentication credentials.|
+|**clean-traces-of-infection** | Indicates that the malware instance or family is able to clean traces of its infection (e.g., file system artifacts) from a system.|
+|**communicate-with-c2-server** | Indicates that the malware instance or family is able to communicate (i.e., send or receive data) with a command and control (C2) server.|
+|**compromise-data-availability** | Indicates that the malware instance or family is able to compromise the availability of data on the local system on which it is executing and/or one or more remote systems.|
+|**compromise-system-availability** | Indicates that the malware instance or family is able to compromise the availability of the local system on which it is executing and/or one or more remote systems.|
+|**consume-system-resources** | Indicates that the malware instance or family is able to consume system resources for its own purposes, such as password cracking.|
+|**continuous-execution** | Indicates that the malware instance or family is able to continue to execute on a system after significant system events, such as a system reboot.|
+|**data-integrity-violation** | Indicates that the malware instance or family is able to compromise the integrity of some data that resides on (e.g., in the case of files) or is received/transmitted (e.g., in the case of network traffic) by the system on which it is executing.|
+|**data-obfuscation** | Indicates that the malware instance or family is able to obfuscate data that will be exfiltrated.|
+|**data-staging** | Indicates that the malware instance or family is able to gather, prepare, and stage data for exfiltration.|
+|**determine-c2-server** | Indicates that the malware instance or family is able to identify one or more command and control (C2) servers with which to communicate.|
+|**email-spam** | Indicates that the malware instance or family is able to send spam email messages.|
+|**ensure-compatibility** | Indicates that the malware instance or family is able to manipulate or modify the system on which it executes to ensure that it is able to continue executing.|
+|**environment-awareness** | Indicates that the malware instance or family can fingerprint or otherwise identify the environment in which it is executing, for the purpose of altering its behavior based on this environment.|
+|**file-infection** | Indicates that the malware instance or family is able to infect one or more files on the system on which it executes.|
+|**hide-artifacts** | Indicates that the malware instance or family is able to hide its artifacts, such as files and open ports.|
+|**hide-executing-code** | Indicates that the malware instance or family is able to hide its executing code.|
+|**hide-non-executing-code** | Indicates that the malware instance or family is able to hide its non-executing code.|
+|**host-configuration-probing** | Indicates that the malware instance or family is able to probe the configuration of the host system on which it executes.|
+|**information-gathering-for-improvement** | Indicates that the malware instance or family is able to gather information from its environment to make itself less likely to be detected.|
+|**input-peripheral-capture** | Indicates that the malware instance or family is able to capture data from a system's input peripheral devices, such as a keyboard or mouse.|
+|**install-other-components** | Indicates that the malware instance or family is able to install additional components. This encompasses the dropping/downloading of other malicious components such as libraries, other malware, and tools.|
+|**local-machine-control** | Indicates that the malware instance or family is able to control the machine on which it is executing.|
+|**network-environment-probing** | Indicates that the malware instance or family is able to probe the properties of its network environment, e.g. to determine whether it funnels traffic through a proxy.|
+|**os-security-feature-degradation** | Indicates that the malware instance or family is able to bypass or disable operating system (OS) security mechanisms.|
+|**output-peripheral-capture** | Indicates that the malware instance or family captures data sent to a system's output peripherals, such as a display.|
+|**physical-entity-destruction** | Indicates that the malware instance or family is able to destroy physical entities.|
+|**prevent-artifact-access** | Indicates that the malware instance or family is able to prevent its artifacts (e.g., files, registry keys, etc.) from being accessed.|
+|**prevent-artifact-deletion** | Indicates that the malware instance or family is able to prevent its artifacts (e.g., files, registry keys, etc.) from being deleted.|
+|**remote-machine-access** | Indicates that the malware instance or family is able to access one or more remote machines.|
+|**remote-machine-infection** | Indicates that the malware instance or family is able to self-propagate to a remote machine or infect a machine with malware that is different than itself.|
+|**security-software-degradation** | Indicates that the malware instance or family is able to bypass or disable security programs running on a system, either by stopping them from executing or by making changes to their code or configuration parameters.|
+|**security-software-evasion** | Indicates that the malware instance or family is able to evade security software (e.g., anti-virus tools).|
+|**self-modification** | Indicates that the malware instance or family is able to modify itself.|
+|**service-provider-security-feature-degradation** | Indicates that the malware instance or family is able to bypass or disable mobile device service provider security features that would otherwise identify or notify users of its presence.|
+|**stored-information-theft** | Indicates that the malware instance or family is able to steal information stored on a system (e.g., files).|
+|**system-interface-data-capture** | Indicates that the malware instance or family is able to capture data from a system's logical or physical interfaces, such as from a network interface.|
+|**system-operational-integrity-violation** | Indicates that the malware instance or family is able to compromise the operational integrity of the system on which it is executing and/or one or more remote systems, e.g., by causing them to operate beyond their set of specified operational parameters.|
+|**system-re-infection** | Indicates that the malware instance or family is able to re-infect a system after one or more of its components have been removed.|
+|**system-state-data-capture** | Indicates that the malware instance or family is able to capture information about a system's state (e.g., data currently in its RAM).|
+|**system-update-degradation** | Indicates that the malware instance or family is able to disable the downloading and installation of system updates and patches.|
+|**user-data-theft** | Indicates that the malware instance or family is able to steal data associated with one or more users (e.g., browser history).|
+|**virtual-entity-destruction** | Indicates that the malware instance or family is able to destroy a virtual entity.|
