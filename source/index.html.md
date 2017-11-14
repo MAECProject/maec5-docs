@@ -49,31 +49,31 @@ search: true
 }
 ```
 
-Welcome to MAEC 5, a comprehensive language and data model for the exchange of malware data.
+Welcome to the Malware Attribute Enumeration and Characterization (MAEC™, pronounced “mike”) effort, a comprehensive language and data model for the exchange of malware data.
 
-This page is a basic outline of the MAEC 5.0 data model. If you're looking for an introduction or conceptual overview of MAEC, see the [full specification](http://docs.oasis-open.org/cti/stix/v2.0/stix-v2.0-part1-stix-core.html). There's also the [documentation website](http://maecproject.github.io/) if you're looking for more examples and information.
+This page provides a basic outline of the MAEC 5.0 data model. For an introduction and conceptual overview of MAEC, please see the [Core Concepts](https://docs.google.com/document/d/1cnjjZAPHITFjo_8xGVBo1mX9Qvo7pN-YJ4pRZwdsuL0/) and [Vocabularies](https://docs.google.com/document/d/1btZGq2H6xtSsjrweL6NMXx7KHg6B2yIZkz9nSe6JZfA/) specification documents. There's also a [documentation website](http://maecproject.github.io/) containing examples and further information.
 
-This documentation is divided into seven major sections:
+This documentation is divided into seven sections:
 
-* **Top-level Objects** - This section describes the top-level objects (TLOs) in MAEC. It includes objects such as the Malware Instance and the Behavior Objects.
+* **Top-level Objects** - MAEC top-level objects (TLOs) are the entities captured at the top level of a [Package](#Package). Examples include the Malware Instance and the Behavior Objects.
 
 * **MAEC Types** - These MAEC 5.0 types are used by MAEC’s TLOs.
 
-* **MAEC Relationships** - MAEC Relationships are defined between MAEC TLOs.
+* **Relationships** - Relationships are defined between pairs of MAEC TLOs.
 
-* **MAEC Package** - The MAEC Package is MAEC's standard output format.
+* **Package** - The Package is MAEC's standard output format.
 
 * **Common Data Types** - These common data types are used by MAEC TLOs and data types.
 
 * **Cyber Observable Object Extensions** - MAEC-specific extensions are defined for STIX Cyber Observable Objects used in the context of MAEC.
 
-* **Vocabularies** - Many of MAEC's core objects contain properties that let you choose from a list of values. These vocabularies define those lists. In most cases, you don't have to use a value from the vocabulary, but it's recommended to improve compatibility.
+* **Vocabularies** - Many of MAEC's TLOs and data types contain properties that may be defined by MAEC open vocabularies. Each open vocabulary provides a list of common and industry-accepted terms. The use of MAEC's vocabularies is recommended to increase compatibility, but custom values may also be used.
 
 # Top-level Objects
 
 ## Behavior
 
-> A Persistence Behavior composed of Several Actions:
+> Persistence Behavior comprising several Malware Actions:
 
 ```json
 {
@@ -180,7 +180,7 @@ Source | Name | Target | Description
 
 ## Collection
 
-> A basic collection of Malware Instances that were observed together:
+> Basic Collection of Malware Instances observed together:
 
 ```json
 {
@@ -231,7 +231,7 @@ Name | Valid Target(s)
 
 ## Malware Action
 
-> A basic Create File Action
+> Basic "Create File" Action
 
 ```json
 {
@@ -328,7 +328,7 @@ Source | Name | Target | Description
 
 ## Malware Family
 
-> A basic Malware Family:
+> Basic Malware Family:
 
 ```json
 {
@@ -348,7 +348,7 @@ Source | Name | Target | Description
 }
 ```
 
-> An expanded Malware Family:
+> Expanded Malware Family:
 
 ```json
 {
@@ -489,7 +489,7 @@ Source | Name | Target | Description
 }
 ```
 
-> Malware Instance with Actions
+> Malware Instance with Malware Actions
 
 ```json
 {
@@ -601,7 +601,7 @@ Source | Name | Target | Description
 
 ## API Call
 
-> Action with Parameter Constants
+> Malware Action with parameter constants
 
 ```json
 {
@@ -633,7 +633,7 @@ Source | Name | Target | Description
 }
 ```
 
-> Action with Parameter Literals
+> Malware Action with parameter literals
 
 ```json
 {
@@ -679,7 +679,7 @@ Name | Type | Description
 
 ## Analysis Metadata
 
-> Analysis Metadata example
+> Analysis Metadata
 
 ```json
 {
@@ -792,7 +792,7 @@ Name | Type | Description
 
 ## Binary Obfuscation
 
-> Binary Obfuscation example
+> Binary Obfuscation
 
 ```json
 {
@@ -839,7 +839,7 @@ Name | Type | Description
 
 ## Capability
 
-> Capability example
+> Capability
 
 ```json
 {
@@ -909,7 +909,7 @@ Name | Type | Description
 
 ## Dynamic Features
 
-> Dynamic Features example
+> Dynamic Features
 
 ```json
 {
@@ -986,7 +986,7 @@ Name | Type | Description
 
 ## Field Data
 
-> Field Data example
+> Field Data
 
 ```json
 {
@@ -1025,7 +1025,7 @@ Name | Type | Description
 
 ## Malware Development Environment
 
-> Malware Development Environment example
+> Malware Development Environment
 
 ```json
 {
@@ -1078,7 +1078,7 @@ Name | Type | Description
 
 ## Name
 
-> Name example
+> Name
 
 ```json
 {
@@ -1115,7 +1115,7 @@ Name | Type | Description
 
 ## Process Tree Node
 
-> Process Tree Node example
+> Process Tree Node
 
 ```json
 {
@@ -1172,7 +1172,7 @@ Name | Type | Description
 
 ## Relationship Distance
 
-> Relationship Distance example
+> Relationship Distance
 
 ```json
 {
@@ -1204,10 +1204,11 @@ Name | Type | Description
   "relationships": [
      {
         "type":"relationship",
+		"id":"relationship--ffc99c9c-8765-4a36-b416-65dde178b008",
         "source_ref":"malware-instance--b965814d-0c2e-4e01-b8a5-d8c32bb038e6",
         "target_ref":"malware-instance--bacd8340-83bd-94ad-0111-f029304ced90",
         "relationship_type":"has-distance",
-       "metadata": {
+        "metadata": {
            "distance": {
              "distance_score":0.92,
              "algorithm_name":"clusterAlgorithm-abc",
@@ -1233,7 +1234,7 @@ Name | Type | Description
 
 ## Signature Metadata
 
-> Signature Metadata example
+> Signature Metadata
 
 ```json
 {
@@ -1288,7 +1289,7 @@ Name | Type | Description
 
 ## Static Features
 
-> Static Features example
+> Static Features
 
 ```json
 {
@@ -1354,7 +1355,7 @@ Name | Type | Description
 
 # Relationships
 
-> Example: Malware Instances (downloaded)
+> Relationship between Malware Instances ("downloaded-by")
 
 ```json
 {
@@ -1395,7 +1396,7 @@ Name | Type | Description
 }
 ```
 
-> Example: Malware Instances (distance score)
+> Relationship between Malware Instances ("has-distance")
 
 ```json
 {
@@ -1492,7 +1493,7 @@ Source | Relationship Type | Target
 
 # Package
 
-> Package example
+> Package
 
 ```json
 {
@@ -1550,7 +1551,7 @@ Name | Type | Description
 ## AV Classification
 The following are MAEC-specific extensions defined for STIX Cyber Observable Objects used in the context of MAEC.
 
-> AV Classification example
+> AV Classification
 
 ```json
 {
@@ -1605,7 +1606,7 @@ Name | Type | Description
 
 ## Boolean
 
-> Boolean example
+> Boolean
 
 ```json
 {
@@ -1623,7 +1624,7 @@ The JSON MTI serialization uses the JSON boolean type, which is a literal (unquo
 
 ## Dictionary
 
-> Dictionary example
+> Dictionary
 
 ```json
 {
@@ -1658,7 +1659,7 @@ Dictionary values:
 
 ## External Reference
 
-> External-reference example #1
+> External-reference #1
 
 ```json
 {
@@ -1674,7 +1675,7 @@ Dictionary values:
 }
 ```
 
-> External-reference example #2
+> External-reference #2
 
 ```json
 {
@@ -1704,7 +1705,7 @@ Name | Type | Description
 
 ## Float
 
-> Float example
+> Float
 
 ```json
 {
@@ -1722,7 +1723,7 @@ In the JSON MTI serialization, floating point values are represented by the JSON
 
 ## Hexadecimal
 
-> Hexadecimal example
+> Hexadecimal
 
 ```json
 {
@@ -1738,7 +1739,7 @@ The `hex` data type encodes an array of octets (8-bit bytes) as hexadecimal. The
 
 ## Identifier
 
-> Identifier example
+> Identifier
 
 ```json
 {
@@ -1762,7 +1763,7 @@ The JSON MTI serialization uses the JSON string type when representing `identifi
 
 ## Integer
 
-> Integer example
+> Integer
 
 ```json
 {
@@ -1780,7 +1781,7 @@ In the JSON MTI serialization, integers are represented by the JSON number type.
 
 ## List
 
-> Example list:
+> List
 
 ```json
 {
@@ -1804,7 +1805,7 @@ The JSON MTI serialization uses the JSON array type, which is an ordered list of
 
 ## Object Reference
 
->Object Reference example -  illustrates the referencing of a malware binary (represented as a STIX Cyber Observable File Object) by a Malware Instance.
+>Object Reference -  illustrates the referencing of a malware binary (represented as a STIX Cyber Observable File Object) by a Malware Instance.
 
 ```json
 {
@@ -1852,7 +1853,7 @@ The `object-ref` data type specifies a reference to a STIX Observable Object cap
 
 ## Observable Objects
 
-> Observable Object example - illustrates the capture of a STIX Network Traffic Object and an associated IPv4 Address Object.
+> Observable Object - illustrates the capture of a STIX Network Traffic Object and an associated IPv4 Address Object.
  
 ```json
 {
@@ -1907,7 +1908,7 @@ The JSON MTI serialization uses the JSON string type when representing `open-voc
 
 ## String
 
-> String example
+> String 
 
 ```json
 {
@@ -1924,7 +1925,7 @@ The JSON MTI serialization uses the JSON string type, which mandates the UTF-8 e
 
 ## Timestamp
 
-> Timestamp example
+> Timestamp 
 
 ```json
 {
@@ -1976,7 +1977,7 @@ This vocabulary is an enumeration of properties associated with the environment 
 
 | Value | Description |
 | ----- | ----------- |
-| **operating-system** | The operating system used for the dynamic analysis of the malware instance. This applies to virtualized operating systems as well as those running on bare metal. The corresponding value for this entry MUST be of type `object-ref` and the referenced STIX Cyber Observable Object **MUST** be of type `software`.|
+| **operating-system** | The operating system used for the dynamic analysis of the malware instance. This applies to virtualized operating systems as well as those running on bare metal. The corresponding value for this entry **MUST** be of type `object-ref` and the referenced STIX Cyber Observable Object **MUST** be of type `software`.|
 | **host-vm** |The virtual machine used to host the guest operating system (if applicable) used for the the dynamic analysis of the malware instance. If this value is not included in conjunction with `operating-system`, this means that the dynamic analysis was performed on bare metal (i.e., without virtualization). The corresponding value for this entry **MUST** be of type `object-ref` and the referenced STIX Cyber Observable Object **MUST** be of type `software`.|
 | **installed-software** | Any non-standard software installed on the operating system (specified through the `operating-system` value) used for the dynamic analysis of the malware instance. The corresponding value for this entry **MUST** be of type `list` and each STIX Cyber Observable Object(s) referenced in the list **MUST** be of type `software`.|
 
@@ -2166,25 +2167,384 @@ This vocabulary is a non-exhaustive enumeration of malware behaviors.
 
 **Vocabulary Name**: `capability-ov`
 
+The Malware Capability open vocabulary is used in the following object/property:
+
+* Capability --> *name*
+
+| Value | Description |
+| ----- | ----------- |
+|**anti-behavioral-analysis** | Indicates that the malware instance or family is able to prevent behavioral analysis or make it more difficult.|
+|**anti-code-analysis** | Indicates that the malware instance or family is able to prevent code analysis or make it more difficult.|
+|**anti-detection** | Indicates that the malware instance or family is able to prevent itself and its components from being detected on a system.|
+|**anti-removal** | Indicates that the malware instance or family is able to prevent itself and its components from being removed from a system.|
+|**availability-violation** | Indicates that the malware instance or family is able to compromise the availability of a system or some aspect of the system.|
+|**collection** | "Indicates that the malware instance or family is able to capture information from a system related to user or system activity (e.g., from a system's peripheral devices)."|
+|**command-and-control** | Indicates that the malware instance or family is able to receive and/or execute remotely submitted commands.|
+|**data-theft** | "Indicates that the malware instance or family is able to steal data from the system on which it executes. This includes data stored in some form, e.g. in a file, as well as data that may be entered into some application such as a web-browser."|
+|**destruction** | Indicates that the malware instance or family is able to destroy some aspect of a system.|
+|**discovery** | Indicates that the malware instance or family is able to probe its host system or network environment; most often this is done to support other Capabilities and their Objectives.|
+|**exfiltration** | Indicates that the malware instance or family is able to exfiltrate stolen data or perform tasks related to the exfiltration of stolen data.|
+|**fraud** | Indicates that the malware instance or family is able to defraud a user or a system.|
+|**infection-propagation** | "Indicates that the malware instance or family is able to propagate through the infection of a machine or is able to infect a file after executing on a system. The malware instance may infect actively (e.g., gain access to a machine directly) or passively (e.g., send malicious email). This Capability does not encompass any aspects of the initial infection that is done independently of the malware instance itself."|
+|**integrity-violation** | Indicates that the malware instance or family is able to compromise the integrity of a system.|
+|**machine-access-control** | Indicates that the malware instance or family is able to access or control one or more remote machines and/or the machine on which it is executing.|
+|**persistence** | Indicates that the malware instance or family is able to persist and remain on a system regardless of system events.|
+|**privilege-escalation** | Indicates that the malware instance or family is able to elevate the privileges under which it executes.|
+|**secondary-operation** | Indicates that the malware instance or family is able to achieve secondary objectives in conjunction with or after achieving its primary objectives.|
+|**security-degradation** | Indicates that the malware instance or family is able to bypass or disable security features and/or controls.|
+
+
 ## Common Attributes
 
 **Vocabulary Name**: `common-attribute-ov`
+
+The Common Attribute open vocabulary is used in the following objects/properties:
+
+* Capability --> *attributes*
+* Behavior --> *attributes*
+
+This vocabulary is a non-exhaustive enumeration of common attributes associated with Capabilities or Behaviors of a Malware Instance or Malware Family.
+
+| Value | Description |
+| ----- | ----------- |
+|**applicable-platform** | Captures the name of a targeted platform.| 
+|**archive-type** | Captures the name of a file archive format used.|
+|**autonomy** | Captures the level of autonomy used.| 
+|**backdoor-type** | Captures the type of backdoor used.| 
+|**cryptocurrency-type** | Captures a cryptocurrency targeted.| 
+|**encryption-algorithm** | Captures the encryption algorithm used.| 
+|**erasure-scope** | Captures the scope of the erasure performed.| 
+|**file-infection-type** | Captures the method that an executable infector uses to infect a file.| 
+|**file-modification-type** | Captures how a malware file modifies itself to avoid detection.| 
+|**file-type** | Captures the type of file format used for storing data to be exfiltrated.|
+|**frequency** | "Captures the frequency with which a C2 Server sends and receives data.| It is recommended that the description follow the format of "every x (units)", e.g., "every 5 minutes."|
+|**infection-targeting** | "Captures the type of targeting employed, e.g., whether the targeted machines are randomly selected, or chosen from some particular set.| "
+|**network-protocol** | "Captures the name of the network protocol used in command and control communications.| The protocol name **MUST** come from the service names defined in the Service Name column of the IANA Service Name and Port Number Registry.| In cases where an there is variance in the name of a network protocol not included in the IANA Registry, content producers should exercise their best judgement, and it is recommended that lowercase names be used for consistency with the IANA registry.|"
+|**port-number** | Captures the port number used in command and control communications.|
+|**persistence-scope** | Captures the scope of persistence employed.| 
+|**propagation-scope** | "Captures the scope of the infection or propagation performed, i.|e.|, whether it infects just the local machine or actively propagates to other machines as well.| "
+|**targeted-application** | Captures the names of any targeted applications.|
+|**targeted-file-architecture type** | Captures the types of file architectures targeted.|
+|**targeted-file-type** | Captures the types of files targeted.| 
+|**targeted-program** | Captures the names of any targeted programs.| 
+|**targeted-sandbox** | Captures the names of any sandboxes targeted.| 
+|**targeted-vm** | Captures the names of any virtual machines (VM) targeted.| 
+|**targeted-website** | Captures the domain names of any targeted websites.| 
+|**technique** | Captures the name of the technique used.| 
+|**trigger-type** | Captures the trigger used to wake or terminate the malware instance.| 
+|**user-privilege-escalation type** | Captures the type of user privilege escalation employed.| 
+|**vulnerability-id-cve** | Captures the Common Vulnerabilities and Exposures (CVE) vulnerability identifier being referenced.|
+|**vulnerability-id-osvdb** | Captures the vulnerability identifier of the Open Source Vulnerability Database (OSVDB) entry being referenced.|
+
 
 ## Delivery Vectors
 
 **Vocabulary Name**: `delivery-vector-ov`
 
+The Delivery Vector open vocabulary is used in the following objects/properties:
+
+* Malware Instance --> field_data --> *delivery_vectors* 
+* Malware Family --> field_data --> *delivery_vectors* 
+
+This vocabulary is a non-exhaustive enumeration of vectors used to deliver malware.
+
+| Value | Description |
+| ----- | ----------- |
+| **active-attacker** | The malware instance or family was delivered via an active attacker.|
+| **auto-executing-media** | The malware instance or family was delivered via media that automatically executes.|
+| **downloader** | The malware instance or family was delivered via downloader.|
+| **dropper** | The malware instance or family was delivered via dropper.|
+| **email-attachment** | The malware instance or family was delivered via email attachment.|
+| **exploit-kit-landing-page** | The malware instance or family was delivered via an exploit kit landing page.|
+| **fake-website** | The malware instance or family was delivered via a fake website.|
+| **janitor-attack** | The malware instance or family was delivered via a janitor attack.|
+| **malicious-iframes** | The malware instance or family was delivered via malicious iframes.|
+| **malvertising** | The malware instance or family was delivered via malvertising.|
+| **media-baiting** | The malware instance or family was delivered via media baiting.|
+| **pharming** | The malware instance or family was delivered via pharming.|
+| **phishing** | The malware instance or family was delivered via phishing.|
+| **trojanized-link** | The malware instance or family was delivered via a trojanized link.|
+| **trojanized-software** | The malware instance or family was delivered via trojanized software.|
+| **usb-cable-syncing** | The malware instance or family was delivered via usb cable syncing.|
+| **watering-hole** | The malware instance or family was delivered via a watering hole.|
+
+
 ## Entity Associations
 
 **Vocabulary Name**: `entity-association-ov`
+
+The Entity Association open vocabulary is used in the following object/property:
+
+* Collection --> *association_type*
+
+This vocabulary is an non-exhaustive enumeration of entity association types relevant to MAEC entities and STIX Cyber Observables.
+
+| Value | Description |
+| ----- | ----------- |
+| **file-system-entities** | The collection contains Cyber Observable Objects that correspond to file system entities.|
+| **network-entities** | The collection contains Cyber Observable Objects that correspond to network entities.|
+| **process-entities** | The collection contains Cyber Observable Objects that correspond to process entities.|
+| **memory-entities** | The collection contains Cyber Observable Objects that correspond to memory entities.|
+| **ipc-entities** | The collection contains Cyber Observable Objects that correspond to inter-process communication (IPC) entities.|
+| **device-entities** | The collection contains Cyber Observable Objects that correspond to device entities.|
+| **registry-entities** | The collection contains Cyber Observable Objects that correspond to registry entities.|
+| **service-entities** | The collection contains Cyber Observable Objects that correspond to service entities.|
+| **potential-indicators** | The collection contains entities that serve as potential indicators.|
+| **same-malware-family** | The collection contains that Malware Instances are from the same malware family.|
+| **clustered-together** | The collection contains Malware Instances that have been clustered together by some method such as a scoring algorithm.|
+| **observed-together** | The collection contains Malware Instances that have been observed together.|
+| **same-malware-toolkit** | The collection contains Malware Instances that are derived from the same malware toolkit.|
+
 
 ## Malware Actions
 
 **Vocabulary Name**: `malware-action-ov`
 
+The Malware Action open vocabulary is used in the following object/property:
+
+* Malware Action --> *name*
+
+This vocabulary is a non-exhaustive enumeration of Actions that may be performed by a Malware Instance.
+
+| Value | Description |
+| ----- | ----------- |
+|**accept-socket-connection** | The action of accepting a socket connection.|
+|**add-connection-to-network-share** | The action of adding a connection to a network share.|
+|**add-network-share** | The action of adding a new network share on a server.|
+|**add-scheduled-task** | The action of adding a scheduled task to a system.|
+|**add-system-call-hook** | The action of adding a new system call hook.|
+|**add-user-to-group** | The action of adding an existing user to a group.|
+|**add-user** | The action of adding a new user.|
+|**add-windows-hook** | The action of adding a new Windows application-defined hook procedure.|
+|**allocate-process-virtual-memory** | The action of allocating a virtual memory region in an existing process.|
+|**bind-address-to-socket** | The action of binding a socket address to a socket.|
+|**call-library-function** | The action of calling a function exported by a library.|
+|**change-password** | The action of changing a user’s password.|
+|**check-for-kernel-debugger** | The action of checking for the presence of a kernel debugger.|
+|**check-for-remote-debugger** | The action of checking for the presence of a remote debugger.|
+|**close-file** | The action of closing an existing file previously opened for reading or writing.|
+|**close-port** | The action of closing a network port.|
+|**close-registry-key** | The action of closing a handle to an existing registry key.|
+|**close-socket** | The action of closing a socket.|
+|**connect-to-ftp-server** | The action of connecting to an ftp server.|
+|**connect-to-ip-address** | The action of connecting to an IP address.|
+|**connect-to-irc-server** | The action of connecting to an IRC server.|
+|**connect-to-named-pipe** | The action of connecting to a named pipe.|
+|**connect-to-network-share** | The action of connecting to a network share.|
+|**connect-to-socket-address** | The action of connecting to a socket address.|
+|**connect-to-socket** | "The action of connecting to a socket, which consists of an IP address and port number.|"
+|**connect-to-url** | The action of connecting to a URL.|
+|**copy-file** | The action of copying a file from one location to another.|
+|**create-critical-section** | The action of creating a new critical section.|
+|**create-dialog-box** | The action of creating a new dialog box.|
+|**create-directory** | The action of creating a new directory.|
+|**create-event** | The action of creating a new event.|
+|**create-file-alternate-data-stream** | The action of creating a new file alternate data stream in a file.|
+|**create-file-mapping** | The action of creating a new file mapping object.|
+|**create-file-symbolic-link** | The action of creating a new symbolic link to a file.|
+|**create-file** | The action of creating a new file.|
+|**create-mailslot** | The action of creating a new mailslot.|
+|**create-mutex** | The action of creating a new mutex.|
+|**create-named-pipe** | The action of creating a new named pipe.|
+|**create-process-as-user** | The action of creating a new process as a particular user.|
+|**create-process** | The action of creating a new process.|
+|**create-registry-key-value** | The action of creating a new registry key value.|
+|**create-registry-key** | The action of creating a new registry key.|
+|**create-remote-thread-in-process** | The action of creating a new thread that runs in the virtual address space of another process.|
+|**create-semaphore** | The action of creating a new named semaphore.|
+|**create-service** | The action of creating a new service.|
+|**create-socket** | The action of creating a new socket.|
+|**create-thread** | The action of creating a new thread.|
+|**create-window** | The action of creating a new window.|
+|**delete-critical-section** | The action of deleting a critical section object.|
+|**delete-directory** | The action of deleting a directory on a filesystem.|
+|**delete-event** | The action of deleting a named event object.|
+|**delete-file** | The action of deleting a file.|
+|**delete-mutex** | The action of deleting a named mutex.|
+|**delete-named-pipe** | The action of deleting a named pipe.|
+|**delete-network-share** | The action of deleting a network share on a server.|
+|**delete-registry-key-value** | The action of deleting a named value under an existing registry key.|
+|**delete-registry-key** | The action of deleting a registry key.|
+|**delete-semaphore** | The action of deleting a named semaphore.|
+|**delete-service** | The action of deleting a service.|
+|**delete-user** | The action of deleting a user.|
+|**disconnect-from-ftp-server** | The action of disconnecting from a FTP server.|
+|**disconnect-from-ip** | The action of disconnecting from a previously established connection to an IP address.| 
+|**disconnect-from-irc-server** | The action of disconnecting from an IRC server.|
+|**disconnect-from-named-pipe** | The action of disconnecting from a named pipe.|
+|**disconnect-from-network-share** | The action of disconnecting from a network share.|
+|**disconnect-from-socket** | The action of disconnecting from a socket.|
+|**download-file** | The action of downloading a file from a remote location.|
+|**enumerate-libraries** | The action of enumerating the libraries used by a process.|
+|**enumerate-network-shares** | The action of enumerating the available shared resources on a server.|
+|**enumerate-processes** | The action of enumerating all of the running processes on a system.|
+|**enumerate-registry-key-subkeys** | The action of enumerating the registry key subkeys under a registry key.|
+|**enumerate-registry-key-values** | The action of enumerating the named values under a registry key.|
+|**enumerate-services** | The action of enumerating a specific set of services on a system.|
+|**enumerate-system-handles** | The action of enumerating all open handles on a system.|
+|**enumerate-threads** | The action of enumerating all threads in the calling process.|
+|**enumerate-users** | The action of enumerating all users.|
+|**enumerate-windows** | The action of enumerating all open windows.|
+|**execute-file** | The action of executing a file.|
+|**find-file** | The action of searching for a file.|
+|**find-window** | The action of searching for a window.|
+|**flush-process-instruction-cache** | The action of flushing the instruction cache of a process.|
+|**free-library** | The action of freeing a library previously loaded into the address space of the calling process.|
+|**free-process-virtual-memory** | The action of freeing virtual memory regions from a process.|
+|**get-disk-attributes** | "The action of querying the attributes of a disk, such as the amount of available free space.|"
+|**get-disk-type** | The action of getting the disk type.|
+|**get-elapsed-system-up-time** | The action of getting the elapsed up-time for a system.|
+|**get-file-or-directory-attributes** | The action of getting the attributes of a file or directory.|
+|**get-function-address** | The action of getting the address of an exported function or variable from a library.|
+|**get-host-by-address** | The action of getting information on a host from a local or remote host database by its IP address.|
+|**get-host-by-name** | The action of getting information on a host from a local or remote host database by its name.|
+|**get-netbios-name** | The action of getting the NetBIOS name of a system.|
+|**get-process-current-directory** | The action of getting the current directory of a process.|
+|**get-process-environment-variable** | The action of setting an environment variable used by a process.|
+|**get-process-startupinfo** | The action of getting the STARTUPINFO struct associated with a process.|
+|**get-registry-key-attributes** | The action of getting the attributes of a registry key.|
+|**get-system-global-flags** | The action of getting the enabled global flags on a system.|
+|**get-system-host-name** | The action of getting the hostname of a system.|
+|**get-system-local-time** | The action of getting the local time of a system.|
+|**get-system-time** | "The action of getting the system time of a system, represented in Coordinated Universal Time (UTC).|"
+|**get-thread-context** | The action of getting the context structure (containing process-specific register data) of a thread.|
+|**get-thread-username** | The action of getting the name or ID of the user associated with a thread.|
+|**get-user-attributes** | The action of getting the attributes of a user.|
+|**get-username** | The action of getting the username of the currently logged in user of a system.|
+|**get-windows-directory** | The action of getting the Windows installation directory on a system.|
+|**get-windows-system-directory** | The action of getting the Windows \System or \System32 directory on a system.|
+|**get-temporary-files-directory** | The action of getting the temporary file directory on a system.|
+|**impersonate-process** | The action of a thread in the calling process impersonating the security context of another process.|
+|**invoke-user-privilege** | The action of invoking a privilege given to an existing user.|
+|**join-irc-channel** | The action of joining a channel on an IRC server.|
+|**kill-process** | The action of killing a process.|
+|**kill-thread** | The action of killing a thread in the virtual address space of the calling process.|
+|**kill-window** | The action of killing a window.|
+|**leave-irc-channel** | The action of leaving a channel on an IRC server.|
+|**enumerate-disks** | The action of listing all disks available on a system.|
+|**listen-on-port** | The action of listening on a specific port.|
+|**listen-on-socket** | The action of listening on a socket.|
+|**load-and-call-driver** | The action of loading a driver into a system and then calling the loaded driver.|
+|**load-driver** | The action of loading a driver into a system.|
+|**load-library** | The action of loading a library into the address space of the calling process.|
+|**lock-file** | The action of locking a file.|
+|**logon-as-user** | The action of logging on as a specific user.|
+|**map-file-into-process** | The action of mapping a file into the address space of the calling process.|
+|**map-library-into-process** | The action of mapping a library into the address space of the calling process.|
+|**modify-process-virtual-memory-protection** | The action of modifying the protection on a memory region in the virtual address space of a process.|
+|**modify-registry-key-value** | The action of modifying a named value of a registry key.|
+|**modify-registry-key** | The action of modifying a registry key.|
+|**modify-service-configuration** | The action of modifying the configuration parameters of a service.| 
+|**monitor-directory** | The action of monitoring a directory on the filesystem for changes.|
+|**monitor-disk** | The action of monitoring a disk for changes.|
+|**monitor-registry-key** | The action of monitoring a registry key for changes.|
+|**mount-disk** | The action of mounting a file system to a mounting point.|
+|**move-file** | The action of moving a file from one location to another.|
+|**open-critical-section** | The action of opening a critical section object.|
+|**open-event** | The action of opening a named event object.|
+|**open-file-mapping** | The action of opening a file mapping object.|
+|**open-directory** | The action of opening a directory.|
+|**open-file** | The action of opening a file for reading or writing.|
+|**open-mutex** | The action of opening a named mutex.|
+|**open-port** | The action of opening a network port.|
+|**open-process** | The action of opening a process.|
+|**open-registry-key** | The action of opening a registry key.|
+|**open-semaphore** | The action of opening a named semaphore.|
+|**open-service** | The action of opening a service.|
+|**queue-apc-in-thread** | The action of queuing a new Asynchronized Procedure Call (APC) in the context of a thread.| 
+|**read-from-file** | The action of reading from a file.|
+|**read-from-mailslot** | The action of reading some data from a named mailslot.|
+|**read-from-named-pipe** | The action of reading data from a named pipe.|
+|**read-from-process-memory** | The action of reading from a memory region of a process.|
+|**read-registry-key-value** | The action of reading a named value of a registry key.|
+|**receive-data-on-socket** | The action of receiving data on a socket.|
+|**receive-http-response** | The action of receiving an HTTP server response for a prior HTTP request.|
+|**receive-irc-private-message** | The action of receiving a private message from another user on an IRC server.|
+|**receive-network-packet** | The action of receiving a packet on a network.|
+|**release-critical-section** | The action of releasing a critical section object.|
+|**release-mutex** | The action of releasing ownership of a named mutex.|
+|**release-semaphore** | The action of releasing ownership of a named semaphore.|
+|**remove-user-from-group** | The action of removing a user from a group.|
+|**rename-file** | The action of renaming a file on a file system.|
+|**reset-event** | The action of resetting a named event object to the non-signaled state.|
+|**revert-thread-to-self** | The action of reverting a thread to its own security context.|
+|**send-control-code-to-file** | The action of sending a control code to a file.|
+|**send-control-code-to-service** | The action of sending a control code to a service.|
+|**send-data-on-socket** | The action of sending data on a connected socket.|
+|**send-data-to-address-on-socket** | The action of sending data to a specified IP address on an unconnected socket.|
+|**send-dns-query** | The action of sending a DNS query.|
+|**send-email-message** | The action of sending an email message.|
+|**send-ftp-command** | The action of of sending a command on an FTP server connection.|
+|**send-http-connect-request** | The action of sending an HTTP CONNECT client request to a server.|
+|**send-http-delete-request** | The action of sending an HTTP DELETE client request.|
+|**send-http-get-request** | The action of sending an HTTP GET client request.|
+|**send-http-head-request** | The action of sending an HTTP HEAD client request.|
+|**send-http-options-request** | The action of sending an HTTP OPTIONS client request.|
+|**send-http-patch-request** | The action of sending an HTTP PATCH client request.|
+|**send-http-post-request** | The action of sending an HTTP HEAD client request.|
+|**send-http-put-request** | The action of sending an HTTP PUT client request.|
+|**send-http-trace-request** | The action of sending an HTTP TRACE client request.|
+|**send-icmp-request** | The action of sending an ICMP request.|
+|**send-irc-private-message** | The action of sending a private message to another user on an IRC server.|
+|**send-network-packet** | The action of sending a packet on a network.|
+|**send-reverse-dns-lookup** | The action of sending a reverse DNS lookup.|
+|**set-file-or-directory-attributes** | The action of setting some attributes on a file or directory.|
+|**set-irc-nickname** | The action of setting an IRC nickname on an IRC server.|
+|**set-netbios-name** | The action of setting the NetBIOS name of a system.|
+|**set-process-current-directory** | The action of setting the current directory of a process.|
+|**set-process-environment-variable** | The action of setting an environment variable used by a process.|
+|**set-system-global-flags** | The action of setting a system’s global flags.|
+|**set-system-host-name** | The action of setting a system’s hostname.|
+|**set-system-local-time** | The action of setting a system’s local time.|
+|**set-system-time** | "The action of setting a system’s time, represented in UTC.|"
+|**set-thread-context** | The action of setting the context structure (containing process-specific register data) for a thread.|
+|**show-window** | The action of showing a window.|
+|**shutdown-system** | The action of shutting down a system.|
+|**sleep-process** | The action of sleeping a process for some period of time.|
+|**sleep-system** | The action of sleeping a system for some period of time.|
+|**start-service** | The action of starting a service.|
+|**stop-service** | The action of stopping a service.|
+|**unload-driver** | The action of unloading a driver from a system.|
+|**unlock-file** | The action of unlocking a file.|
+|**unmap-file-from-process** | The action of unmapping a file from the address space of the calling process.|
+|**unmount-disk** | The action of unmounting a file system from a mounting point.|
+|**upload-file** | The action of uploading a file to a remote location.|
+|**write-to-file** | The action of writing data to a file.|
+|**write-to-mailslot** | The action of writing data to a named mailslot.|
+|**write-to-named-pipe** | The action of writing data to a named pipe.|
+|**write-to-process-memory** | The action of writing to a memory region of an existing process.|
+
+
 ## Malware-Configuration-Parameters
 
 **Vocabulary Name**: `malware-configuration-parameter-ov`
+
+The Malware Configuration Parameters open vocabulary is used in the following object/property:
+
+* Malware Instance --> static_features --> *configuration_parameters*
+
+This vocabulary is a non-exhaustive enumeration of malware configuration parameter names.
+
+| Value | Description |
+| ----- | ----------- |
+| **filename** | Captures the name of a file (e.g., a binary downloaded, embedded binary).|
+| **group-id** | Captures an identifier of a collection of malware instances.|
+| **id** | Captures an identifier of a malware instance.|
+| **installation-path** | Captures a location on disk where the malware instance is installed, copied, or moved.|
+| **magic-number** | Captures a file signature used to identify or validate content of the malware instance.|
+| **mutex** | Captures a unique mutex value associated with the malware instance.|
+| **c2-ip-address** | Captures an IP address used by the malware instance for command and control.|
+| **c2-domain** | Captures a domain name used by the malware instance for command and control.|
+| **c2-url** | Captures a URL used by the malware instance for command and control.|
+| **directory** | Captures the name of a directory used by the malware instance.|
+| **filepath** | Captures a file path (directory + file name) used by the malware instance.|
+| **injection-process** | Captures a process into which malware instance is injected. Usually this is a process name but it may take other forms such as a filename of the executable.|
+| **interval** | Captures the time malware instance waits between beacons or other activity, in seconds.|
+| **key** | Captures an encryption, encoding, or obfuscation key used by the malware instance. By convention, when these represent binary data, they should be bare hex encoded with no other markup. Base64 or similar custom dictionaries are stored as is.|
+| **password** | Captures a password used by the malware instance.|
+| **useragent** | Captures a software identifier used by the malware instance.|
+| **version** | Captures the version of the malware instance. To the degree possible this should be based directly on artifacts from the malware.|
+
 
 ## Malware Labels
 
@@ -2251,19 +2611,207 @@ This vocabulary is a non-exhaustive enumeration of common malware labels.
 
 **Vocabulary Name**: `os-features-ov`
 
+The Operating System Features open vocabulary is used by the following object/property:
+
+* Malware Instance --> *os_features*
+
+This vocabulary is a non-exhaustive enumeration of operating system features that may be used by malware. Each feature is specific to a particular operating system, unless otherwise specified by “multi-OS” in its description, in which case it can apply to a range of operating systems.
+
+| Value | Description |
+| ----- | ----------- |
+|**login-items** | Indicates use of MacOS/OS X login items.|
+|**plist-files** | Indicates use of MacOS/OS X plist files.|
+|**applescript** | Indicates use of MacOS/OS X AppleScript.|
+|**launch-agent** | Indicates use of a MacOS/OS X launch agent.|
+|**launch-daemons** | Indicates use of MacOS/OS X launch daemons.|
+|**kext** | Indicates the use of MacOS/OS X kernel extensions (kexts).|
+|**login-logout-hooks** | Indicates the use of MacOS/OS X login/logout hooks.|
+|**named-pipes** | Indicates use of named pipes (multi-OS).|
+|**berkeley-sockets** | Indicates use of Berkeley sockets (multi-OS).|
+|**cron** | Indicates use of the Linux or MacOS/OS X cron jobs.|
+|**mutexes** | Indicates use of mutual exclusion objects (mutexes) (multi-OS).|
+|**registry-keys** | Indicates use of Windows registry keys.|
+|**services** | Indicates use of Windows services.|
+|**powershell** | Indicates use of Windows powershell.|
+|**ntfs-extended-attributes** | Indicates use of Windows NTFS extended attributes.|
+|**network-shares** | Indicates use of Windows network shares.|
+|**hooks** | Indicates use of Windows hooks.|
+|**wmi** | Indicates use of Windows Management Instrumentation (WMI).|
+|**task-scheduler** | Indicates use of Windows task scheduler (scheduled tasks).|
+|**critical-sections** | Indicates of Windows critical sections.|
+|**device-drivers** | Indicates use of device drivers (multi-OS).|
+|**admin-network-shares** | Indicates use of Windows administrator (ADMIN$) network shares.|
+
 
 ## Operating Systems
 
 **Vocabulary Name**: `operating-system-ov`
+
+The Operating System open vocabulary is used by the following objects/properties:
+
+* Behavior --> attributes
+* Capability --> attributes 
+
+This vocabulary is a non-exhaustive enumeration of operating systems.
+
+| Value | Description |
+| ----- | ----------- |
+|**android-1.0.x** | Indicates the Android 1.0.x operating system.|
+|**android-1.1.x** | Indicates the Android 1.1.x operating system.|
+|**android-1.5.x** | Indicates the Android 1.5.x operating system.|
+|**android-1.6.x** | Indicates the Android 1.6.x operating system.|
+|**android-2.0.x** | Indicates the Android 2.0.x operating system.|
+|**android-2.1.x** | Indicates the Android 2.1.x operating system.|
+|**android-2.2.x** | Indicates the Android 2.2.x operating system.|
+|**android-2.3.x** | Indicates the Android 2.3.x operating system.|
+|**android-3.0.x** | Indicates the Android 3.0.x operating system.|
+|**android-3.1.x** | Indicates the Android 3.1.x operating system.|
+|**android-3.2.x** | Indicates the Android 3.2.x operating system.|
+|**android-4.0.x** | Indicates the Android 4.0.x operating system.|
+|**android-4.1.x** | Indicates the Android 4.1.x operating system.|
+|**android-4.2.x** | Indicates the Android 4.2.x operating system.|
+|**android-4.3.x** | Indicates the Android 4.3.x operating system.|
+|**android-4.4.x** | Indicates the Android 4.4.x operating system.|
+|**android-5.0.x** | Indicates the Android 5.0.x operating system.|
+|**android-5.1.x** | Indicates the Android 5.1.x operating system.|
+|**android-unknown-version** | Indicates an unknown version of the Android operating system.|
+|**ios-1.0.x** | Indicates the iOS 1.0.x operating system.|
+|**ios-1.1.x** | Indicates the iOS 1.1.x operating system.|
+|**ios-2.0.x** | Indicates the iOS 2.0.x operating system.|
+|**ios-2.1.x** | Indicates the iOS 2.1.x operating system.|
+|**ios-2.2.x** | Indicates the iOS 2.2.x operating system.|
+|**ios-3.0.x** | Indicates the iOS 3.0.x operating system.|
+|**ios-3.1.x** | Indicates the iOS 3.1.x operating system.|
+|**ios-3.2.x** | Indicates the iOS 3.2.x operating system.|
+|**ios-4.0.x** | Indicates the iOS 4.0.x operating system.|
+|**ios-4.1.x** | Indicates the iOS 4.1.x operating system.|
+|**ios-4.2.x** | Indicates the iOS 4.2.x operating system.|
+|**ios-4.3.x** | Indicates the iOS 4.3.x operating system.|
+|**ios-5.0.x** | Indicates the iOS 5.0.x operating system.|
+|**ios-5.1.x** | Indicates the iOS 5.1.x operating system.|
+|**ios-6.0.x** | Indicates the iOS 6.0.x operating system.|
+|**ios-6.1.x** | Indicates the iOS 6.1.x operating system.|
+|**ios-7.0.x** | Indicates the iOS 7.0.x operating system.|
+|**ios-7.1.x** | Indicates the iOS 7.1.x operating system.|
+|**ios-8.0.x** | Indicates the iOS 8.0.x operating system.|
+|**ios-8.1.x** | Indicates the iOS 8.1.x operating system.|
+|**ios-8.2.x** | Indicates the iOS 8.2.x operating system.|
+|**ios-8.3.x** | Indicates the iOS 8.3.x operating system.|
+|**ios-8.4.x** | Indicates the iOS 8.4.x operating system.|
+|**ios-9.0.x** | Indicates the iOS 9.0.x operating system.|
+|**ios-9.1.x** | Indicates the iOS 9.1.x operating system.|
+|**ios-9.2.x** | Indicates the iOS 9.2.x operating system.|
+|**ios-9.3.x** | Indicates the iOS 9.3.x operating system.|
+|**ios-10.0.x** | Indicates the iOS 10.0.x operating system.|
+|**ios-10.1.x** | Indicates the iOS 10.1.x operating system.|
+|**ios-unknown-version** | Indicates an unknown version of the iOS operating system.|
+|**linux-kernel-2.4.x** | Indicates version 2.4.x of the linux kernel.
+|**linux-kernel-2.6.x** | Indicates version 2.6.x of the linux kernel.
+|**linux-kernel-3.0.x** | Indicates version 3.0.x of the linux kernel.
+|**linux-kernel-3.1.x** | Indicates version 3.1.x of the linux kernel.
+|**linux-kernel-3.2.x** | Indicates version 3.2.x of the linux kernel.
+|**linux-kernel-3.3.x** | Indicates version 3.3.x of the linux kernel.
+|**linux-kernel-3.4.x** | Indicates version 3.4.x of the linux kernel.
+|**linux-kernel-3.5.x** | Indicates version 3.5.x of the linux kernel.
+|**linux-kernel-3.6.x** | Indicates version 3.6.x of the linux kernel.
+|**linux-kernel-3.7.x** | Indicates version 3.7.x of the linux kernel.
+|**linux-kernel-3.8.x** | Indicates version 3.8.x of the linux kernel.
+|**linux-kernel-3.9.x** | Indicates version 3.9.x of the linux kernel.
+|**linux-kernel-3.10.x** | Indicates version 3.10.x of the linux kernel.
+|**linux-kernel-3.11.x** | Indicates version 3.11.x of the linux kernel.
+|**linux-kernel-3.12.x** | Indicates version 3.12.x of the linux kernel.
+|**linux-kernel-3.13.x** | Indicates version 3.13.x of the linux kernel.
+|**linux-kernel-3.14.x** | Indicates version 3.14.x of the linux kernel.
+|**linux-kernel-3.15.x** | Indicates version 3.15.x of the linux kernel.
+|**linux-kernel-3.16.x** | Indicates version 3.16.x of the linux kernel.
+|**linux-kernel-3.17.x** | Indicates version 3.17.x of the linux kernel.
+|**linux-kernel-3.18.x** | Indicates version 3.18.x of the linux kernel.
+|**linux-kernel-3.19.x** | Indicates version 3.19.x of the linux kernel.
+|**linux-kernel-4.0.x** | Indicates version 4.0.x of the linux kernel.
+|**linux-kernel-4.1.x** | Indicates version 4.1.x of the linux kernel.
+|**linux-unknown-version** | Indicates an unknown version of the linux kernel.
+|**mac-os-x-10.0.x** | Indicates the Mac OS X 10.0.x operating system.|
+|**mac-os-x-10.1.x** | Indicates the Mac OS X 10.1.x operating system.|
+|**mac-os-x-10.2.x** | Indicates the Mac OS X 10.2.x operating system.|
+|**mac-os-x-10.3.x** | Indicates the Mac OS X 10.3.x operating system.|
+|**mac-os-x-10.4.x** | Indicates the Mac OS X 10.4.x operating system.|
+|**mac-os-x-10.5.x** | Indicates the Mac OS X 10.5.x operating system.|
+|**mac-os-x-10.6.x** | Indicates the Mac OS X 10.6.x operating system.|
+|**mac-os-x-10.7.x** | Indicates the Mac OS X 10.7.x operating system.|
+|**mac-os-x-10.8.x** | Indicates the Mac OS X 10.8.x operating system.|
+|**mac-os-x-10.9.x** | Indicates the Mac OS X 10.9.x operating system.|
+|**mac-os-x-10.10.x** | Indicates the Mac OS X 10.10.x operating system.|
+|**mac-os-x-10.11.x** | Indicates the Mac OS X 10.11.x operating system.|
+|**mac-os-x-unknown-version** | Indicates an unknown version of the Mac OS X operating system.|
+|**windows-7** | Indicates the Windows 7 operating system.|
+|**windows-7-sp1** | Indicates the Windows 7 SP1 operating system.|
+|**windows-8** | Indicates the Windows 8 operating system.|
+|**windows-8.1** | Indicates the Windows 8.1 operating system.|
+|**windows-10** | Indicates the Windows 10 operating system.|
+|**windows-server-2003** | Indicates the Windows Server 2003 operating system.|
+|**windows-server-2003-sp1** | Indicates the Windows Server 2003 SP1 operating system.|
+|**windows-server-2003-sp2** | Indicates the Windows Server 2003 SP2 operating system.|
+|**windows-server-2008** | Indicates the Windows Server 2008 operating system.|
+|**windows-server-2008-sp1** | Indicates the Windows Server 2008 SP1 operating system.|
+|**windows-server-2008-sp2** | Indicates the Windows Server 2008 SP2 operating system.|
+|**windows-server-2008-r2** | Indicates the Windows Server 2008 r2 operating system.|
+|**windows-server-2008-r2-sp1** | Indicates the Windows Server 2008 R2 SP1 operating system.|
+|**windows-server-2012** | Indicates the Windows Server 2012 operating system.|
+|**windows-server-2012-r2** | Indicates the Windows Server 2012 r2 operating system.|
+|**windows-vista** | Indicates the Windows Vista operating system.|
+|**windows-vista-sp1** | Indicates the Windows Vista SP1 operating system.|
+|**windows-vista-sp2** | Indicates the Windows Vista SP2 operating system.|
+|**windows-xp** | Indicates the Windows XP operating system.|
+|**windows-xp-sp1** | Indicates the Windows XP SP1 operating system.|
+|**windows-xp-sp2** | Indicates the Windows XP SP2 operating system.|
+|**windows-xp-sp3** | Indicates the Windows XP SP3 operating system.|
+|**windows-unknown-version** | Indicates an unknown version of the Windows operating system.|
 
 
 ## Obfuscation Methods
 
 **Vocabulary Name**: `obfuscation-method-ov`
 
+The Obfuscation Method open vocabulary is used in the following object/property:
+
+* Malware Instance --> static_features --> obfuscation_methods --> *method*
+
+This vocabulary is a non-exhaustive enumeration of obfuscation methods used in obfuscating a binary associated with a Malware Instance.
+
+| Value | Description |
+| ----- | ----------- |
+|**packing** | Packing of the malware instance code, not including encryption (the code-encryption value defined below should be used for encrypted code).|
+|**code-encryption** | Encryption of the malware instance code.|
+|**dead-code-insertion** | Dead code inserted in the malware instance.|
+|**entry-point-obfuscation** | Obfuscation of the malware instance entry point.|
+|**import-address-table-obfuscation** | Obfuscation of the malware instance import address table.|
+|**interleaving-code** | Code interleaving in the malware instance (code is split into sections that are rearranged and connected by unconditional jumps).|
+|**symbolic-obfuscation** | Obfuscation of the malware instance symbols.|
+|**string-obfuscation** | Obfuscation of the malware instance strings.|
+|**subroutine-reordering** | Reordering of subroutines in the malware instance.|
+|**code-transposition** | Reordering of instructions in the malware instance.|
+|**instruction-substitution** | Substitution of malware instance instructions with semantic equivalents.|
+|**register-reassignment** | Replacement of unused registers with those containing malicious code.|
+
+
 ## Processor Architectures
 
 **Vocabulary Name**: `processor-architecture-ov`
+
+The Process Architecture open vocabulary is used in the following object/property:
+
+* Malware Instance --> *architecture_execution_envs*
+
+| Value | Description |
+| ----- | ----------- |
+|**x86** | The 32-bit x86 architecture.|
+|**x86-64** | The 64-bit x86 architecture.|
+|**ia-64** | The 64-bit IA (Itanium) architecture.|
+|**powerpc** | The PowerPC architecture.|
+|**arm** | The ARM architecture.|
+|**alpha** | The Alpha architecture.|
+|**sparc** | The SPARC architecture.|
+|**mips** | The MIPS architecture.|
 
 
 ## Refined Capabilities
