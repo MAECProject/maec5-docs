@@ -55,7 +55,7 @@ This page provides a basic outline of the MAEC 5.0 data model. For an introducti
 
 This documentation is divided into seven sections:
 
-* **Top-level Objects** - MAEC top-level objects (TLOs) are the entities captured at the top level of a [Package](#Package). Examples include the Malware Instance and the Behavior Objects.
+* **Top-level Objects** - MAEC top-level objects (TLOs) are the entities captured at the top level of a [Package](#package). Examples include the Malware Instance and the Behavior Objects.
 
 * **MAEC Types** - These MAEC 5.0 types are used by MAEC’s TLOs.
 
@@ -1455,7 +1455,7 @@ Name | Type | Description
 | **target_ref** (required) | [identifier](#identifier) | Specifies a reference to the ID of the entity in the MAEC document that corresponds to the target in the source-target relationship. The referenced entity **MUST** be present in the current Package.|
 | **timestamp** (optional) | [timestamp](#timestamp) | Specifies a timestamp that states when the relationship was created.|
 | **relationship_type** (required) | [string](#string) | Specifies the type of relationship being expressed. This value **SHOULD** be an exact value listed in the relationships for the source and target top-level object, but **MAY** be any string. The value of this field **MUST** be in ASCII and is limited to characters a–z (lowercase ASCII), 0–9, and dash (-).|
-| **metadata** (optional) | [dictionary](#dictionary) | Specifies a dictionary of additional metadata around the relationship. Standard dictionary keys include `distance`, which is used for capturing any distance-related metadata. The corresponding value for this key **MUST** be an object of type `relationship-distance`. Custom entries in the dictionary **MAY** also be included. Each custom entry **MUST** have a key of type `string` and the key **MUST** be in ASCII and is limited to characters a–z (lowercase ASCII), 0–9, and dash (-). Each custom entry **MUST** have a key value that is a valid [common datatype](#Common-Data-Types).
+| **metadata** (optional) | [dictionary](#dictionary) | Specifies a dictionary of additional metadata around the relationship. Standard dictionary keys include `distance`, which is used for capturing any distance-related metadata. The corresponding value for this key **MUST** be an object of type `relationship-distance`. Custom entries in the dictionary **MAY** also be included. Each custom entry **MUST** have a key of type `string` and the key **MUST** be in ASCII and is limited to characters a–z (lowercase ASCII), 0–9, and dash (-). Each custom entry **MUST** have a key value that is a valid [common datatype](#common-data-types).
 
 ## Common Relationships
 
@@ -1541,8 +1541,8 @@ Name | Type | Description
 | **type** (required) | [string](#string) | The value of this property **MUST** be `package`.|
 | **id** (required) | [identifier](#identifier) | Specifies the ID for the Package.|
 | **schema_version** (required) | [string](#string) | Specifies the version of the MAEC specification used to represent the content in this Package. The value of this property **MUST** be `5.0`.
-| **maec_objects** (required) | [list](#list) of type [\<MAEC Object\>](#Top-level-Objects) | Specifies MAEC Objects. Objects in this list **MUST** be valid MAEC Top-level Objects.|
-| **observable_objects** (optional) | [stix-observable-objects](#Observable-Objects) | Specifies a dictionary of STIX Cyber Observable Objects relevant to the MAEC Package. This dictionary **MUST** contain all Cyber Observable Objects associated with the MAEC Package, including those that are referenced by other Cyber Observable Objects.|
+| **maec_objects** (required) | [list](#list) of type [\<MAEC Object\>](#top-level-objects) | Specifies MAEC Objects. Objects in this list **MUST** be valid MAEC Top-level Objects.|
+| **observable_objects** (optional) | [stix-observable-objects](#observable-objects) | Specifies a dictionary of STIX Cyber Observable Objects relevant to the MAEC Package. This dictionary **MUST** contain all Cyber Observable Objects associated with the MAEC Package, including those that are referenced by other Cyber Observable Objects.|
 | **relationships** (optional) | [list](#list) of type [relationship](#relationship) | Specifies a set of one or more MAEC Relationships. Each entry in this list **MUST** be of type relationship.|
 
 
@@ -1900,7 +1900,7 @@ The `stix-observable-objects` data type is a dictionary (see the `dictionary` da
 
 **Type Name**: `open-vocab`
 
-The `open-vocab` data type is represented as a `string`. For properties that use this type, there will be a list of suggested values to define the property (see [Vocabularies](#Vocabularies)). The value of the property **SHOULD** be chosen from the open vocabulary but **MAY** be any other `string` value. Values that are not from the open vocabulary **SHOULD** be all lowercase (where lowercase is defined by the locality conventions) and **SHOULD** use hyphens instead of spaces or underscores as word separators.
+The `open-vocab` data type is represented as a `string`. For properties that use this type, there will be a list of suggested values to define the property (see [Vocabularies](#vocabularies)). The value of the property **SHOULD** be chosen from the open vocabulary but **MAY** be any other `string` value. Values that are not from the open vocabulary **SHOULD** be all lowercase (where lowercase is defined by the locality conventions) and **SHOULD** use hyphens instead of spaces or underscores as word separators.
 
 A consumer that receives MAEC content with one or more open-vocab terms not defined in the open vocabulary **MAY** ignore those values.
 
