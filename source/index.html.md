@@ -658,7 +658,7 @@ Source | Name | Target | Description
              "dwFlagsAndAttributes":"128",
              "hTemplateFile":"00000000"
           },
-          "function_name":"DeleteFile" 
+          "function_name":"DeleteFile"
        }
     }
  ]
@@ -672,7 +672,7 @@ The `api-call` type serves as a method for characterizing API Calls, as implemen
 
 Name | Type | Description
 --------- | ------- | -----------
-| **address** (optional) | [hex](#hex) | Captures the hexadecimal address of the API call in the binary.|
+| **address** (optional) | [hex](#hexadecimal) | Captures the hexadecimal address of the API call in the binary.|
 | **return_value** (optional) | [string](#string) | Captures the return value of the API call.|
 | **parameters** (optional) | [dictionary](#dictionary) | Captures a list of function parameters. Each key in the dictionary **MUST** be a string that captures the exact name of the parameter, and each corresponding key value **MUST** be a string that captures the corresponding parameter value.  For parameter values that can be represented by a constant, e.g., GENERIC_WRITE, the constant rather than the literal **SHOULD** be used. For cases where the parameter cannot be represented by a constant, the literal (as reported by the tool producing the data) **MUST** be used.|
 | **function_name** (required) | [string] (#string) | Captures the full name of the API function called, e.g., `CreateFileEx`.
@@ -782,12 +782,12 @@ Name | Type | Description
 | **last_update_time** (optional) | [timestamp](#timestamp) |  Captures the date/time that the analysis was last updated.|
 | **confidence** (optional) | [integer](#integer) | Captures the relative measure of confidence in the accuracy of the analysis results.  The confidence value **MUST** be a number in the range of 0-100.|
 | **analysts** (optional) | [list](#list) of type [string](#string) | Captures the names of analysts who performed the analysis.|
-| **analysis_type** (required) | [open-vocab](#open-vocabulary) | Captures the type of analysis performed. The value for this property **SHOULD** come from the [analysis-type-ov](#analysis-type) vocabulary.|
+| **analysis_type** (required) | [open-vocab](#open-vocabulary) | Captures the type of analysis performed. The value for this property **SHOULD** come from the [analysis-type-ov](#analysis-types) vocabulary.|
 | **comments** (optional) | [list](#list) of type [string](#string) | Captures comments regarding the analysis that was performed. A comment **SHOULD** be attributable to a specific analyst and **SHOULD** reflect particular insights of the author that are significant from an analysis standpoint.|
 | **tool_refs** (optional) | [list](#list) of type [object-ref](#object-reference) | References the tools used in the analysis of the Malware Instance. The objects referenced **MUST** be of STIX Cyber Observable type `software` and **MUST** be specified in the **observable_objects** property of the Package.|
 | **analysis_environment** (optional) | [dictionary](#dictionary) | Captures any metadata, such as the host virtual machine, associated with the analysis environment used to perform the dynamic analysis of the Malware Instance. Each key in the dictionary **SHOULD** come from the [analysis-environment-ov](#analysis-environment), and each corresponding key value **SHOULD** be a valid `object-ref` or `list` of `object-ref`. This property **MUST NOT** be included if **analysis_type** is set to a value of `static`.|
 | **description** (optional) | [string](#string) |  Captures a textual description of the analysis performed.|
-| **conclusion** (optional) | [open-vocab](#open-vocabulary) | Captures the conclusion of the analysis, such as whether the binary was found to be malicious. The value for this property **SHOULD** come from the [analysis-conclusion-ov](#analysis-conclusion) vocabulary.|
+| **conclusion** (optional) | [open-vocab](#open-vocabulary) | Captures the conclusion of the analysis, such as whether the binary was found to be malicious. The value for this property **SHOULD** come from the [analysis-conclusion-ov](#analysis-conclusions) vocabulary.|
 | **references** (optional) | [list](#list) of type [external-reference](#external-reference) | Captures any references to reports or other data sources pertaining to the analysis.|
 
 ## Binary Obfuscation
@@ -829,12 +829,12 @@ The `binary-obfuscation` type captures metadata on the methods that a binary may
 
 Name | Type | Description
 --------- | ------- | -----------
-| **method** (required) | [open-vocab](#open-vocabulary) | Captures the method used to obfuscate the binary. The value for this property **SHOULD** come from the [obfuscation-method-ov](#obfuscation-method) vocabulary.|
+| **method** (required) | [open-vocab](#open-vocabulary) | Captures the method used to obfuscate the binary. The value for this property **SHOULD** come from the [obfuscation-method-ov](#obfuscation-methods) vocabulary.|
 | **layer_order** (optional) | [integer](#integer) | Captures the ordering of the obfuscation method with respect to other obfuscation methods (if known), as a positive integer. For example, if a binary was packed and then XOR encrypted, the **layer_order** property of the packing layer would equal `1` and the **layer_order** property of the XOR encryption layer would equal `2`.|
 | **encryption_algorithm** (optional) | [open-vocab](#open-vocabulary) | Captures the name of the encryption algorithm used by the obfuscation method (if applicable). The values for this property **SHOULD** come from the STIX [encryption-algo-ov](https://docs.google.com/document/d/1ti4Ei_ii_Uc4izHNZlYmBP9NgD5-iVWC--y-3HmGZyg/edit#heading=h.h5b9uravt8oh) vocabulary.|
 | **packer_name** (optional) | [string](#string) | Specifies the name of the packer (if applicable).|
 | **packer_version** (optional) | [string](#string) | Specifies the version of the packer (if applicable).|
-| **packer_entry_point** (optional) | [hex](#hex) | Specifies the entry point address of the packer (if applicable).|
+| **packer_entry_point** (optional) | [hex](#hexadecimal) | Specifies the entry point address of the packer (if applicable).|
 | **packer_signature** (optional) | [string](#string) | Specifies the matching signature detected for the packer (if applicable).|
 
 ## Capability
@@ -900,10 +900,10 @@ The `capability` type captures details of a Capability implemented by a malware 
 
 Name | Type | Description
 --------- | ------- | -----------
-| **name** (required) | [open-vocab](#open-vocabulary) | Captures the name of the Capability. The values for this property **SHOULD** come from the [capability-ov](#capabilities) vocabulary. When used as part of a refined Capability, the values for this property **SHOULD** come from the [refined-capability-ov](#refined-capability) vocabulary.|
+| **name** (required) | [open-vocab](#open-vocabulary) | Captures the name of the Capability. The values for this property **SHOULD** come from the [capability-ov](#capabilities) vocabulary. When used as part of a refined Capability, the values for this property **SHOULD** come from the [refined-capability-ov](#refined-capabilities) vocabulary.|
 | **refined_capabilities** (optional) | [list](#list) of type [capability](#capability) | Captures a refinement of the Capability, recursively using `capability` type.|
 | **description** (optional) | [string](#string) | Captures a textual description of the Capability.|
-| **attributes** (optional) | [dictionary](#dictionary) | Captures attributes of the Capability as key/value pairs. Each key in the dictionary **MUST** be a string that captures the name of the attribute and **SHOULD** come from the [common-attribute-ov](#common-attribute) vocabulary. Each corresponding key value **MUST** be a string or list of strings that captures the corresponding attribute values.|
+| **attributes** (optional) | [dictionary](#dictionary) | Captures attributes of the Capability as key/value pairs. Each key in the dictionary **MUST** be a string that captures the name of the attribute and **SHOULD** come from the [common-attribute-ov](#common-attributes) vocabulary. Each corresponding key value **MUST** be a string or list of strings that captures the corresponding attribute values.|
 | **behavior_refs** (optional) | [list](#list) of type [identifier](#identifier) | Captures the IDs of Behaviors that implement the Capability. Each referenced entity **MUST** be of type `behavior` and each Behavior **MUST** be present in the current Package.|
 | **references** (optional) | [list](#list) of type [external-reference](#external-reference) | Captures external references to ATT&CK Tactics and other entities that may be associated with the Capability.|
 
@@ -928,7 +928,7 @@ Name | Type | Description
            "process_tree": [
              {          
                  "process_ref":"1",
-                 "ordinal_position":0 
+                 "ordinal_position":0
               }
            ]
         }
@@ -975,13 +975,15 @@ Name | Type | Description
 
 The `dynamic-features` type captures the dynamic features (i.e., those associated with the semantics of the executed code, of a malware instance).
 
-*Requirement*: At least one of **behavior_refs** or **action_refs** or **network_traffic_refs** or **process_tree** **MUST** be included when using this type.
+*Requirements*:
+
+* At least one of **behavior_refs** or **action_refs** or **network_traffic_refs** or **process_tree** **MUST** be included when using this type.
 
 Name | Type | Description
 --------- | ------- | -----------
 | **behavior_refs** (optional) | [list](#list) of type [identifier](#identifier) | Captures the IDs of Behaviors exhibited by the Malware Instance. Each referenced entity **MUST** be of type `behavior`.|
 | **action_refs** (optional) | [list](#list) of type [identifier](#identifier) | Captures the IDs of Actions discovered for the Malware Instance. Each referenced entity **MUST** be of type `malware-action`. This property is intended for capturing Actions that are discovered through static analysis, reverse engineering, or other methods and therefore **MUST NOT** be used to reference any of the Actions that are included in the **process_tree** property. As such, the Actions referenced by this property are mutually exclusive with respect to the Actions referenced by the **process_tree** property.|
-| **network_traffic_refs** (optional) | [list](#list) of type [object-ref](#object-reference) | Captures any network traffic recorded for the Malware Instance. The Object(s) referenced **MUST** be of STIX Cyber Observable type `network-traffic` OR `artifact` (for including binaries of captured traffic such as PCAPs) and **MUST** be specified in the observable_objects property of the Package.|
+| **network_traffic_refs** (optional) | [list](#list) of type [object-ref](#object-reference) | Captures any network traffic recorded for the Malware Instance. The Object(s) referenced **MUST** be of STIX Cyber Observable type `network-traffic` OR `artifact` (for including binaries of captured traffic such as PCAPs) and **MUST** be specified in the `observable_objects` property of the Package.|
 | **process_tree** (optional) | [list](#list) of type [process-tree-node](#process-tree-node) | Captures the Process Tree observed during the execution of the Malware Instance. This property may also capture Actions that are executed by a process and captured by dynamic analysis/sandboxing and therefore **MUST NOT** be used to reference any of the Actions that are included in the **action_refs** property. As such, the Actions referenced by this property are mutually exclusive with respect to the Actions referenced by the **action_refs** property.|
 
 ## Field Data
@@ -1015,11 +1017,13 @@ Name | Type | Description
 
 The `field-data` type captures field data, such as the time that the malware instance or family was first observed, associated with a malware instance or family.
 
-*Requirement*: At least one of **delivery_vectors** or **first_seen** or **last_seen** **MUST** be included when using this type.
+*Requirements*:
+
+* At least one of **delivery_vectors** or **first_seen** or **last_seen** **MUST** be included when using this type.
 
 Name | Type | Description
 --------- | ------- | -----------
-| **delivery_vectors** (optional) | [list](#list) of type [open-vocab](#open-vocabulary) | Captures the vectors used to distribute/deploy the Malware Instance. The values for this property **SHOULD** come from the [delivery-vector-ov](#delivery-vector) vocabulary.|
+| **delivery_vectors** (optional) | [list](#list) of type [open-vocab](#open-vocabulary) | Captures the vectors used to distribute/deploy the Malware Instance. The values for this property **SHOULD** come from the [delivery-vector-ov](#delivery-vectors) vocabulary.|
 | **first_seen** (optional) | [timestamp](#timestamp) | Captures the date/time that the malware instance was first seen by the producer of the Malware Instance Object.|
 | **last_seen** (optional) | [timestamp](#timestamp) | Captures the date/time that the malware instance was last seen by producer of the Malware Instance Object.|
 
@@ -1067,9 +1071,11 @@ Name | Type | Description
 
 **Type Name**: `malware-development-environment`
 
-The `malware-development-environment` captures details of the development environment used in developing the malware instance, such as information on any tools that were used. 
+The `malware-development-environment` captures details of the development environment used in developing the malware instance, such as information on any tools that were used.
 
-*Requirement*: At least one of **tool_refs** or **debugging_file_refs** **MUST** be included when using this type.
+*Requirements*:
+
+* At least one of **tool_refs** or **debugging_file_refs** **MUST** be included when using this type.
 
 Name | Type | Description
 --------- | ------- | -----------
@@ -1105,7 +1111,7 @@ Name | Type | Description
 
 **Type Name**: `name`
 
-The `name` type captures the name of a malware instance, family, or alias, as well as the source and relative confidence in the name.
+The `name` type captures the name of a Malware Instance, Malware Family, or alias, as well as the source and relative confidence in the name.
 
 Name | Type | Description
 --------- | ------- | -----------
@@ -1168,7 +1174,7 @@ Name | Type | Description
 | **process_ref** (required) | [object-ref](#object-reference) | References the Process Object, contained in the Package, which represents the process and its relevant metadata. The Object referenced **MUST** be of STIX Cyber Observable type `process` and **MUST** be specified in the **observable_objects** property of the Package.|
 | **parent_action_ref** (optional) | [identifier](#identifier) | Captures the ID of the Action that created or injected the process. The referenced entity **MUST** be of type `malware-action`.|
 | **ordinal_position** (optional) | [integer](#integer) | Captures the ordinal position of the process with respect to the other processes spawned or injected by the malware. This value **MUST** be a non-negative integer. For specifying the root process of the process tree, a value of `0` **MUST** be used.|
-| initiated_action_refs** (optional) | [list](#list) of type [identifier](#identifier) | Captures the IDs of the Actions initiated by the process. Each referenced entity **MUST** be of type `malware-action`.
+| **initiated_action_refs** (optional) | [list](#list) of type [identifier](#identifier) | Captures the IDs of the Actions initiated by the process. Each referenced entity **MUST** be of type `malware-action`.
 
 ## Relationship Distance
 
@@ -1275,7 +1281,9 @@ Name | Type | Description
 
 The `signature-metadata` type captures metadata associated with a signature (for example, a YARA rule) that may have been triggered during the analysis of a malware instance.
 
-*Requirement*: In addition to **signature_type**, at least one of the **name** or **description** properties **MUST** be included when using this type.
+*Requirements*:
+
+* In addition to **signature_type**, at least one of the **name** or **description** properties **MUST** be included when using this type.
 
 Name | Type | Description
 --------- | ------- | -----------
@@ -1332,7 +1340,7 @@ Name | Type | Description
               "tool_refs": ["4"],
               "debugging_file_refs": ["6"]
            }
-        } 
+        }
      }
   ]
 }
@@ -1342,7 +1350,9 @@ Name | Type | Description
 
 The `static-features` type captures features associated with a malware instance (a binary file) not related to the semantics of the code.
 
-*Requirement*: At least one of **strings** or **obfuscation_methods** or **certificates** or **file_headers** or **configuration_parameters** or **development_environment properties** **MUST** be included when using this type.
+*Requirements*:
+
+* At least one of **strings** or **obfuscation_methods** or **certificates** or **file_headers** or **configuration_parameters** or **development_environment properties** **MUST** be included when using this type.
 
 Name | Type | Description
 --------- | ------- | -----------
@@ -1350,7 +1360,7 @@ Name | Type | Description
 | **obfuscation_methods** (optional) | [list](#list) of type [binary-obfuscation](#binary-obfuscation) | Captures metadata associated with methods used to obfuscate the malware instance (e.g., packers, encryptors).|
 | **certificates** (optional) | [list](#list) of type [object-ref](#object-reference) | References any software certificates used to sign the malware instance. The Objects referenced **MUST** be of STIX Cyber Observable type `x509-certificate` and **MUST** be specified in the **observable_objects** property of the Package.|
 | **file_headers** (optional) | [list](#list) of type [object-ref](#object-reference) | References any file headers (e.g., PE file headers) extracted from the malware instance. The Objects referenced **MUST** be of STIX Cyber Observable type `file` and **MUST** be specified in the **observable_objects** property of the Package.|
-| **configuration_parameters** (optional) | [dictionary](#dictionary) | Captures any configuration parameters specified for the malware instance. Each key in the dictionary **MUST** be of type `string` and **SHOULD** come from the [malware-configuration-parameter-ov](#malware-configuration-parameter) vocabulary, which is based on the data reported by the Malware Configuration Parser (MWCP) tool developed by the Department of Defense Cyber Crime Center (DC3). Each corresponding key value **MUST** also be of type `string`, and should capture the actual value of the configuration parameter.|
+| **configuration_parameters** (optional) | [dictionary](#dictionary) | Captures any configuration parameters specified for the malware instance. Each key in the dictionary **MUST** be of type `string` and **SHOULD** come from the [malware-configuration-parameter-ov](#malware-configuration-parameters) vocabulary, which is based on the data reported by the Malware Configuration Parser (MWCP) tool developed by the Department of Defense Cyber Crime Center (DC3). Each corresponding key value **MUST** also be of type `string`, and should capture the actual value of the configuration parameter.|
 | **development_environment** (optional) | [malware-development-environment](#malware-development-environment) | Captures details of the development environment used to create the malware instance.|
 
 # Relationships
@@ -1469,8 +1479,8 @@ Relationship Type | Source | Target | Description
 
 This relationship summary is provided as a convenience. If there is a discrepancy between this table and the relationships defined with each of the TLOs, then the relationships defined with the TLOs **MUST** be viewed as authoritative.
 
-Source | Relationship Type | Target 
---------- | ------- | ----------- 
+Source | Relationship Type | Target
+--------- | ------- | -----------
 | `behavior` | `dependent-on` | `behavior` |
 | `behavior` | `discovered-by` | `software` |
 | `malware-action` | `dependent-on` | `malware-action` |
@@ -1543,7 +1553,7 @@ Name | Type | Description
 | **schema_version** (required) | [string](#string) | Specifies the version of the MAEC specification used to represent the content in this Package. The value of this property **MUST** be `5.0`.
 | **maec_objects** (required) | [list](#list) of type [\<MAEC Object\>](#top-level-objects) | Specifies MAEC Objects. Objects in this list **MUST** be valid MAEC Top-level Objects.|
 | **observable_objects** (optional) | [stix-observable-objects](#observable-objects) | Specifies a dictionary of STIX Cyber Observable Objects relevant to the MAEC Package. This dictionary **MUST** contain all Cyber Observable Objects associated with the MAEC Package, including those that are referenced by other Cyber Observable Objects.|
-| **relationships** (optional) | [list](#list) of type [relationship](#relationship) | Specifies a set of one or more MAEC Relationships. Each entry in this list **MUST** be of type relationship.|
+| **relationships** (optional) | [list](#list) of type [relationship](#relationships-6) | Specifies a set of one or more MAEC Relationships. Each entry in this list **MUST** be of type relationship.|
 
 
 # STIX Cyber Observable Object Extensions
@@ -1647,11 +1657,11 @@ Dictionary keys:
 
 * **MUST** be unique in each dictionary.
 * **MUST** be in ASCII.
-* **MUST** be limited to the characters a-z (lowercase ASCII), A-Z (uppercase ASCII), numerals 0-9, hyphen (-), and underscore (_). 
+* **MUST** be limited to the characters a-z (lowercase ASCII), A-Z (uppercase ASCII), numerals 0-9, hyphen (-), and underscore (_).
 * **SHOULD** be no longer than 30 ASCII characters in length.
 * **MUST** have a minimum length of 3 ASCII characters.
 * **MUST** be no longer than 256 ASCII characters in length.
-* **SHOULD** be lowercase. 
+* **SHOULD** be lowercase.
 
 Dictionary values:
 
@@ -1775,7 +1785,7 @@ The JSON MTI serialization uses the JSON string type when representing `identifi
 
 **Type Name**: `integer`
 
-The integer data type represents a number without any fractional or decimal part. Unless otherwise specified, all integers **MUST** be capable of being represented as a signed 64-bit value ([-(2**63)+1, (2**63)-1]). Additional restrictions **MAY** be placed on the type as described where it is used.
+The integer data type represents a number without any fractional or decimal part. Unless otherwise specified, all integers **MUST** be capable of being represented as a signed 64-bit value ([-(2\*\*63)+1, (2\*\*63)-1]). Additional restrictions **MAY** be placed on the type as described where it is used.
 
 In the JSON MTI serialization, integers are represented by the JSON number type.
 
@@ -1854,7 +1864,7 @@ The `object-ref` data type specifies a reference to a STIX Observable Object cap
 ## Observable Objects
 
 > Observable Object - illustrates the capture of a STIX Network Traffic Object and an associated IPv4 Address Object.
- 
+
 ```json
 {
  "0": {
@@ -1908,7 +1918,7 @@ The JSON MTI serialization uses the JSON string type when representing `open-voc
 
 ## String
 
-> String 
+> String
 
 ```json
 {
@@ -1925,7 +1935,7 @@ The JSON MTI serialization uses the JSON string type, which mandates the UTF-8 e
 
 ## Timestamp
 
-> Timestamp 
+> Timestamp
 
 ```json
 {
@@ -1937,7 +1947,7 @@ The JSON MTI serialization uses the JSON string type, which mandates the UTF-8 e
 **Type Name**: `timestamp`
 
 The `timestamp` data type defines how timestamps are represented in MAEC.
- 
+
 The JSON MTI serialization uses the JSON string type when representing `timestamp`.
 
 *Requirements*:
@@ -1988,7 +1998,7 @@ This vocabulary is an enumeration of properties associated with the environment 
 
 The Analysis Type open vocabulary is used by the following object/property:
 
-* Malware Instance --> analysis_metadata --> *analysis_type* 
+* Malware Instance --> analysis_metadata --> *analysis_type*
 
 This vocabulary is an enumeration of malware analysis types.
 
@@ -2178,14 +2188,14 @@ The Malware Capability open vocabulary is used in the following object/property:
 |**anti-detection** | Indicates that the malware instance or family is able to prevent itself and its components from being detected on a system.|
 |**anti-removal** | Indicates that the malware instance or family is able to prevent itself and its components from being removed from a system.|
 |**availability-violation** | Indicates that the malware instance or family is able to compromise the availability of a system or some aspect of the system.|
-|**collection** | "Indicates that the malware instance or family is able to capture information from a system related to user or system activity (e.g., from a system's peripheral devices)."|
+|**collection** | Indicates that the malware instance or family is able to capture information from a system related to user or system activity (e.g., from a system's peripheral devices).|
 |**command-and-control** | Indicates that the malware instance or family is able to receive and/or execute remotely submitted commands.|
-|**data-theft** | "Indicates that the malware instance or family is able to steal data from the system on which it executes. This includes data stored in some form, e.g. in a file, as well as data that may be entered into some application such as a web-browser."|
+|**data-theft** | Indicates that the malware instance or family is able to steal data from the system on which it executes. This includes data stored in some form, e.g. in a file, as well as data that may be entered into some application such as a web-browser.|
 |**destruction** | Indicates that the malware instance or family is able to destroy some aspect of a system.|
 |**discovery** | Indicates that the malware instance or family is able to probe its host system or network environment; most often this is done to support other Capabilities and their Objectives.|
 |**exfiltration** | Indicates that the malware instance or family is able to exfiltrate stolen data or perform tasks related to the exfiltration of stolen data.|
 |**fraud** | Indicates that the malware instance or family is able to defraud a user or a system.|
-|**infection-propagation** | "Indicates that the malware instance or family is able to propagate through the infection of a machine or is able to infect a file after executing on a system. The malware instance may infect actively (e.g., gain access to a machine directly) or passively (e.g., send malicious email). This Capability does not encompass any aspects of the initial infection that is done independently of the malware instance itself."|
+|**infection-propagation** | Indicates that the malware instance or family is able to propagate through the infection of a machine or is able to infect a file after executing on a system. The malware instance may infect actively (e.g., gain access to a machine directly) or passively (e.g., send malicious email). This Capability does not encompass any aspects of the initial infection that is done independently of the malware instance itself.|
 |**integrity-violation** | Indicates that the malware instance or family is able to compromise the integrity of a system.|
 |**machine-access-control** | Indicates that the malware instance or family is able to access or control one or more remote machines and/or the machine on which it is executing.|
 |**persistence** | Indicates that the malware instance or family is able to persist and remain on a system regardless of system events.|
@@ -2207,32 +2217,32 @@ This vocabulary is a non-exhaustive enumeration of common attributes associated 
 
 | Value | Description |
 | ----- | ----------- |
-|**applicable-platform** | Captures the name of a targeted platform.| 
+|**applicable-platform** | Captures the name of a targeted platform.|
 |**archive-type** | Captures the name of a file archive format used.|
-|**autonomy** | Captures the level of autonomy used.| 
-|**backdoor-type** | Captures the type of backdoor used.| 
-|**cryptocurrency-type** | Captures a cryptocurrency targeted.| 
-|**encryption-algorithm** | Captures the encryption algorithm used.| 
-|**erasure-scope** | Captures the scope of the erasure performed.| 
-|**file-infection-type** | Captures the method that an executable infector uses to infect a file.| 
-|**file-modification-type** | Captures how a malware file modifies itself to avoid detection.| 
+|**autonomy** | Captures the level of autonomy used.|
+|**backdoor-type** | Captures the type of backdoor used.|
+|**cryptocurrency-type** | Captures a cryptocurrency targeted.|
+|**encryption-algorithm** | Captures the encryption algorithm used.|
+|**erasure-scope** | Captures the scope of the erasure performed.|
+|**file-infection-type** | Captures the method that an executable infector uses to infect a file.|
+|**file-modification-type** | Captures how a malware file modifies itself to avoid detection.|
 |**file-type** | Captures the type of file format used for storing data to be exfiltrated.|
 |**frequency** | "Captures the frequency with which a C2 Server sends and receives data.| It is recommended that the description follow the format of "every x (units)", e.g., "every 5 minutes."|
 |**infection-targeting** | "Captures the type of targeting employed, e.g., whether the targeted machines are randomly selected, or chosen from some particular set.| "
 |**network-protocol** | "Captures the name of the network protocol used in command and control communications.| The protocol name **MUST** come from the service names defined in the Service Name column of the IANA Service Name and Port Number Registry.| In cases where an there is variance in the name of a network protocol not included in the IANA Registry, content producers should exercise their best judgement, and it is recommended that lowercase names be used for consistency with the IANA registry.|"
 |**port-number** | Captures the port number used in command and control communications.|
-|**persistence-scope** | Captures the scope of persistence employed.| 
+|**persistence-scope** | Captures the scope of persistence employed.|
 |**propagation-scope** | "Captures the scope of the infection or propagation performed, i.|e.|, whether it infects just the local machine or actively propagates to other machines as well.| "
 |**targeted-application** | Captures the names of any targeted applications.|
 |**targeted-file-architecture type** | Captures the types of file architectures targeted.|
-|**targeted-file-type** | Captures the types of files targeted.| 
-|**targeted-program** | Captures the names of any targeted programs.| 
-|**targeted-sandbox** | Captures the names of any sandboxes targeted.| 
-|**targeted-vm** | Captures the names of any virtual machines (VM) targeted.| 
-|**targeted-website** | Captures the domain names of any targeted websites.| 
-|**technique** | Captures the name of the technique used.| 
-|**trigger-type** | Captures the trigger used to wake or terminate the malware instance.| 
-|**user-privilege-escalation type** | Captures the type of user privilege escalation employed.| 
+|**targeted-file-type** | Captures the types of files targeted.|
+|**targeted-program** | Captures the names of any targeted programs.|
+|**targeted-sandbox** | Captures the names of any sandboxes targeted.|
+|**targeted-vm** | Captures the names of any virtual machines (VM) targeted.|
+|**targeted-website** | Captures the domain names of any targeted websites.|
+|**technique** | Captures the name of the technique used.|
+|**trigger-type** | Captures the trigger used to wake or terminate the malware instance.|
+|**user-privilege-escalation type** | Captures the type of user privilege escalation employed.|
 |**vulnerability-id-cve** | Captures the Common Vulnerabilities and Exposures (CVE) vulnerability identifier being referenced.|
 |**vulnerability-id-osvdb** | Captures the vulnerability identifier of the Open Source Vulnerability Database (OSVDB) entry being referenced.|
 
@@ -2243,8 +2253,8 @@ This vocabulary is a non-exhaustive enumeration of common attributes associated 
 
 The Delivery Vector open vocabulary is used in the following objects/properties:
 
-* Malware Instance --> field_data --> *delivery_vectors* 
-* Malware Family --> field_data --> *delivery_vectors* 
+* Malware Instance --> field_data --> *delivery_vectors*
+* Malware Family --> field_data --> *delivery_vectors*
 
 This vocabulary is a non-exhaustive enumeration of vectors used to deliver malware.
 
@@ -2369,7 +2379,7 @@ This vocabulary is a non-exhaustive enumeration of Actions that may be performed
 |**delete-service** | The action of deleting a service.|
 |**delete-user** | The action of deleting a user.|
 |**disconnect-from-ftp-server** | The action of disconnecting from a FTP server.|
-|**disconnect-from-ip** | The action of disconnecting from a previously established connection to an IP address.| 
+|**disconnect-from-ip** | The action of disconnecting from a previously established connection to an IP address.|
 |**disconnect-from-irc-server** | The action of disconnecting from an IRC server.|
 |**disconnect-from-named-pipe** | The action of disconnecting from a named pipe.|
 |**disconnect-from-network-share** | The action of disconnecting from a network share.|
@@ -2434,7 +2444,7 @@ This vocabulary is a non-exhaustive enumeration of Actions that may be performed
 |**modify-process-virtual-memory-protection** | The action of modifying the protection on a memory region in the virtual address space of a process.|
 |**modify-registry-key-value** | The action of modifying a named value of a registry key.|
 |**modify-registry-key** | The action of modifying a registry key.|
-|**modify-service-configuration** | The action of modifying the configuration parameters of a service.| 
+|**modify-service-configuration** | The action of modifying the configuration parameters of a service.|
 |**monitor-directory** | The action of monitoring a directory on the filesystem for changes.|
 |**monitor-disk** | The action of monitoring a disk for changes.|
 |**monitor-registry-key** | The action of monitoring a registry key for changes.|
@@ -2451,7 +2461,7 @@ This vocabulary is a non-exhaustive enumeration of Actions that may be performed
 |**open-registry-key** | The action of opening a registry key.|
 |**open-semaphore** | The action of opening a named semaphore.|
 |**open-service** | The action of opening a service.|
-|**queue-apc-in-thread** | The action of queuing a new Asynchronized Procedure Call (APC) in the context of a thread.| 
+|**queue-apc-in-thread** | The action of queuing a new Asynchronized Procedure Call (APC) in the context of a thread.|
 |**read-from-file** | The action of reading from a file.|
 |**read-from-mailslot** | The action of reading some data from a named mailslot.|
 |**read-from-named-pipe** | The action of reading data from a named pipe.|
@@ -2650,7 +2660,7 @@ This vocabulary is a non-exhaustive enumeration of operating system features tha
 The Operating System open vocabulary is used by the following objects/properties:
 
 * Behavior --> attributes
-* Capability --> attributes 
+* Capability --> attributes
 
 This vocabulary is a non-exhaustive enumeration of operating systems.
 
